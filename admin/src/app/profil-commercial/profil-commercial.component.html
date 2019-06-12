@@ -1,0 +1,362 @@
+<div class="main-content">
+  <div class="row wow fadeIn mt-5">
+    <!-- <div class="col-md-6 mb-4 ">
+        <div class="card">
+          <div class="card-header">
+
+            </div>
+        <div class="card-body">
+          <table class="table table-hover">
+            <thead class="blue-grey lighten-4">
+              <tr>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Email</th>
+
+              </tr>
+            </thead>
+
+            <tbody >
+              <tr>
+
+                <td>{{com.prenom}}</td>
+                <td>{{com.nom}}</td>
+                <td>{{com.email}}</td>
+              </tr>
+
+            </tbody>
+
+          </table>
+
+
+        </div>
+
+
+      </div>
+      </div> -->
+  <div class="col-md-9 mb-4">
+    <div class="card">
+        <div class="card-header row">
+            <div class="col-md-06">
+                Rapport ordre
+              </div>
+              
+              <div class="col-md-02">
+                <label for=""> filtrer par annnee</label>
+                <select name="" id="" (change)="dateByYear($event.target.value)">
+                  <option value="2018" selected>2019</option>
+                  <option value="2018" >2018</option>
+                  <option value="2017">2017</option>
+                  <option value="2016">2016</option>
+                  <option value="2015">2015</option>
+                  <option value="2014">2014</option>
+                  <option value="2013">2013</option>
+                  <option value="2012">2012</option>
+                  <option value="2011">2011</option>
+                  <option value="2010">2010</option>
+                  <option value="2009">2009</option>
+                  <option value="2008">2008</option>
+                  <option value="2007">2007</option>
+                  <option value="2006">2006</option>
+                  <option value="2005">2005</option>
+                  <option value="2004">2004</option>
+                  <option value="2003">2003</option>
+                  <option value="2002">2002</option>
+                  <option value="2001">2001</option>
+                  <option value="2000">2000</option>
+                </select>
+            </div>
+        </div>
+      <div class="card-body">
+
+        <div style="display: block">
+          <canvas baseChart [chartType]="chart1Type" [datasets]="chartDatasets" [labels]="chartLabels" [colors]="chartColors" [options]="chartOptions"
+            [legend]="true">
+          </canvas>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="col-md-3 mb-4">
+
+    <div class="card mb-4">
+
+
+
+      <div class="card-header text-center">
+        Portefeuille
+      </div>
+
+
+
+      <div class="list-group list-group-flush">
+        <a class="list-group-item list-group-item-action waves-effect">evolution portefeuille
+          <span class="badge badge-success badge-pill pull-right">
+            <i class="fa fa-arrow-up ml-1"></i>
+          </span>
+        </a>
+
+        <a class="list-group-item list-group-item-action waves-effect">montant titre achete
+          <span class="badge badge-primary badge-pill pull-right">{{montantAchat | number}} fcfa</span>
+        </a>
+        <a class="list-group-item list-group-item-action waves-effect">montant titre vendu
+          <span class="badge badge-primary badge-pill pull-right">{{montantVente | number}} fcfa</span>
+        </a>
+        <a class="list-group-item list-group-item-action waves-effect">montant de Souscription
+          <span class="badge badge-primary badge-pill pull-right">{{montantSubscription | number}} fcfa</span>
+        </a>
+        <a class="list-group-item list-group-item-action waves-effect">montant portefeuille
+          <span class="badge badge-primary badge-pill pull-right">{{com.portefeuille | number}} fcfa</span>
+        </a>
+        <a class="list-group-item list-group-item-action waves-effect">montant liquidite
+          <span class="badge badge-primary badge-pill pull-right">{{com.liquidite | number}} fcfa</span>
+        </a>
+        <a class="list-group-item list-group-item-action waves-effect">montant Total Collecte
+          <span class="badge badge-primary badge-pill pull-right">{{depotEspece + depotCheque + depotVirement | number}} fcfa</span>
+        </a>
+        <a class="list-group-item list-group-item-action waves-effect">montant Total Decollecte
+          <span class="badge badge-primary badge-pill pull-right">{{ retraitCheque+retraitVrement| number}} fcfa</span>
+        </a>
+        <!-- <a class="list-group-item list-group-item-action waves-effect">Commission Cgf Obtenu
+          <span class="badge badge-primary badge-pill pull-right">{{commissioncgf | number}} fcfa</span>
+        </a>
+        <a class="list-group-item list-group-item-action waves-effect">Commission Total Cgf
+
+          <span class="badge badge-primary badge-pill pull-right">{{commissionTotalcgf | number}} fcfa</span>
+        </a>
+depotEspece + depotCheque + depotVirement
+     
+        <a class="list-group-item list-group-item-action waves-effect">Pourcentage commission obtenu
+
+          <span class="badge badge-success badge-pill pull-right">{{pourcentage | number:'2.1-2'}} %</span>
+        </a> -->
+      </div>
+    </div>
+
+
+    </div>
+
+
+
+
+
+</div>
+
+<div class="row">
+    <div class="col-md-6 mb-4">
+
+            <div class="card">
+                <div class="card-header" style="background-color:darkgray;">
+                 Rapport ordre
+                 
+                </div>
+              <div class="card-body">
+
+                <table class="table table-hover">
+                  <thead class="blue-grey lighten-4">
+  
+                  </thead>
+  
+                    <tbody>
+                      
+                    <tr class="waves-light">
+                      <td>Montant depot espece</td>
+                      <td class="badge badge-primary" width="150px">{{depotEspece | number}} fcfa</td>
+                  </tr>
+
+                  <tr class="waves-light">
+                      <td>montant retrait cheque</td>
+                      <td class="badge badge-primary" width="150px">{{retraitCheque | number}} fcfa</td>
+                  </tr>
+                 
+                  <tr class="waves-light">
+                      <td>montant depot cheque</td>
+                      <td class="badge badge-primary" width="150px">{{depotCheque | number}} fcfa</td>
+                  </tr>
+
+                  <tr class="waves-light">
+                      <td>montant retrait par virement</td>
+                      <td class="badge badge-primary" width="150px">{{retraitVrement | number}} fcfa</td>
+                  </tr>
+
+
+                  <tr class="waves-light">
+                      <td>montant depot par virement</td>
+                      <td class="badge badge-primary" width="150px">{{depotVirement | number}} fcfa</td>
+                  </tr>
+                    </tbody>
+                   
+                </table>
+               
+                <!-- Table  -->
+                <!-- <div class="chart-area" >
+                  <div *ngIf="isDataAvailable">
+
+                  
+                    <canvas baseChart id="lineChartExampleWithNumbersAndGrid"
+                           [datasets]="chartDatasetsOrdre"
+                           [labels]="chartLabels"
+                           [colors]="chartColors"
+                           [options]="lineChartWithNumbersAndGridOptions"
+                           [chartType]="chart2Type"
+
+                           ></canvas>
+                  </div>
+                 </div> -->
+
+
+              </div>
+
+            </div>
+
+
+            <!--/.Card-->
+
+      </div>
+
+
+      <div class="col-md-6">
+
+
+          <div class="card">
+              <div class="card-header" style="background-color:darkgray;">
+                 Statistique
+              </div>
+            <!--Card content-->
+            <div class="card-body">
+
+              <!-- Table  -->
+              <table class="table table-hover">
+                <!-- Table head -->
+                <thead class="blue-grey lighten-4">
+
+                </thead>
+
+                  <tbody>
+
+                    <!-- <tr class="waves-light">
+                        <td>Nombre de clients crées</td>
+                        <td class="badge badge-primary" width="150px">{{nombreCompteCreer}}</td>
+                    </tr> -->
+
+                    <tr class="waves-light">
+                        <td>Nombre d'ordres passe</td>
+                        <td class="badge badge-primary" width="150px">{{nombreOdre}}</td>
+                    </tr>
+
+                    <tr class="waves-light">
+                        <td>Nombre ordres web activées</td>
+                        <td class="badge badge-primary" width="150px">{{nombreOdreWeb}}</td>
+                    </tr>
+
+                    <tr class="waves-light">
+                        <td>Nombre d'ordre Totalement Execute</td>
+                        <td class="badge badge-primary" width="150px">{{nombreOdreExecute}}</td>
+                    </tr>
+
+
+                    <tr class="waves-light">
+                        <td>Nombre ordre Execute partiellement</td>
+                        <td class="badge badge-primary" width="150px">{{nombreOdreExecutepart}}</td>
+                    </tr>
+
+                    <tr class="waves-light">
+                        <td>Nombre ordre non Execute</td>
+                        <td class="badge badge-primary" width="150px">{{nombreOdreNonExecute}}</td>
+                    </tr>
+
+
+                  </tbody>
+
+              </table>
+
+
+            </div>
+
+          </div>
+      </div>
+</div>
+<!-- <div class="row">
+  <div class="col-md-6 mb-4">
+
+        
+          <div class="card">
+              <div class="card-header" style="background-color:darkgray;">
+                Taches
+              </div>
+           
+            <div class="card-body">
+              <table class="table table-hover">
+               
+                <thead class="blue-grey lighten-4">
+                  <tr>
+                    <th>Nom</th>
+                    <th>Prenom</th>
+                    <th>Email</th>
+
+                  </tr>
+                </thead>
+
+                <tbody >
+                  <tr>
+
+                  </tr>
+
+                </tbody>
+
+              </table>
+
+
+            </div>
+
+          </div>
+
+
+       
+
+    </div>
+
+    <div class="col-md-6 mb-4">
+
+         
+            <div class="card">
+                <div class="card-header" style="background-color:darkgray;">
+                    Reclamentions
+                </div>
+            
+              <div class="card-body">
+                <table class="table table-hover">
+               
+                  <thead class="blue-grey lighten-4">
+                    <tr>
+                      <th>Nom</th>
+                      <th>Prenom</th>
+                      <th>Email</th>
+
+                    </tr>
+                  </thead>
+
+                  <tbody >
+                    <tr>
+
+
+                    </tr>
+
+                  </tbody>
+
+                </table>
+
+
+              </div>
+
+            </div>
+
+
+        
+
+      </div>
+
+</div> -->
+
+</div>

@@ -1,0 +1,667 @@
+
+ <div class="row wow fadeIn mt-5">
+  <div class="col-md-6 mb-4 ">
+    <div class="card" style="height: 220px;">
+      <div class="card-header">
+          Profile client
+        </div>
+    <!--Card content-->
+    <div class="card-body">
+
+      <!-- Table  -->
+      <table class="table table-hover">
+        <!-- Table head -->
+        <thead class="blue-grey lighten-4">
+          <tr>
+            <th>Numero Compte</th>
+            <th>Nom</th>
+            <th>Telephone</th>
+            <th>CNI</th>
+            <th>Email</th>
+
+          </tr>
+        </thead>
+
+        <tbody *ngIf="client!=null">
+          <tr>
+            <td>{{client.numCompt}}</td>
+            <td>{{client.nom}}</td>
+            <td>{{client.phone}}</td>
+            <td>{{client.cni}}</td>
+            <td>{{client.email}}</td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+      <!-- <button class="btn btn-primary" (click)="modifier(client.numCompt)">modifier</button>
+      <button class="btn btn-primary" (click)="voirProfil(client.numCompt)">voir profil</button> -->
+    </div>
+
+
+  </div>
+  </div>
+  <div class="col-md-6 mb-4">
+    <div class="card" style="height: 220px;">
+      <div class="card-header">
+          Portefeuille
+      </div>
+    <!--Card content-->
+    <div class="card-body">
+        <table class="table table-hover">
+            <!-- Table head -->
+            <thead class="blue-grey lighten-4">
+              <tr>
+                <th> Portefeuille client:</th>
+                <th>liquidite</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td> {{portefeuilleClient.portefeuille | number}}  fcfa</td>
+                <td>{{portefeuilleClient.liquidite | number}}  fcfa</td>
+              </tr>
+              <tr></tr>
+              <tr></tr>
+            </tbody>
+
+          </table>
+
+      <!-- <div class="row">
+        <div class="col-md-3">
+         Portefeuille client:
+        </div>
+        <div class="col-md-3">
+          {{portefeuilleClient.portefeuille | number}}  fcfa
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          liquidite:
+        </div>
+        <div class="col-md-3">
+          {{portefeuilleClient.liquidite | number}}  fcfa
+        </div>
+      </div> -->
+      
+      <div class="row">
+          <button class="btn btn-primary" (click)="ajouterReclamention(client.clientId)">Ajouter une reclamation</button>
+          <button class="btn btn-primary" (click)="detailPortefeuille(client.numCompt)">Voir detail portefeuille</button>
+          <button class="btn btn-primary" (click)="getAllTitreAction()" >Creer une alerte</button>
+        </div>
+    </div>
+
+  </div>
+
+  </div>
+</div>
+
+<div class="row wow fadeIn mt-5">
+
+<!--Grid column-->
+
+<div class="col-md-9 mb-4">
+
+  <!--Card-->
+  <div class="card">
+      <div class="card-header row">
+          <div class="col-md-8 mb-4">
+             Rapport des operations sur le compte
+          </div>
+          <div class="col-md-04 mb-4">
+              <label for=""> filtrer par annnee</label>
+              <select name="" id="" (change)="creeCompteParAn($event.target.value)">
+                <option value="2019" selected>2019</option>
+                <option value="2018" >2018</option>
+                <option value="2017">2017</option>
+                <option value="2016">2016</option>
+                <option value="2015">2015</option>
+                <option value="2014">2014</option>
+                <option value="2013">2013</option>
+                <option value="2012">2012</option>
+                <option value="2011">2011</option>
+                <option value="2010">2010</option>
+                <option value="2009">2009</option>
+                <option value="2008">2008</option>
+                <option value="2007">2007</option>
+                <option value="2006">2006</option>
+                <option value="2005">2005</option>
+                <option value="2004">2004</option>
+                <option value="2003">2003</option>
+                <option value="2002">2002</option>
+                <option value="2001">2001</option>
+                <option value="2000">2000</option>
+              </select>
+           </div>
+      </div>
+    <!--Card content-->
+    <div class="card-body">
+
+      <div style="display: block">
+        <canvas baseChart [chartType]="chart1Type" [datasets]="chartDatasets" [labels]="chartLabels" [colors]="chartColors" [options]="chartOptions"
+          [legend]="true">
+        </canvas>
+      </div>
+    </div>
+
+  </div>
+  <!--/.Card-->
+
+</div>
+
+
+<!--Grid column-->
+
+<!--Grid column-->
+<div class="col-md-3 mb-4">
+
+  <!--Card-->
+  <!-- <div class="card mb-4">
+
+
+    <div class="card-header text-center">
+      Pie chart
+    </div>
+
+
+    <div class="card-body">
+
+      <div style="display: block">
+        <canvas mdbChart [chartType]="chart2Type" [datasets]="chartDatasets" [labels]="chartLabels" [colors]="chartColors" [options]="chartOptions"
+          [legend]="true">
+        </canvas>
+      </div>
+    </div>
+
+  </div> -->
+
+  <!--/.Card-->
+
+  <!--Card-->
+  <div class="card mb-4">
+
+    <!--Card content-->
+    <div class="card-body">
+
+      <!-- List group links -->
+      <div class="list-group list-group-flush">
+        <a class="list-group-item list-group-item-action waves-effect">evolution Portefeuille
+          <span class="badge badge-success badge-pill pull-right">22%
+            <i class="fa fa-arrow-up ml-1"></i>
+          </span>
+        </a>
+        <a class="list-group-item list-group-item-action waves-effect">montant titre achete
+          <span class="badge badge-primary badge-pill pull-right"> {{montantAchat | number}} fcfa</span>
+        </a>
+        <a class="list-group-item list-group-item-action waves-effect">montant titre vendu
+          <span class="badge badge-primary badge-pill pull-right"> {{montantVente | number}} fcfa</span>
+        </a>
+        <a class="list-group-item list-group-item-action waves-effect">montant Souscription
+          <span class="badge badge-primary badge-pill pull-right">{{montantSubscription | number}} fcfa</span>
+        </a>
+        <a class="list-group-item list-group-item-action waves-effect">Courtage CGF obtenu
+            <span class="badge badge-primary badge-pill pull-right">{{courtagecgf | number}} fcfa</span>
+          </a>
+      </div>
+      <!-- List group links -->
+
+    </div>
+
+  </div>
+  <!--/.Card-->
+  <div class="card ">
+      <div class="card-header row">
+        <div class="col-md-8">Operation de caisse</div>
+       
+       </div>
+      <div class="card-body ">
+         
+          <a class="list-group-item list-group-item-action waves-effect">Montant depot espece
+              <span class="badge badge-primary badge-pill pull-right" width="150px">{{  depotEspece | number}} cfa</span>
+          </a>
+          <a class="list-group-item list-group-item-action waves-effect">Montant retrait cheque
+              <span class="badge badge-primary badge-pill pull-right" width="150px">{{  retraitCheque | number}} cfa</span>
+          </a>
+          <a class="list-group-item list-group-item-action waves-effect">Montant depot cheque
+              <span class="badge badge-primary badge-pill pull-right" width="150px">{{  depotCheque | number}} cfa</span>
+          </a>
+          <a class="list-group-item list-group-item-action waves-effect">Montant retrait par virement
+              <span class="badge badge-primary badge-pill pull-right" width="150px">{{  retraitVrement | number}} cfa</span>
+          </a>
+          <a class="list-group-item list-group-item-action waves-effect">Montant depot par virement
+              <span class="badge badge-primary badge-pill pull-right" width="150px">{{  depotVirement | number}} cfa</span>
+          </a>
+      </div>
+    </div>
+  </div>
+
+
+<!--Grid column-->
+
+</div>
+
+<div class="row wow fadeIn">
+
+  <!--Grid column-->
+
+  <!--Grid column-->
+  <div class="col-md-6 mb-4">
+
+
+      <div class="card">
+
+        <div class="card-header">
+
+          <div class="row">
+              <div class="col-md-10">
+                  Note rattacher a ce client
+              </div>
+
+              <div class="col-md-1">
+                  <span class="btn btn-primary" (click)="ajouterNote(client.clientId)">
+                      <i class="fa fa-plus"></i>
+                  </span>
+              </div>
+            </div>
+        </div>
+        <div class="card-body">
+
+
+          <table class="table table-hover">
+
+            <thead class="blue lighten-4">
+              <tr>
+
+                <th>sujet</th>
+                <th>description</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <!-- Table head -->
+
+            <!-- Table body -->
+            <tbody *ngFor="let note of notes">
+
+                  <tr  class="waves-light" data-toggle="modal" data-target="#basicExample" (click)="modif(tache.id);centralLarge.show()">
+
+
+                      <td>{{note.sujet}}</td>
+                      <td>{{note.description}}</td>
+                      <td>{{note.dateCreat | date}}</td>
+                    </tr>
+
+
+
+            </tbody>
+            <!-- Table body -->
+          </table>
+          <!-- Table  -->
+
+        </div>
+          <div class="row">
+            <!-- <button type="button" class="btn btn-secondary btn-sm waves-light" data-dismiss="modal" (click)="voirPlusTache.show()" mdbWavesEffect>voir plus</button> -->
+
+          </div>
+      </div>
+      <!--/.Card-->
+
+    </div>
+  <!--Grid column-->
+  <div class="col-md-6 mb-4">
+
+
+    <div class="card">
+
+      <div class="card-header">
+
+        <div class="row">
+            <div class="col-md-5">
+                Tache rattacher a ce client
+            </div>
+            <div class="col-md-5">
+              <form class="d-flex justify-content-center">
+                <!-- Default input -->
+                <input type="date" aria-label="Search" class="form-control" name="dateDebutTache" [(ngModel)]="dateDebutTache">
+                <button class="btn btn-primary btn-sm my-0 p" type="submit" (click)="chercherTache()">
+                  <i class="fa fa-search"></i>
+                </button>
+
+              </form>
+            </div>
+            <div class="col-md-1">
+                <span class="btn btn-primary" (click)="ajouterTache(client.clientId)">
+                    <i class="fa fa-plus"></i>
+                </span>
+            </div>
+          </div>
+      </div>
+      <div class="card-body">
+
+
+        <table class="table table-hover">
+
+          <thead class="blue lighten-4">
+            <tr>
+
+              <th>Statut</th>
+              <th>Description</th>
+              <th>date debut</th>
+              <th>Date fin</th>
+
+            </tr>
+          </thead>
+          <!-- Table head -->
+
+          <!-- Table body -->
+          <tbody *ngFor="let tache of taches | slice:taches.length-5:taches.length">
+
+                <tr  class="waves-light" data-toggle="modal" data-target="#basicExample" (click)="modifTache(tache.idTache);centralTache.show()">
+
+
+                    <td>{{tache.statut}}</td>
+                    <td>{{tache.descriptionTache}}</td>
+                    <td>{{tache.dateDebut | date}}</td>
+                    <td>{{tache.dateFin | date}}</td>
+                  </tr>
+
+
+
+          </tbody>
+          <!-- Table body -->
+        </table>
+        <!-- Table  -->
+        <div class="row">
+          <!-- <button type="button" class="btn btn-secondary btn-sm waves-light" data-dismiss="modal" (click)="voirPlusTache.show()" mdbWavesEffect>voir plus</button> -->
+
+        </div>
+      </div>
+
+    </div>
+    <!--/.Card-->
+
+  </div>
+  <!--Grid column-->
+
+</div>
+<div class="col-md-12 mb-4">
+
+  <!--Card-->
+  <div class="card">
+      <div class="card-header row">
+          <div class="col-md-8 mb-4">
+             Rapport des operations sur le compte
+          </div>
+          <div class="col-md-04 mb-4">
+              <label for=""> filtrer par annnee</label>
+              <select name="" id="" (change)="creeCompteParAn($event.target.value)">
+                
+                <option value="2018" selected>2018</option>
+                <option value="2017">2017</option>
+                <option value="2016">2016</option>
+                <option value="2015">2015</option>
+                <option value="2014">2014</option>
+                <option value="2013">2013</option>
+                <option value="2012">2012</option>
+                <option value="2011">2011</option>
+                <option value="2010">2010</option>
+                <option value="2009">2009</option>
+                <option value="2008">2008</option>
+                <option value="2007">2007</option>
+                <option value="2006">2006</option>
+                <option value="2005">2005</option>
+                <option value="2004">2004</option>
+                <option value="2003">2003</option>
+                <option value="2002">2002</option>
+                <option value="2001">2001</option>
+                <option value="2000">2000</option>
+              </select>
+           </div>
+      </div>
+    <!--Card content-->
+    <div class="card-body">
+
+      <div style="display: block">
+        <canvas baseChart [chartType]="chart3Type" [datasets]="chartDatasets" [labels]="chartLabels" [colors]="chartColors" [options]="chartOptions"
+          [legend]="true">
+        </canvas>
+      </div>
+    </div>
+
+  </div>
+  <!--/.Card-->
+
+</div>
+<div class="row wow fadeIn mt-5">
+    <div class="col-md-12 mb-4">
+
+        <!--Card-->
+        <div class="card">
+            <div class="card-header">
+                Liste operation effectue sur le compte
+              </div>
+          <!--Card content-->
+          <div class="card-body">
+
+            <!-- Table  -->
+            <table class="table table-hover">
+              <!-- Table head -->
+                <thead class="blue-grey lighten-4">
+                  <tr>
+                    <th>type operation</th>
+                    <th>titre</th>
+                    <th>Date operation</th>
+                    <th>quantite</th>
+                    <th>prix</th>
+                    <th>user commercial</th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let operation of operations | slice:operations.length-5:operations.length">
+
+                      <tr class="waves-light" data-toggle="modal" data-target="#basicExample" (click)="getOrdreById(operation.idOrdre);centralOperation.show()">
+
+                          <td>{{operation.typeOrde}}</td>
+                          <td>{{operation.codeTitre}}</td>
+                          <td>{{operation.dateOrde | date}}</td>
+                          <td>{{operation.quantite}}</td>
+                          <td>{{operation.valUnitaire}}</td>
+                          <td>{{operation.usernameCommercial}}</td>
+                        </tr>
+
+
+
+                </tbody>
+
+            </table>
+
+            <div class="row">
+              <button type="button" class="btn btn-secondary btn-sm waves-light" data-dismiss="modal"  mdbWavesEffect>voir plus</button>
+              <!-- (click)="voirPlusOperation.show()" -->
+
+            </div>
+          </div>
+
+        </div>
+        <!--/.Card-->
+
+      </div>
+      
+      <div class="col-md-12 mb-4">
+
+        <!--Card-->
+        <div class="card">
+            <div class="card-header">
+                Evolution du portefeuille client
+            </div>
+          <!--Card content-->
+          <div class="card-body">
+
+            <div style="display: block">
+              <canvas baseChart [chartType]="chart3Type" [datasets]="chartDatasets1" [labels]="chartLabels" [colors]="chartColors" [options]="chartOptions"
+                [legend]="true">
+              </canvas>
+            </div>
+          </div>
+
+        </div>
+        <!--/.Card-->
+
+      </div>
+</div>
+<div class="row">
+            <div class="col-md-6 mb-4">
+
+              <!--Card-->
+              <div class="card">
+                  <div class="card-header">
+                    Reclamations du client
+                    </div>
+                <!--Card content-->
+                <div class="card-body">
+
+                  <!-- Table  -->
+                  <table class="table table-hover">
+                    <!-- Table head -->
+                    <thead class="blue-grey lighten-4">
+                      <tr>
+                        <th>date</th>
+                        <th>sujet</th>
+                        <th>statut</th>
+                      </tr>
+                    </thead>
+
+                      <tbody *ngFor="let reclamention of reclamentions | slice:0:5">
+                        <tr class="waves-light" data-toggle="modal" data-target="#basicExample" (click)="voirReclamention(reclamention.idReclamention);centralReclamention.show()">
+
+                          <td>{{reclamention.dateReclamention | date}}</td>
+                          <td>{{reclamention.statut}}</td>
+                          <td>{{reclamention.description}}</td>
+
+                        </tr>
+
+                      </tbody>
+
+                  </table>
+
+
+                </div>
+                <div class="row">
+                  <!-- <button type="button" class="btn btn-secondary btn-sm waves-light" data-dismiss="modal" (click)="voirPlusTache.show()" mdbWavesEffect>voir plus</button> -->
+
+                </div>
+              </div>
+              <!--/.Card-->
+
+            </div>
+
+            <div class="col-md-6 mb-4">
+
+                <!--Card-->
+                <div class="card">
+                    <div class="card-header row">
+                      <div class="col-md-8">
+                          Listes des appels 
+                      </div>
+                      <!-- <div class="col-md-2"></div>
+                        <div class="col-md-2">
+                            <span class="btn btn-primary" (click)="AddPhonning.show()">
+                                <i class="fa fa-plus"></i>
+                            </span>
+                        </div> -->
+                      </div>
+                  <!--Card content-->
+                  <div class="card-body">
+      
+                    <!-- Table  -->
+                    <table class="table table-hover">
+                      <!-- Table head -->
+                      <thead class="blue-grey lighten-4">
+                        <tr>
+                          <th>date</th>
+                          <th>description</th>
+                          <th>durée de l'appelle</th>
+                          <th>user</th>
+                        </tr>
+                      </thead>
+      
+                        <tbody *ngFor="let phonning of phonnings | slice:0:5">
+                          <tr class="waves-light" data-toggle="modal" data-target="#basicExample" (click)="voirReclamention(reclamention.idReclamention);centralReclamention.show()">
+                            <td>{{phonning.datePhoning}}</td>
+                            <td>{{phonning.descriptionPhonning}}</td>
+                            <td>{{phonning.dureePhoning}} min</td>
+                            <td>{{phonning.useCreateAt}}</td>
+      
+                          </tr>
+      
+                        </tbody>
+      
+                    </table>
+      
+      
+                  </div>
+                  <div class="row">
+                    <!-- <button type="button" class="btn btn-secondary btn-sm waves-light" data-dismiss="modal" (click)="voirPlusTache.show()" mdbWavesEffect>voir plus</button> -->
+      
+                  </div>
+                </div>
+                <!--/.Card-->
+      
+              </div>
+</div>
+<!--Grid row-->
+<!-- <div mdbModal #detailPorte="mdb-modal" class="modal fade" id="basicExample" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+      aria-hidden="true" [config]="{backdrop: true, ignoreBackdropClick: false}">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+          Detail Portefeuille
+          </div>
+          <div class="modal-body">
+              <div style="overflow-y:scroll;height: 800px;">
+                <table class="table table-hover">
+                
+                    <thead class="blue-grey lighten-4">
+                      <tr>
+                        <th>Code Titre</th>
+                        <th>Nom Titre</th>
+                        <th>Quantite</th>
+                        <th>Prix du jour</th>
+                        <th>Montant</th>
+                        <th>cmp</th>
+
+
+
+                      </tr>
+                    </thead>
+                 
+                    <tbody *ngIf="titre!=null">
+
+                          <tr *ngFor="let t of titre">
+                            <th>{{t.codeTitre}}</th>
+                            <th>{{t.nomTitre}}</th>
+                            <th>{{t.quantite}}</th>
+                            <th>{{t.prixDuJour}}</th>
+                            <th>{{t.montant | number:'':'en'}}</th>
+                            <th>{{t.cmp}}</th>
+
+                          </tr>
+
+
+
+                    </tbody>
+                  
+                  </table>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary btn-sm waves-light" data-dismiss="modal" (click)="detailPorte.hide()" mdbWavesEffect>Close</button>
+
+          </div>
+        </div>
+      </div>
+ -->
+
+
+<!-- <app-stats-card2></app-stats-card2> -->

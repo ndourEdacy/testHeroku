@@ -1,0 +1,88 @@
+<div class="col-md-12 mb-4">
+  
+  
+  <div class="row">
+      <div class="col-md-4">
+          <button class="btn btn-primary" (click)="filterParOdreExecute()">Filtrer ordre totalement execute</button>
+      </div>
+      <div class="col-md-4">
+          <button class="btn btn-primary" (click)="filterParOdreExecutePartiellement()">Filtrer ordre execute partiellement</button>
+      </div>
+      <div class="col-md-4">
+          <button class="btn btn-primary" (click)="filterParOdreNonExecute()">Filtrer ordre non execute</button>
+     </div>
+    </div>
+    <!--Card-->
+    <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-md-4">
+                Liste des operations execute   
+            </div>
+            <div class="col-md-4">
+                nombre ordre: {{nombreOrde}}
+            </div>
+            <div class="col-md-4">
+              nombre ordre web: {{nombreOrdeWeb}}
+           </div>
+          </div>
+                                   
+          </div>
+      <!--Card content-->
+      <div class="card-body">
+
+        <!-- Table  -->
+        <table class="table table-hover">
+            <!-- Table head -->
+            <thead class="blue-grey lighten-4">
+              <tr>
+                <th>Numero Compte</th>
+                <th>Numero Ordre</th>
+                <th>type operation</th>
+                <th>titre</th>
+                <th>Date operation</th>
+                <th>quantite</th>
+                <th>prix Unitaire</th>
+                <th>Montant</th>
+                <th>quantite execute</th>
+                <th>agence</th>
+                <th>date valide</th>
+                <th></th>
+                
+              </tr>
+            </thead>
+            <!-- Table head -->
+  
+            <!-- Table body -->
+            <tbody *ngIf="operations!=null">
+            
+                  <tr *ngFor="let operation of operations |  slice:operations.length-25:operations.length">
+                      <td>{{operation.numCompte}}</td>
+                      <td>{{operation.numOrde}}</td>
+                      <td>{{operation.typeOrde}}</td>
+                      <td>{{operation.codeTitre}}</td>
+                      <td>{{operation.dateOrde}}</td>
+                      <td>{{operation.quantite}}</td>
+                      <td>{{operation.valUnitaire}}</td>
+                      <td>{{operation.montant}}</td>
+                      <td>{{operation.quantiteExecute}}</td>
+                      <td>{{operation.agence}}</td>
+                      <td>{{operation.dateValid}}</td>
+                    </tr>
+           
+            
+             
+            </tbody>
+            <!-- Table body -->
+          </table>
+       
+
+      </div>
+        <div class="row">
+            <button type="button" class="btn btn-secondary btn-sm waves-light" data-dismiss="modal" (click)="voirPlusOperation.show()" mdbWavesEffect>voir plus</button>
+
+          </div>
+    </div>
+    <!--/.Card-->
+ 
+  </div>

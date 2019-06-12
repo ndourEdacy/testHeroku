@@ -1,0 +1,252 @@
+<div class="col-md-12" style="margin-top: 40px">
+  <div class="card" style="height: 950px;">
+    <div class="card-header row">
+      <div class="col-md-8">
+          <h5 class="card-category">Rapport Du Mois</h5>
+          <h4 class="card-title">rapport du mois</h4>
+      </div>
+      <div class="col-md-2">
+        <label for=""> selectionner le mois</label>
+        <select name="" id="" (change)="filtreMoi($event.target.value)">
+          
+          <option value="01" selected>jav</option>
+          <option value="02">fev</option>
+          <option value="03">mars</option>
+          <option value="04">avr</option>
+          <option value="05" >mai</option>
+          <option value="06">juin</option>
+          <option value="07">juil</option>
+          <option value="08">aout</option>
+          <option value="09">sept</option>
+          <option value="10">oct</option>
+          <option value="11">nov</option>
+          <option value="12">dec</option>
+         
+        </select>
+    </div>
+      <div class="col-md-2">
+          <label for=""> Selectionner l'année</label>
+          <select name="" id="" (change)="filtreAn($event.target.value)">
+            <option value="2019" selected>2019</option>
+            <option value="2018" >2018</option>
+            <option value="2017">2017</option>
+            <option value="2016">2016</option>
+            <option value="2015">2015</option>
+            <option value="2014">2014</option>
+            <option value="2013">2013</option>
+            <option value="2012">2012</option>
+            <option value="2011">2011</option>
+            <option value="2010">2010</option>
+            <option value="2009">2009</option>
+            <option value="2008">2008</option>
+            <option value="2007">2007</option>
+            <option value="2006">2006</option>
+            <option value="2005">2005</option>
+            <option value="2004">2004</option>
+            <option value="2003">2003</option>
+            <option value="2002">2002</option>
+            <option value="2001">2001</option>
+            <option value="2000">2000</option>
+          </select>
+      </div>
+      
+    </div>
+    <div class="card-body">
+      <div class="chart-area">
+       
+          <div  *ngIf="isDataAvailable">
+             <canvas baseChart id="lineChartExampleWithNumbersAndGrid"
+                    [datasets]="chartDatasets"
+                    [labels]="chartLabels"
+                    [colors]="chartColors"
+                    [options]="lineChartWithNumbersAndGridOptions"
+                    [chartType]="chart1Type">
+             </canvas>
+          </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="stats">
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="card ">
+          <div class="card-header row">
+            <div class="col-md-8">Statistique</div>
+           
+          </div>
+          <div class="card-body ">
+            <div class="table-responsive">
+              <table class="table">
+                <tbody>
+  
+  
+                  <!-- <tr>
+                    <td>Nombre Total de compte</td>
+                    <td class="badge badge-primary" width="150px">{{  nombreTotaleDeCompte | number}}</td>
+                  </tr>
+                  <tr>
+                    <td>Nombre de compte Creer au cours du mois</td>
+                    <td class="badge badge-primary" width="150px">{{nombreCompteCreeInThisYear  | number}}</td>
+                  </tr>
+  
+                  <tr>
+                    <td>Courtage sur les comptes crees</td>
+                    <td class="badge badge-primary" width="150px">{{courtageOuvertureCompte  | number}} cfa</td>
+                  </tr> -->
+  
+                 
+                  <tr>
+                    <td>Commision Totale sur les ordres achat et vente</td>
+                    <td class="badge badge-primary" width="150px">{{commissionTotalcgf | number}} cfa</td>
+                  </tr>
+  
+  
+                  <tr>
+                      <td>Montant Total Achat éxecuté</td>
+                      <td class="badge badge-primary" width="150px">{{ montantAchatTotal | number}} cfa</td>
+                  </tr>
+  
+                 <tr>
+                    <td>Montant Total Vente éxecuté</td>
+                    <td class="badge badge-primary" width="150px"> {{ montantVenteTotal | number}} cfa</td>
+                 </tr>
+  
+                 <tr>
+                    <td>Montant total Souscription</td>
+                    <td class="badge badge-primary" width="150px">{{montantSubscriptionTotal | number}} cfa</td>
+                 </tr>
+  
+                  <tr>
+                    <td>Commision obtenu par le web</td>
+                    <td class="badge badge-primary" width="150px">{{courtageWeb | number}} cfa</td>
+                  </tr>
+                  <tr>
+                    <td>Nombre de compte Creer au cours du mois</td>
+                    <td class="badge badge-primary" width="150px">{{nombreCompteCreeInThisYear  | number}}</td>
+                  </tr>
+  
+                  <tr>
+                    <td>Courtage sur les comptes crees</td>
+                    <td class="badge badge-primary" width="150px">{{courtageOuvertureCompte  | number}} cfa</td>
+                  </tr>
+                  <!-- <tr>
+                      <td>Commision obtenu par l'agence</td>
+                      <td class="badge badge-primary" width="150px">{{courtageAgent | number}} cfa</td>
+                  </tr> -->
+  
+                  <!-- <tr>
+                      <td>Nombre total d'ordre passé</td>
+                      <td class="badge badge-primary" width="150px">{{nombreOrdreTotalPasse | number}}</td>
+                  </tr> -->
+  
+  
+  
+                </tbody>
+              </table>
+            </div>
+          </div>
+  
+        </div>
+      </div>
+      <div class="col-md-6">
+          <div class="card ">
+            <div class="card-header row">
+              <div class="col-md-8">Operation de caisse</div>
+             
+             </div>
+            <div class="card-body ">
+              <div class="table-responsive">
+                <table class="table">
+                  <tbody>
+                        <tr>
+                          <td>Montant depot espece</td>
+                          <td class="badge badge-primary" width="150px">{{depotEspece  | number}} cfa</td>
+                        </tr>
+          
+                        <tr>
+                          <td>Montant retrait cheque</td>
+                          <td class="badge badge-primary" width="150px">{{retraitCheque  | number}} cfa</td>
+                        </tr>
+          
+                        <tr>
+                          <td>Montant depot cheque</td>
+                          <td class="badge badge-primary" width="150px">{{depotCheque | number}} cfa</td>
+                        </tr>
+                        <tr>
+                          <td>Montant retrait par virement</td>
+                          <td class="badge badge-primary" width="150px">{{retraitVirement | number}} cfa</td>
+                        </tr>
+                        <tr>
+                          <td>Montant depot par virement</td>
+                          <td class="badge badge-primary" width="150px">{{depotvirement | number}} cfa</td>
+                        </tr>
+                        <tr>
+                          <td>Montant Total Collecte</td>
+                          <td class="badge badge-primary" width="150px">{{depotEspece + depotCheque +  depotvirement| number}} cfa</td>
+                        </tr>
+                        <tr>
+                          <td>Montant Total decollecte</td>
+                          <td class="badge badge-primary" width="150px">{{retraitCheque + retraitVirement | number}} cfa</td>
+                        </tr>
+                        
+                  </tbody>
+               </table>
+              </div>
+            </div>
+          </div>
+        </div>
+</div>
+<!-- <div class="row">
+  <div class="col-md-6">
+    <div class="card ">
+      <div class="card-header row">
+        <div class="col-md-8">Statistique ouverture de compte</div>
+       
+       </div>
+      <div class="card-body ">
+        <div class="table-responsive">
+          <table class="table">
+            <tbody>
+              
+  
+            </tbody>
+         </table>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+  <!-- <div class="col-md-6">
+      <div class="card ">
+        <div class="card-header row">
+          <div class="col-md-8">Portefeuille du mois</div>
+         
+         </div>
+        <div class="card-body ">
+          <div class="table-responsive">
+            <table class="table">
+              <tbody>
+                  <tr>
+                      <td>Montant total portefeuille</td>
+                      <td class="badge badge-primary" width="150px">{{montantPortefeuille | number}} cfa</td>
+                    </tr>
+    
+                    <tr>
+                        <td>Montant Total Liquidite</td>
+                        <td class="badge badge-primary" width="150px">{{ montantLiquidite | number}} cfa</td>
+                    </tr>
+    
+              </tbody>
+           </table>
+          </div>
+        </div>
+      </div>
+    </div>
+             
+              
+</div> -->

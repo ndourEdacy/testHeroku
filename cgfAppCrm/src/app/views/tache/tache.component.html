@@ -1,0 +1,67 @@
+<div class="card">
+    <div class="card-header">
+        Ajouter une tache
+    </div>
+    <div class="card-body">
+            <div class="row">
+                    <div class="col-md-2">
+                  
+                    </div>
+                    <div class="col-md-10">
+                       <form >
+                         <div class="form-row">
+                          <div class="col-md-6">
+                              <label for="">sujet</label>
+                              <input type="text" name="sujet" class="form-control" [(ngModel)]="tache.sujet">
+                          </div>
+                          <div class="col-md-3">
+                              <label for="">statut</label>
+                              <select class="form-control" [(ngModel)]="tache.statut" name="statut">
+                                <option value="active">active</option>
+                                <option value="en cours">en cours</option>
+                                <option value="fin">fin</option>
+                              </select>
+                            </div>
+                         </div>
+                         <div class="form-row">
+                            <div class="col-md-3">
+                                <label for="">date debut</label>
+                                <input type="date" class="form-control" [(ngModel)]="tache.dateDebut" name="dateDebut">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="">date fin</label>
+                                <input type="date" class="form-control" [(ngModel)]="tache.dateFin" name="dateFin">
+                            </div>
+                            <div class="col-md-3">
+                              <label for="">Priorité</label>
+                              <select class="form-control" [(ngModel)]="tache.priorite" name="priorite">
+                                <option value="high">high</option>
+                                <option value="medium">medium</option>
+                                <option value="low">low</option>
+                              </select>
+                            </div>
+                           </div>
+                           <div class="form-row">
+                              <div class="form-group col-md-9">
+                                <label for="">Description</label>
+                                 <textarea class="form-control" [(ngModel)]="tache.description" name="description"></textarea>
+                              </div>
+                          </div>
+                          <div class="form-row">
+                              <div class="col-md-3">
+                                      <label for="">Assigner a quelqu'un</label>
+                                      <input type="text" name="nom" class="form-control">
+                                      
+                                  </div>
+                          </div>
+                          
+                         
+                          <button class="btn btn-success" (click)="ajouterTache()"> <i class="fa fa-plus mr-3"></i>Ajouter</button>
+                          <button type="reset" class="btn btn-primary">Annuler</button>
+                          
+                       </form>
+                      </div>
+                   
+                  </div>
+    </div>
+</div>

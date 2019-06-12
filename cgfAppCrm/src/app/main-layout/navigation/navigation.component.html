@@ -1,0 +1,91 @@
+<!--Main Navigation-->
+<header>
+
+    <!-- Sidebar -->
+    <div class="sidebar-fixed position-fixed">
+
+        <a class="logo-wrapper waves-effect">
+            <img src="../../../../assets/img/cgflogo.jpg" class="img-fluid" alt="">
+        </a>
+
+        <div class="list-group list-group-flush">
+
+            <a [routerLink]="['cgf-crm/admin1',username]" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
+                <i class="fa fa-pie-chart mr-3"></i>Dashboard
+            </a>
+            <a routerLink="profiles/profile1" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
+                <i class="fa fa-user mr-3"></i>Profile</a>
+            <a routerLink="client" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
+                <i class="fa fa-handshake-o mr-3"></i>Ajout Client</a>
+            <a routerLink="prospect" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
+                <i class="fa fa-map mr-3"></i>Ajout Prospect</a>
+            <a routerLink="operation" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
+            <i class="fa fa-map mr-3"></i>Faire une operation</a>
+            <a routerLink="tache" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
+                    <i class="fa fa-map mr-3"></i>Creer une tache</a>
+            <a routerLink="note" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
+                  <i class="fa fa-map mr-3"></i>Creer une note</a>
+            <a routerLink="simulateur" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
+                        <i class="fa fa-map mr-3"></i>simulateur</a>
+            <a routerLink="listeClient" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
+                    <i class="fa fa-eye mr-3"></i>liste client</a>
+            <a routerLink="listeProspect" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
+                    <i class="fa fa-eye mr-3"></i>liste prospects</a>
+           <a routerLink="listeProspect" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
+                    <i class="fa fa-eye mr-3"></i>Mon portefeuille</a>
+            <a routerLink="notification" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
+                <i class="fa fa-bell mr-3"></i>Notifications</a>
+             <a routerLink="notification" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
+                    <i class="fa fa-bell mr-3"></i>Creer alerte</a>
+            <a routerLink="notification" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
+                <i class="fa fa-bell mr-3"></i>Definir objectif</a>
+
+
+        </div>
+
+    </div>
+    <!-- Sidebar -->
+
+    <!--Navbar-->
+    <mdb-navbar [containerInside]="false" SideClass="navbar navbar-expand-lg navbar-light white">
+
+        <!-- Navbar brand -->
+        <logo class="ml-3">
+           
+                <strong class="blue-text">CGF-Bourse</strong>
+               
+            
+        </logo>
+        
+        <!-- Collapsible content -->
+       <!-- <links>
+
+          
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" mdbWavesEffect>Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://mdbootstrap.com/angular/angular-bootstrap-getting-started/" target="_blank" mdbWavesEffect>About MDB</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://mdbootstrap.com/angular/getting-started/" target="_blank" mdbWavesEffect>Free download</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://mdbootstrap.com/angular/angular-tutorial/" target="_blank" mdbWavesEffect>Free tutorials</a>
+                </li>
+            </ul>
+           
+            
+
+           
+        </links> -->
+        <!-- Collapsible content -->
+
+    </mdb-navbar>
+    <!--/.Navbar-->
+
+</header>
+<!--Main Navigation-->

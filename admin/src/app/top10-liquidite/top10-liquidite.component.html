@@ -1,0 +1,42 @@
+<div class="card-body" style="background-color:white;z-index: inherit 10000000000000000;margin-top: 10%;">       
+  <table class="table table-hover">
+
+    <thead class="blue lighten-4">
+      <tr>
+        <th>Numero Compte</th>
+        <th>nom</th>
+        <th>Telephone</th>
+        <th>Email</th>
+        <th>Gerant portefeuille client</th>
+        <th>Type Compte</th>
+        <th>Portefeuille</th>
+        <th>Liquidite</th>
+      </tr>
+    </thead>
+
+    <tbody *ngFor="let c of clients | slice:0:25">
+     
+          <tr  class="waves-light" data-toggle="modal" data-target="#basicExample" (click)="detailClient(c.numCompt)">           
+              <td>{{c.numCompt}}</td>
+              <td>{{c.nom}}</td>
+              <td>{{c.phone}}</td>
+              <td>{{c.email}}</td>
+              <td>{{c.username}}</td>
+              <td>{{c.typeCompte}}</td>
+              <td>  <span class="badge badge-success badge-pill " >{{c.portefeuille | number}}</span></td>
+              <td>
+                <span class="badge badge-success badge-pill" *ngIf="c.liquidite >= 100000">{{c.liquidite | number}}</span>
+                <span class="badge badge-danger badge-pill" *ngIf="c.liquidite <= 0 ">{{c.liquidite | number}}</span>
+                <span class="badge badge-primary badge-pill" *ngIf="c.liquidite >0 && c.liquidite <=100000 ">{{c.liquidite | number}}</span>
+               
+              </td>
+           </tr>
+    
+      
+      
+    </tbody>
+  </table>
+  
+<!-- {{nombreClient}} -->
+ 
+</div>

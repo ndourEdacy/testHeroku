@@ -1,0 +1,125 @@
+<div class="card">
+  
+        <div class="card-header">
+           Ajouter une note
+       </div>
+       <div class="card-body">
+            <div class="row">
+                    <div class="col-md-2">
+  
+                    </div>
+                        <div class="col-md-10">
+                           <form >
+                             <div class="form-row">
+                              <div class="col-md-6">
+                                  <label for="">sujet</label>
+                                  <input type="text" name="sujet" class="form-control" [(ngModel)]="note.sujet">
+                              </div>
+                            
+                             </div>
+                             
+                               <div class="form-row">
+                                  <div class="form-group col-md-6">
+                                    <label for="">Description</label>
+                                     <textarea class="form-control" name="description"  [(ngModel)]="note.description"></textarea>
+                                  </div>
+                              </div>
+                              <div class="form-row">
+                                  <div class="col-md-3">
+                                        <button class="waves-light" data-toggle="modal" data-target="#basicExample" (click)="getClient();centralLarge.show()">rattacher a</button>
+                                      <input type="text" name="nomclient" class="form-control" [(ngModel)]="nomclient" disabled>
+                                  </div>
+                              </div>
+                              
+                              <button type="submit" class="btn btn-success" (click)="ajouterNote()"> <i class="fa fa-plus mr-3"></i>Ajouter</button>
+                              <button type="reset" class="btn btn-primary">Annuler</button>
+                            
+                             
+                    
+                           </form>
+                          </div>
+             </div>
+       </div>
+</div>
+
+<div class="col-md-3">
+
+    <div mdbModal #centralLarge="mdb-modal" class="modal fade" id="basicExample" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+      aria-hidden="true" [config]="{backdrop: true, ignoreBackdropClick: false}">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title w-100" id="myModalLabel">Modal title</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="centralLarge.hide()">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+                <div class="col-md-8">
+                     
+                </div>
+              <div class="col-md-4">
+    
+                  <form class="d-flex md-form justify-content-center">
+                    <!-- Default input -->
+                    <input type="search" placeholder="cni,mail ou matricule" aria-label="Search" class="form-control" name="cni" [(ngModel)]="cni">
+                    <button class="btn btn-primary btn-sm my-0 p" type="submit" (click)="chercher()">
+                      <i class="fa fa-search"></i>
+                    </button>
+              
+                  </form>
+              </div>
+             
+             
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-10">
+                        <table class="table table-hover">
+        
+                            <thead class="blue lighten-4">
+                              <tr>
+                                <th></th>
+                                <th>prenom</th>
+                                <th>nom</th>
+                                <th>Date naissance</th>
+                                <th>Action</th>
+                              </tr>
+                            </thead>
+                            <!-- Table head -->
+                        
+                            <!-- Table body -->
+                            <tbody *ngFor="let c of clients">
+                             
+                                  <tr  class="waves-light" data-toggle="modal" data-target="#basicExample" >
+                                    
+                                      <td><input type="checkbox" [(ngModel)]="c.isChecked" (change)="checkValue(c.isChecked?'A':'B',c.id)"></td>
+                                      <td>{{c.prenom}}</td>
+                                      <td>{{c.nom}}</td>
+                                      <td>{{c.dateNaiss}}</td>
+                                      <td><a  (click)="detailClient(c.id)"><i class="fa fa-eye mr-3"></i></a></td>
+
+                                 </tr>
+                            
+                              
+                              
+                            </tbody>
+                            <!-- Table body -->
+                          </table>
+                      </div>
+                </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary btn-sm waves-light" mdbWavesEffect (click)="saveChoix();centralLarge.hide()">Save changes</button>
+            <button type="button" class="btn btn-secondary btn-sm waves-light" data-dismiss="modal" (click)="centralLarge.hide()" mdbWavesEffect>Close</button>
+           
+          </div>
+        </div>
+      </div>
+    </div>
+   
+  
+  
+  </div>

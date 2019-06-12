@@ -1,0 +1,1032 @@
+<!-- Heading -->
+
+
+<div class="card mb-4 wow fadeIn">
+
+  <!--Card content-->
+  <div class="card-body d-sm-flex justify-content-between">
+
+    <h4 class="mb-sm-0 pt-3">
+      <a href="https://mdbootstrap.com/material-design-for-bootstrap/" target="_blank">Home Page</a>
+      <span>/</span>
+      <span>Dashboard</span>
+    </h4>
+    <!-- <form class="d-flex md-form justify-content-center">
+     
+      <input type="search" placeholder="entrer le nom " aria-label="Search" class="form-control" name="nom" [(ngModel)]="nom">
+      <input type="search" placeholder="entrer le prenom" aria-label="Search" class="form-control" name="prenom" [(ngModel)]="prenom">
+      <input type="date" placeholder="entrer la date de naissance" aria-label="Search" class="form-control" name="date" [(ngModel)]="date">
+      <button class="btn btn-primary btn-sm my-0 p" type="submit" (click)="chercheByName()">
+        <i class="fa fa-search"></i>
+      </button>
+
+    </form> -->
+
+    <form class="d-flex md-form justify-content-center">
+      <!-- Default input -->
+      <input type="search" placeholder="numero compte" aria-label="Search" class="form-control" name="cni" [(ngModel)]="cni">
+      <button class="btn btn-primary btn-sm my-0 p" type="submit" (click)="chercher()">
+        <i class="fa fa-search"></i>
+      </button>
+
+    </form>
+
+  </div>
+
+</div>
+<!-- Heading -->
+
+
+
+<!-- <app-stats-card></app-stats-card> -->
+
+
+<div class="row wow fadeIn">
+
+    <!--Grid column-->
+    <div class="col-md-6 mb-4">
+  
+      <!--Card-->
+      <div class="card">
+          <div class="card-header">
+              <div class="row">
+                <div class="col-md-10">
+                    Mes Notes
+                </div>
+                <div class="col-md-1">
+                    <span class="btn btn-primary" (click)="ajouterMeeting()">
+                        <i class="fa fa-plus"></i>
+                    </span>
+                </div>
+              </div>
+             
+              
+            </div>
+        <!--Card content-->
+        <div class="card-body">
+  
+          <!-- Table  -->
+          <table class="table table-hover">
+            <!-- Table head -->
+            <thead class="blue-grey lighten-4">
+              <tr>
+                <th>id</th>
+                <th>sujet</th>
+                <th>description</th>
+                
+              </tr>
+            </thead>
+            <!-- Table head -->
+  
+            <!-- Table body -->
+            <tbody *ngFor="let note of notes">
+              <tr  class="waves-light" data-toggle="modal" data-target="#basicExample" (click)="modifnote(tache.id);centralNote.show()">
+               
+                <td>{{note.id}}</td>
+                <td>{{note.sujet}}</td>
+                <td>{{note.description}}</td>
+              </tr>
+             
+            </tbody>
+            <!-- Table body -->
+          </table>
+          <!-- Table  -->
+  
+        </div>
+  
+      </div>
+      <!--/.Card-->
+  
+    </div>
+    <!--Grid column-->
+  
+    <!--Grid column-->
+    <div class="col-md-6 mb-4">
+  
+      
+      <div class="card">
+  
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-10">
+                    Mes Taches
+                </div>
+                <div class="col-md-1">
+                    <span class="btn btn-primary" (click)="ajouterTache()">
+                        <i class="fa fa-plus"></i>
+                    </span>
+                </div>
+              </div>
+        </div>
+        <div class="card-body">
+  
+         
+          <table class="table table-hover">
+        
+            <thead class="blue lighten-4">
+              <tr>
+                <th>id</th>
+                <th>sujet</th>
+                <th>date debut</th>
+                <th>Date fin</th>
+              </tr>
+            </thead>
+            <!-- Table head -->
+  
+            <!-- Table body -->
+            <tbody *ngFor="let tache of taches">
+             
+                  <tr  class="waves-light" data-toggle="modal" data-target="#basicExample" (click)="modif(tache.id);centralLarge.show()">
+                    
+                      <td>{{tache.id}}</td>
+                      <td>{{tache.sujet}}</td>
+                      <td>{{tache.dateDebut}}</td>
+                      <td>{{tache.dateFin}}</td>
+                    </tr>
+            
+              
+              
+            </tbody>
+            <!-- Table body -->
+          </table>
+          <!-- Table  -->
+  
+        </div>
+  
+      </div>
+      <!--/.Card-->
+  
+    </div>
+    <!--Grid column-->
+  
+  </div>
+<!--Grid row-->
+<div class="row wow fadeIn mt-5">
+
+  <!--Grid column-->
+  <div class="col-md-9 mb-4">
+
+    <!--Card-->
+    <div class="card">
+        <div class="card-header">
+            Rapport
+        </div>
+      <!--Card content-->
+      <div class="card-body">
+
+        <div style="display: block">
+          <canvas mdbChart [chartType]="chart1Type" [datasets]="chartDatasets" [labels]="chartLabels" [colors]="chartColors" [options]="chartOptions"
+            [legend]="true">
+          </canvas>
+        </div>
+      </div>
+
+    </div>
+    <!--/.Card-->
+
+  </div>
+  <!--Grid column-->
+
+  <!--Grid column-->
+  <div class="col-md-3 mb-4">
+
+    <!--Card-->
+    <div class="card mb-4">
+
+      <!-- Card header -->
+      <div class="card-header text-center">
+        Portefeuille
+      </div>
+
+     
+      <!-- <div class="card-body">
+
+        <div style="display: block">
+          <canvas mdbChart [chartType]="chart2Type" [datasets]="chartDatasets" [labels]="chartLabels" [colors]="chartColors" [options]="chartOptions"
+            [legend]="true">
+          </canvas>
+        </div>
+      </div> -->
+      <div class="list-group list-group-flush">
+        <a class="list-group-item list-group-item-action waves-effect">evolution portefeuille
+          <span class="badge badge-success badge-pill pull-right">22%
+            <i class="fa fa-arrow-up ml-1"></i>
+          </span>
+        </a>
+        <!-- <a class="list-group-item list-group-item-action waves-effect">Traffic
+          <span class="badge badge-danger badge-pill pull-right">5%
+            <i class="fa fa-arrow-down ml-1"></i>
+          </span>
+        </a> -->
+        <a class="list-group-item list-group-item-action waves-effect">montant titre achete
+          <span class="badge badge-primary badge-pill pull-right">14 || {{montantAchat}} fcfa</span>
+        </a>
+        <a class="list-group-item list-group-item-action waves-effect">montant titre vendu
+          <span class="badge badge-primary badge-pill pull-right">123 || {{montantVente}} fcfa</span>
+        </a>
+        <a class="list-group-item list-group-item-action waves-effect">montant de subscription
+          <span class="badge badge-primary badge-pill pull-right">8 ||{{montantSubscription}} fcfa</span>
+        </a>
+        <a class="list-group-item list-group-item-action waves-effect">montant portefeuille
+          <span class="badge badge-primary badge-pill pull-right">{{montantPortefeuille}} fcfa</span>
+        </a>
+        <a class="list-group-item list-group-item-action waves-effect">montant liquidite
+          <span class="badge badge-primary badge-pill pull-right">{{montantLiquidite}} fcfa</span>
+        </a>
+        <a class="list-group-item list-group-item-action waves-effect">Commission Cgf Obtenu
+          <span class="badge badge-primary badge-pill pull-right">{{commissioncgf}} fcfa</span>
+        </a>
+        <a class="list-group-item list-group-item-action waves-effect">Commission Total Cgf 
+       
+          <span class="badge badge-primary badge-pill pull-right">{{commissionTotalcgf}} fcfa</span>
+        </a>
+        <a class="list-group-item list-group-item-action waves-effect">Pourcentage commission obtenu
+       
+          <span class="badge badge-success badge-pill pull-right">{{pourcentage | number:'2.1-2'}} %</span>
+        </a>
+      </div>
+    </div>
+  
+    <!--/.Card-->
+     
+    </div>
+    
+  
+  <!--Grid column-->
+
+</div>
+<div class="col-md-12 mb-4">
+  
+    <!--Card-->
+    <div class="card">
+        <div class="card-header">
+           Liste des odres executes
+          </div>
+      <!--Card content-->
+      <div class="card-body">
+
+        <!-- Table  -->
+        <table class="table table-hover">
+            <!-- Table head -->
+            <thead class="blue-grey lighten-4">
+              <tr>
+                <th>Numero compte</th>
+                <th>type operation</th>
+                <th>titre</th>
+                <th>Date operation</th>
+                <th>quantite</th>
+                <th>prix Unitaire</th>
+                <th>Montant</th>
+                <th>quantite execute</th>
+                <th>agence</th>
+                <th>date valide</th>
+                <th></th>
+                
+              </tr>
+            </thead>
+            <!-- Table head -->
+  
+            <!-- Table body -->
+            <tbody *ngIf="operations!=null">
+            
+                  <tr *ngFor="let operation of operations |  slice:operations.length-5:operations.length">
+                      <td>{{operation.numCompte}}</td>
+                      <td>{{operation.typeOrde}}</td>
+                      <td>{{operation.codeTitre}}</td>
+                      <td>{{operation.dateOrde}}</td>
+                      <td>{{operation.quantite}}</td>
+                      <td>{{operation.valUnitaire}}</td>
+                      <td>{{operation.montant}}</td>
+                      <td>{{operation.quantiteExecute}}</td>
+                      <td>{{operation.agence}}</td>
+                      <td>{{operation.dateValid}}</td>
+                  </tr>
+           
+            
+             
+            </tbody>
+            <!-- Table body -->
+          </table>
+       
+
+      </div>
+        <div class="row">
+            <button type="button" class="btn btn-secondary btn-sm waves-light" data-dismiss="modal" (click)="voirPlusOperation()" mdbWavesEffect>voir plus</button>
+
+          </div>
+    </div>
+    <!--/.Card-->
+ 
+  </div>
+<div class="col-md-12 mb-4">
+
+  <!--Card-->
+  <div class="card">
+      <div class="card-header">
+          Evolution de ton portefeuille
+      </div>
+    <!--Card content-->
+    <div class="card-body">
+
+      <div style="display: block">
+        <canvas mdbChart [chartType]="chart3Type" [datasets]="chartDatasets1" [labels]="chartLabels" [colors]="chartColors" [options]="chartOptions"
+          [legend]="true">
+        </canvas>
+      </div>
+    </div>
+
+  </div>
+  <!--/.Card-->
+
+</div>
+
+<div class="col-md-3">
+
+  <div mdbModal #centralLarge="mdb-modal" class="modal fade" id="basicExample" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true" [config]="{backdrop: true, ignoreBackdropClick: false}">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title w-100" id="myModalLabel">Modal title</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="centralLarge.hide()">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-2">
+          
+            </div>
+            <div class="col-md-10">
+               <form #f="ngForm" (ngSubmit)="modifier(f.value)">
+                  <input type="text" name="id" class="form-control" [ngModel]="tache.id" hidden>
+                 <div class="form-row">
+                  <div class="col-md-6">
+                      <label for="">sujet</label>
+                      <input type="text" name="sujet" class="form-control" [ngModel]="tache.sujet">
+                  </div>
+                  <div class="col-md-3">
+                      <label for="">statut</label>
+                      <select class="form-control" [ngModel]="tache.statut" name="statut">
+                        <option value="active">active</option>
+                        <option value="en cours">en cours</option>
+                        <option value="fin">fin</option>
+                      </select>
+                    </div>
+                 </div>
+                 <div class="form-row">
+                    <div class="col-md-3">
+                        <label for="">date debut</label>
+                        <input type="date" class="form-control" [ngModel]="tache.dateDebut" name="dateDebut">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="">date fin</label>
+                        <input type="date" class="form-control" [ngModel]="tache.dateFin" name="dateFin">
+                    </div>
+                    <div class="col-md-3">
+                      <label for="">Priorité</label>
+                      <select class="form-control" [ngModel]="tache.priorite" name="priorite">
+                        <option value="high">high</option>
+                        <option value="medium">medium</option>
+                        <option value="low">low</option>
+                      </select>
+                    </div>
+                   </div>
+                   <div class="form-row">
+                      <div class="form-group col-md-9">
+                        <label for="">Description</label>
+                         <textarea class="form-control" [ngModel]="tache.description" name="description"></textarea>
+                      </div>
+                  </div>
+                  <div class="form-row">
+                      <div class="col-md-3">
+                              <label for="">Assigner a quelqu'un</label>
+                              <input type="text" name="nom" class="form-control">
+                              
+                          </div>
+                  </div>
+                  
+                 
+                  <button class="btn btn-success" type="submit"> <i class="fa fa-edit mr-3" ></i>Modofier</button>
+                  <button type="reset" class="btn btn-primary">Annuler</button>
+                  
+               </form>
+              </div>
+           
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm waves-light" data-dismiss="modal" (click)="centralLarge.hide()" mdbWavesEffect>Close</button>
+          <button type="button" class="btn btn-primary btn-sm waves-light" mdbWavesEffect>Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+
+
+</div>
+
+<div class="col-md-3">
+
+    <div mdbModal #centralNote="mdb-modal" class="modal fade" id="basicExample" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+      aria-hidden="true" [config]="{backdrop: true, ignoreBackdropClick: false}">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title w-100" id="myModalLabel">Modal title</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="centralLarge.hide()">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-2">
+            
+              </div>
+              <div class="col-md-10">
+                 <form #f="ngForm" (ngSubmit)="modifier(f.value)">
+                    <input type="text" name="id" class="form-control" [ngModel]="tache.id" hidden>
+                   <div class="form-row">
+                    <div class="col-md-6">
+                        <label for="">sujet</label>
+                        <input type="text" name="sujet" class="form-control" [ngModel]="tache.sujet">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="">statut</label>
+                        <select class="form-control" [ngModel]="tache.statut" name="statut">
+                          <option value="active">active</option>
+                          <option value="en cours">en cours</option>
+                          <option value="fin">fin</option>
+                        </select>
+                      </div>
+                   </div>
+                   <div class="form-row">
+                      <div class="col-md-3">
+                          <label for="">date debut</label>
+                          <input type="date" class="form-control" [ngModel]="tache.dateDebut" name="dateDebut">
+                      </div>
+                      <div class="col-md-3">
+                          <label for="">date fin</label>
+                          <input type="date" class="form-control" [ngModel]="tache.dateFin" name="dateFin">
+                      </div>
+                      <div class="col-md-3">
+                        <label for="">Priorité</label>
+                        <select class="form-control" [ngModel]="tache.priorite" name="priorite">
+                          <option value="high">high</option>
+                          <option value="medium">medium</option>
+                          <option value="low">low</option>
+                        </select>
+                      </div>
+                     </div>
+                     <div class="form-row">
+                        <div class="form-group col-md-9">
+                          <label for="">Description</label>
+                           <textarea class="form-control" [ngModel]="tache.description" name="description"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-3">
+                                <label for="">Assigner a quelqu'un</label>
+                                <input type="text" name="nom" class="form-control">
+                                
+                            </div>
+                    </div>
+                    
+                   
+                    <button class="btn btn-success" type="submit"> <i class="fa fa-edit mr-3" ></i>Modofier</button>
+                    <button type="reset" class="btn btn-primary">Annuler</button>
+                    
+                 </form>
+                </div>
+             
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary btn-sm waves-light" data-dismiss="modal" (click)="centralLarge.hide()" mdbWavesEffect>Close</button>
+            <button type="button" class="btn btn-primary btn-sm waves-light" mdbWavesEffect>Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+   
+  
+  
+  </div>
+<!--Grid row-->
+
+<!--Grid row-->
+
+<!--Grid row-->
+
+<!--Grid row-->
+<!-- <div class="row wow fadeIn">
+
+ 
+  <div class="col-lg-4 col-md-12 mb-4">
+
+   
+    <div class="card">
+
+      
+      <div class="card-header">Line chart</div>
+
+     
+      <div class="card-body">
+
+        <div style="display: block">
+          <canvas mdbChart [chartType]="chart3Type" [datasets]="chartDatasets" [labels]="chartLabels" [colors]="chartColors" [options]="chartOptions"
+            [legend]="true">
+          </canvas>
+        </div>
+      </div>
+
+    </div>
+    
+
+  </div>
+  
+
+ 
+  <div class="col-lg-4 col-md-6 mb-4">
+
+   
+    <div class="card">
+
+     
+      <div class="card-header">Radar Chart</div>
+
+     
+      <div class="card-body">
+
+        <div style="display: block">
+          <canvas mdbChart [chartType]="chart4Type" [datasets]="chartDatasets" [labels]="chartLabels" [colors]="chartColors" [options]="chartOptions"
+            [legend]="true">
+          </canvas>
+        </div>
+      </div>
+
+    </div>
+  
+
+  </div>
+ 
+  <div class="col-lg-4 col-md-6 mb-4">
+
+  
+    <div class="card">
+
+     
+      <div class="card-header">Doughnut Chart</div>
+
+    
+      <div class="card-body">
+
+        <div style="display: block">
+          <canvas mdbChart [chartType]="chart5Type" [datasets]="chartDatasets" [labels]="chartLabels" [colors]="chartColors" [options]="chartOptions"
+            [legend]="true">
+          </canvas>
+        </div>
+      </div>
+
+    </div>
+   
+  </div>
+  
+
+</div> -->
+<!--Grid row-->
+
+<!--Grid row-->
+<div class="row wow fadeIn">
+
+  <!--Grid column-->
+  <div class="col-md-6 mb-4">
+
+    <!--Card-->
+    <!-- <div class="card">
+
+     
+      <div class="card-header">Google map</div>
+
+    
+      <div class="card-body">
+
+       
+        <div class="card-body text-center">
+          <agm-map [latitude]="map.lat" [longitude]="map.lng" [mapTypeId]="'roadmap'" style="height: 300px">
+            <agm-marker [latitude]="map.lat" [longitude]="map.lng"></agm-marker>
+          </agm-map>
+
+        </div>
+      </div>
+
+    </div> -->
+    <!--/.Card-->
+
+  </div>
+  <!--Grid column-->
+
+  <!--Grid column-->
+  <div class="col-md-6 mb-4">
+
+    <!--Card-->
+    <!-- <div class="card">
+
+
+      <div class="card-header">Modals</div>
+      
+      <div class="card-body">
+      
+        <section class="px-4">
+          <h4 class="mb-5 mt-4 dark-grey-text text-center font-bold">
+            <strong>Position & Sizes</strong>
+          </h4>
+
+          <div class="text-center mb-5">
+            <p class="lead">Click buttons below to launch modals demo</p>
+          </div>
+
+         
+          <div class="row">
+
+           
+            <div class="col-md-3">
+              <h5 class="text-center mb-3">Frame Modal</h5>
+
+              <img src="https://mdbootstrap.com/img/brandflow/modal4.jpg" alt="" class="img-fluid z-depth-1">
+              <div class="text-center">
+                <h5 class="my-3">Position</h5>
+
+
+                <button type="button" class="btn btn-primary waves-light" data-toggle="modal" data-target="#basicExample" (click)="frameTop.show()"
+                  mdbWavesEffect>
+                  Top
+                </button>
+                <br>
+                <button type="button" class="btn btn-primary waves-light" data-toggle="modal" data-target="#basicExample" (click)="frameBottom.show()"
+                  mdbWavesEffect>
+                  Bottom
+                </button>
+
+                <div mdbModal #frameTop="mdb-modal" class="modal fade top" id="frameModalBottom" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                  aria-hidden="true" [config]="{backdrop: false, ignoreBackdropClick: false}">
+                  <div class="modal-dialog modal-frame modal-top" role="document">
+                    <div class="modal-content">
+                      <div class="modal-body text-center">
+                        <div class="row px-4">
+                          <p class="pt-1 pr-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit nisi quo provident fugiat reprehenderit
+                            nostrum quos..</p>
+                          <button type="button" class="btn btn-secondary waves-light" data-dismiss="modal" (click)="frameTop.hide()" mdbWavesEffect>Close</button>
+                          <button type="button" class="btn btn-primary waves-light" mdbWavesEffect>Save changes</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div mdbModal #frameBottom="mdb-modal" class="modal fade bottom" id="frameModalBottom" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                  aria-hidden="true" [config]="{backdrop: false, ignoreBackdropClick: false}">
+                  <div class="modal-dialog modal-frame modal-bottom" role="document">
+                    <div class="modal-content">
+                      <div class="modal-body text-center">
+                        <div class="row px-4">
+                          <p class="pt-1 pr-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit nisi quo provident fugiat reprehenderit
+                            nostrum quos..</p>
+                          <button type="button" class="btn btn-secondary waves-light" data-dismiss="modal" (click)="frameBottom.hide()" mdbWavesEffect>Close</button>
+                          <button type="button" class="btn btn-primary waves-light" mdbWavesEffect>Save changes</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+           
+            <div class="col-md-3">
+              <h5 class="text-center mb-3">Side Modal</h5>
+
+              <img src="https://mdbootstrap.com/img/brandflow/modal3.jpg" alt="" class="img-fluid z-depth-1">
+              <div class="text-center">
+                <h5 class="my-3">Position</h5>
+
+                <button type="button" class="btn btn-primary waves-light" data-toggle="modal" data-target="#basicExample" (click)="sideTopRight.show()"
+                  mdbWavesEffect>
+                  Top right
+                </button>
+                <br>
+                <button type="button" class="btn btn-primary waves-light" data-toggle="modal" data-target="#basicExample" (click)="sideTopLeft.show()"
+                  mdbWavesEffect>
+                  Top left
+                </button>
+                <br>
+                <button type="button" class="btn btn-primary waves-light" data-toggle="modal" data-target="#basicExample" (click)="sideBottomRight.show()"
+                  mdbWavesEffect>
+                  Bottom right
+                </button>
+                <br>
+                <button type="button" class="btn btn-primary waves-light" data-toggle="modal" data-target="#basicExample" (click)="sideBottomLeft.show()"
+                  mdbWavesEffect>
+                  Bottom left
+                </button>
+                <br>
+
+
+
+                <div mdbModal #sideTopRight="mdb-modal" class="modal fade right" id="centralModalSm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                  aria-hidden="true">
+                  <div class="modal-dialog modal-side modal-top-right" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title w-100" id="myModalLabel">Modal title</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="sideTopRight.hide()">
+                          <span aria-hidden="true">×</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        ...
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary waves-light" data-dismiss="modal" (click)="sideTopRight.hide()" mdbWavesEffect>Close</button>
+                        <button type="button" class="btn btn-primary waves-light" mdbWavesEffect>Save changes</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div mdbModal #sideTopLeft="mdb-modal" class="modal fade left" id="centralModalSm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                  aria-hidden="true">
+                  <div class="modal-dialog modal-side modal-top-left" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title w-100" id="myModalLabel">Modal title</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="sideTopLeft.hide()">
+                          <span aria-hidden="true">×</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        ...
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary waves-light" data-dismiss="modal" (click)="sideTopLeft.hide()" mdbWavesEffect>Close</button>
+                        <button type="button" class="btn btn-primary waves-light" mdbWavesEffect>Save changes</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div mdbModal #sideBottomRight="mdb-modal" class="modal fade right" id="centralModalSm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                  aria-hidden="true">
+                  <div class="modal-dialog modal-side modal-bottom-right" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title w-100" id="myModalLabel">Modal title</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="sideBottomRight.hide()">
+                          <span aria-hidden="true">×</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        ...
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary waves-light" data-dismiss="modal" (click)="sideBottomRight.hide()" mdbWavesEffect>Close</button>
+                        <button type="button" class="btn btn-primary waves-light" mdbWavesEffect>Save changes</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div mdbModal #sideBottomLeft="mdb-modal" class="modal fade left" id="centralModalSm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                  aria-hidden="true">
+                  <div class="modal-dialog modal-side modal-bottom-left" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title w-100" id="myModalLabel">Modal title</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="sideBottomLeft.hide()">
+                          <span aria-hidden="true">×</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        ...
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary waves-light" data-dismiss="modal" (click)="sideBottomLeft.hide()" mdbWavesEffect>Close</button>
+                        <button type="button" class="btn btn-primary waves-light" mdbWavesEffect>Save changes</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+ 
+            
+            <div class="col-md-3">
+              <h5 class="text-center mb-3">Fluid Modal</h5>
+
+              <img src="https://mdbootstrap.com/img/brandflow/modal1.jpg" alt="" class="img-fluid z-depth-1">
+              <div class="text-center">
+                <h5 class="my-3">Position</h5>
+
+
+                <button type="button" class="btn btn-primary waves-light" data-toggle="modal" data-target="#basicExample" (click)="fluidRight.show()"
+                  mdbWavesEffect>
+                  Right
+                </button>
+                <br>
+                <button type="button" class="btn btn-primary waves-light" data-toggle="modal" data-target="#basicExample" (click)="fluidLeft.show()"
+                  mdbWavesEffect>
+                  Left
+                </button>
+                <br>
+                <button type="button" class="btn btn-primary waves-light" data-toggle="modal" data-target="#basicExample" (click)="centralSuccess.show()"
+                  mdbWavesEffect>
+                  Top
+                </button>
+                <br>
+                <button type="button" class="btn btn-primary waves-light" data-toggle="modal" data-target="#basicExample" (click)="fluidBottom.show()"
+                  mdbWavesEffect>
+                  Bottom
+                </button>
+                <br>
+
+
+
+
+                <div mdbModal #centralSuccess="mdb-modal" class="modal fade" id="centralModalSuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                  aria-hidden="true">
+                  <div class="modal-dialog modal-notify modal-success" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <p class="heading lead">Modal Success</p>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="centralSuccess.hide()">
+                          <span aria-hidden="true" class="white-text">×</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="text-center">
+                          <i class="fa fa-check fa-4x mb-3 animated rotateIn"></i>
+                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit iusto nulla aperiam blanditiis
+                            ad consequatur in dolores culpa, dignissimos, eius non possimus fugiat. Esse ratione fuga, enim,
+                            ab officiis totam.</p>
+                        </div>
+                      </div>
+                      <div class="modal-footer justify-content-center">
+                        <a type="button" class="btn btn-primary-modal waves-light" mdbWavesEffect>Get it now
+                          <i class="fa fa-diamond ml-1"></i>
+                        </a>
+                        <a type="button" class="btn btn-outline-secondary-modal" data-dismiss="modal" (click)="centralSuccess.hide()" mdbWavesEffect>No, thanks</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div mdbModal #fluidBottom="mdb-modal" class="modal fade bottom" id="centralModalSuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                  aria-hidden="true">
+                  <div class="modal-dialog modal-notify modal-success" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <p class="heading lead">Modal Success</p>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="centralSuccess.hide()">
+                          <span aria-hidden="true" class="white-text">×</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="text-center">
+                          <i class="fa fa-check fa-4x mb-3 animated rotateIn"></i>
+                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit iusto nulla aperiam blanditiis
+                            ad consequatur in dolores culpa, dignissimos, eius non possimus fugiat. Esse ratione fuga, enim,
+                            ab officiis totam.</p>
+                        </div>
+                      </div>
+                      <div class="modal-footer justify-content-center">
+                        <a type="button" class="btn btn-primary-modal waves-light" mdbWavesEffect>Get it now
+                          <i class="fa fa-diamond ml-1"></i>
+                        </a>
+                        <a type="button" class="btn btn-outline-secondary-modal" data-dismiss="modal" (click)="fluidBottom.hide()" mdbWavesEffect>No, thanks</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div mdbModal #fluidRight="mdb-modal" class="modal fade right" id="fullHeightModalRight" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                  aria-hidden="true">
+                  <div class="modal-dialog modal-full-height modal-right" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title w-100" id="myModalLabel">Modal title</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="fluidRight.hide()">
+                          <span aria-hidden="true">×</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente magnam, sunt, ea dolore eum quod.
+                          Minima fugiat enim aut soluta est reprehenderit reiciendis quos, qui, amet possimus laborum assumenda
+                          voluptate.
+                        </p>
+
+                        <ul class="list-group z-depth-0">
+                          <li class="list-group-item justify-content-between">
+                            Cras justo odio
+                            <span class="badge badge-primary badge-pill">14</span>
+                          </li>
+                          <li class="list-group-item justify-content-between">
+                            Dapibus ac facilisis in
+                            <span class="badge badge-primary badge-pill">2</span>
+                          </li>
+                          <li class="list-group-item justify-content-between">
+                            Morbi leo risus
+                            <span class="badge badge-primary badge-pill">1</span>
+                          </li>
+                          <li class="list-group-item justify-content-between">
+                            Cras justo odio
+                            <span class="badge badge-primary badge-pill">14</span>
+                          </li>
+                          <li class="list-group-item justify-content-between">
+                            Dapibus ac facilisis in
+                            <span class="badge badge-primary badge-pill">2</span>
+                          </li>
+                          <li class="list-group-item justify-content-between">
+                            Morbi leo risus
+                            <span class="badge badge-primary badge-pill">1</span>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn btn-secondary waves-light" data-dismiss="modal" (click)="fluidRight.hide()" mdbWavesEffect>Close</button>
+                        <button type="button" class="btn btn-primary waves-light" mdbWavesEffect>Save changes</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div mdbModal #fluidLeft="mdb-modal" class="modal fade left" id="fullHeightModalRight" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                  aria-hidden="true">
+                  <div class="modal-dialog modal-full-height modal-left" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title w-100" id="myModalLabel">Modal title</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="fluidLeft.hide()">
+                          <span aria-hidden="true">×</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente magnam, sunt, ea dolore eum quod.
+                          Minima fugiat enim aut soluta est reprehenderit reiciendis quos, qui, amet possimus laborum assumenda
+                          voluptate.
+                        </p>
+
+                        <ul class="list-group z-depth-0">
+                          <li class="list-group-item justify-content-between">
+                            Cras justo odio
+                            <span class="badge badge-primary badge-pill">14</span>
+                          </li>
+                          <li class="list-group-item justify-content-between">
+                            Dapibus ac facilisis in
+                            <span class="badge badge-primary badge-pill">2</span>
+                          </li>
+                          <li class="list-group-item justify-content-between">
+                            Morbi leo risus
+                            <span class="badge badge-primary badge-pill">1</span>
+                          </li>
+                          <li class="list-group-item justify-content-between">
+                            Cras justo odio
+                            <span class="badge badge-primary badge-pill">14</span>
+                          </li>
+                          <li class="list-group-item justify-content-between">
+                            Dapibus ac facilisis in
+                            <span class="badge badge-primary badge-pill">2</span>
+                          </li>
+                          <li class="list-group-item justify-content-between">
+                            Morbi leo risus
+                            <span class="badge badge-primary badge-pill">1</span>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn btn-secondary waves-light" data-dismiss="modal" (click)="fluidLeft.hide()" mdbWavesEffect>Close</button>
+                        <button type="button" class="btn btn-primary waves-light" mdbWavesEffect>Save changes</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+         
+          </div>
+          
+
+        </section>
+       
+
+      </div>
+      
+    </div> -->
+    <!--/.Card-->
+
+
+  </div>
+  <!--Grid column-->
+
+
+</div>
+<!--Grid row-->
+
+
+<app-stats-card2></app-stats-card2>

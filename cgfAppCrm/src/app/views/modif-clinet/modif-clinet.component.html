@@ -1,0 +1,73 @@
+
+
+<div class="row">
+  <div class="col-md-8">
+      <div class="card">
+          <h5 class="card-header">Ajout nouveau client</h5>
+          <div class="card-body">
+             
+        <form>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="inputEmail4">Prenom</label>
+                  <input type="text" class="form-control" id="inputEmail4" placeholder="prenom"  [(ngModel)]="client.prenom" name="prenom">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="inputPassword4">Nom</label>
+                  <input type="text" class="form-control" id="inputPassword4" placeholder="nom" name="nom" [(ngModel)]="client.nom">
+                </div>
+              </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputEmail4">Email</label>
+              <input type="email" class="form-control" id="inputEmail4" placeholder="Email" name="email" [(ngModel)]="client.email">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="inputPassword4">Telephone</label>
+              <input type="text" class="form-control" id="inputPassword4" placeholder="Telephone" name="tel" [(ngModel)]="client.tel">
+            </div>
+          </div>
+          <div class="form-row">
+              <div class="form-group col-md-6">
+                  <label for="inputAddress">Date Naissance</label>
+                  <input type="date" class="form-control" id="inputAddress" placeholder="1234 Main St" name="dateNaiss" [(ngModel)]="client.dateNaiss">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="inputAddress2">Lieu de naissance</label>
+                  <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor" name="lieuNaiss" [(ngModel)]="client.lieuNaiss">
+                </div>
+          </div>
+          <div class="form-row">
+              <div class="form-group col-md-6">
+                  <label for="inputAddress">Address</label>
+                  <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="inputAddress2">Address 2</label>
+                  <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                </div>
+          </div>
+        
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputCity">Ville</label>
+              <input type="text" class="form-control" id="inputCity" name="ville"  [(ngModel)]="client.ville">
+            </div>
+            <div class="form-group col-md-4">
+              <label for="inputState">Pays</label>
+              <select id="inputState" class="form-control"  [(ngModel)]="client.pays" name="pays">
+                <option selected>Senegal</option>
+                <option>...</option>
+              </select>
+            </div>
+          
+          </div>
+        
+          <button type="submit" class="btn btn-success" (click)="modifClient()"> <i class="fa fa-edit mr-3"></i>Modifier</button>
+          <button class="btn btn-primary">Annuler</button>
+        </form>
+          </div>
+        </div>
+  </div>
+
+</div>
