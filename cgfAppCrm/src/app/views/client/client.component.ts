@@ -27,6 +27,6 @@ export class ClientComponent implements OnInit {
   ajoutClient(){
     this.clientService.ajoutClient(this.client)
    
-    console.log(this.clientService.chercherClientByName(this.client.nom,this.client.prenom,this.client.dateNaiss))
+   
   }
 }

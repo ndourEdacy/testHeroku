@@ -1,63 +1,81 @@
 
  <div class="row wow fadeIn mt-5">
-    <div class="col-md-6 mb-4">
+    <div class="col-md-6 mb-1 ">
       <div class="card">
         <div class="card-header">
             Profile client
           </div>
       <!--Card content-->
-      <div class="card-body">
-    
+      <div class="card-body"  style="height: 250px;">
+
         <!-- Table  -->
         <table class="table table-hover">
           <!-- Table head -->
           <thead class="blue-grey lighten-4">
             <tr>
-              <th>Numero Compte</th>
+              <th>Type Compte</th>
               <th>Nom</th>
-              <th>date naisssance</th>
               <th>Telephone</th>
-              <th>CNI</th>
-              
+              <!-- <th>CNI</th> -->
+              <th>Email</th>
+
             </tr>
           </thead>
-          <!-- Table head -->
-    
-          <!-- Table body -->
+
           <tbody *ngIf="client!=null">
             <tr>
-              <td>{{client.numCompt}}</td>
-              <td>{{client.nom}}</td>
-              <td>{{client.dateNaiss}}</td>
+              <td>{{client.typeCompte}}</td>
+              <td>{{client.nomClient}}</td>
               <td>{{client.phone}}</td>
-              <td>{{client.cni}}</td>
+              <!-- <td>{{client.cni}}</td> -->
+              <td>{{client.email}}</td>
               
             </tr>
-           
+
           </tbody>
-          <!-- Table body -->
+
         </table>
-        <!-- Table  -->
-        <button class="btn btn-primary" (click)="modifier(client.numCompt)">modifier</button>
-        <button class="btn btn-success" (click)="voirProfil(client.numCompt)">voir profil</button>
+
+        <button class="btn btn-primary" (click)="modifier(client.numcompte)" disabled>modifier</button>
+        <button class="btn btn-primary" (click)="voirProfil(client.numcompte)" disabled>voir profil</button>
       </div>
-     
-      
+
+
     </div>
     </div>
-    <div class="col-md-6 mb-4">
-      <div class="card">
+    <div class="col-md-6 mb-1">
+      <div class="card" >
         <div class="card-header">
             Portefeuille
-          </div>
+        </div>
       <!--Card content-->
-      <div class="card-body">
-        <div class="row">
+      <div class="card-body" style="height: 250px;">
+          <table class="table table-hover">
+              <!-- Table head -->
+              <thead class="blue-grey lighten-4">
+                <tr>
+                  <th>Portefeuille client</th>
+                  <th>liquidite</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>{{portefeuilleClient.portefeuille | number : '1.1-10'}}  fcfa</td>
+                  <td>{{portefeuilleClient.liquidite | number : '1.1-10'}}  fcfa</td>
+
+                </tr>
+                <tr></tr>
+                <tr></tr>
+              </tbody>
+
+            </table>
+        <!-- <div class="row">
           <div class="col-md-3">
            Portefeuille client:
           </div>
           <div class="col-md-3">
-            {{portefeuilleClient.portefeuille}}  fcfa
+            {{portefeuilleClient.portefeuille | number}}  fcfa
           </div>
         </div>
         <div class="row">
@@ -65,30 +83,58 @@
             liquidite:
           </div>
           <div class="col-md-3">
-            {{portefeuilleClient.liquidite}}  fcfa
+            {{portefeuilleClient.liquidite | number}}  fcfa
           </div>
-        </div>
-        <button class="btn btn-success" (click)="detailPortefeuille(client.numCompt);detailPorte.show()">Voir detail portefeuille</button>
+        </div> -->
+        <div class="row">
+            <button class="btn btn-primary" (click)="ajouterReclamention(client.idClientCgf);AddReclamention.show()">Ajouter une reclamation</button>
+            <button class="btn btn-primary" (click)="detailPortefeuille(client.numcompte);detailPorte.show()">Voir detail portefeuille</button>
+            <button class="btn btn-primary" (click)="getAllTitreAction();alert.show()" >Creer une alerte</button>
+          </div>
       </div>
-    
+
     </div>
-    <div class="row">
-      <button class="btn btn-primary" (click)="ajouterReclamention(client.id);AddReclamention.show()">Ajouter une reclamation</button>
-      <button class="btn btn-primary" (click)="sideTopRight.show()" >Rattacher un document</button>
-    </div>
+
     </div>
  </div>
 
- <div class="row wow fadeIn mt-5">
+ <div class="row wow fadeIn mt-2">
 
   <!--Grid column-->
-  
-  <div class="col-md-9 mb-4">
+
+  <div class="col-lg-9 col-md-12 mb-1 rap-port">
 
     <!--Card-->
     <div class="card">
-        <div class="card-header">
-            Rapport des operations sur le compte
+        <div class="card-header row">
+            <div class="col-md-8 mb-1">
+               Rapport des operations sur le compte
+            </div>
+            <div class="col-md-04 mb-4">
+                <label for=""> filtrer par annnee</label>
+                <select name="" id="" (change)="creeCompteParAn($event.target.value)">
+                  <option value="2019" selected>2019</option>
+                  <option value="2018" >2018</option>
+                  <option value="2017">2017</option>
+                  <option value="2016">2016</option>
+                  <option value="2015">2015</option>
+                  <option value="2014">2014</option>
+                  <option value="2013">2013</option>
+                  <option value="2012">2012</option>
+                  <option value="2011">2011</option>
+                  <option value="2010">2010</option>
+                  <option value="2009">2009</option>
+                  <option value="2008">2008</option>
+                  <option value="2007">2007</option>
+                  <option value="2006">2006</option>
+                  <option value="2005">2005</option>
+                  <option value="2004">2004</option>
+                  <option value="2003">2003</option>
+                  <option value="2002">2002</option>
+                  <option value="2001">2001</option>
+                  <option value="2000">2000</option>
+                </select>
+             </div>
         </div>
       <!--Card content-->
       <div class="card-body">
@@ -105,21 +151,21 @@
 
   </div>
 
-  
+
   <!--Grid column-->
 
   <!--Grid column-->
-  <div class="col-md-3 mb-4">
+  <div class="col-md-12 col-lg-3 mb-1">
 
     <!--Card-->
-    <div class="card mb-4">
+    <!-- <div class="card mb-4">
 
-      <!-- Card header -->
+
       <div class="card-header text-center">
         Pie chart
       </div>
 
-      <!--Card content-->
+
       <div class="card-body">
 
         <div style="display: block">
@@ -129,12 +175,12 @@
         </div>
       </div>
 
-    </div>
-    
+    </div> -->
+
     <!--/.Card-->
 
     <!--Card-->
-    <div class="card mb-4">
+    <div class="card mb-1">
 
       <!--Card content-->
       <div class="card-body">
@@ -147,16 +193,16 @@
             </span>
           </a>
           <a class="list-group-item list-group-item-action waves-effect">montant titre achete
-            <span class="badge badge-primary badge-pill pull-right"> {{montantAchat}} fcfa</span>
+            <span class="badge badge-primary badge-pill pull-right"> {{montantAchat | number : '1.1-10'}} fcfa</span>
           </a>
           <a class="list-group-item list-group-item-action waves-effect">montant titre vendu
-            <span class="badge badge-primary badge-pill pull-right"> {{montantVente}} fcfa</span>
+            <span class="badge badge-primary badge-pill pull-right"> {{montantVente | number : '1.1-10'}} fcfa</span>
           </a>
-          <a class="list-group-item list-group-item-action waves-effect">montant subscription
-            <span class="badge badge-primary badge-pill pull-right">{{montantSubscription}} fcfa</span>
+          <a class="list-group-item list-group-item-action waves-effect">montant souscription
+            <span class="badge badge-primary badge-pill pull-right">{{montantSubscription | number : '1.1-10'}} fcfa</span>
           </a>
           <a class="list-group-item list-group-item-action waves-effect">Courtage CGF obtenu
-              <span class="badge badge-primary badge-pill pull-right">{{courtagecgf}} fcfa</span>
+              <span class="badge badge-primary badge-pill pull-right">{{courtagecgf | number : '1.1-10'}} fcfa</span>
             </a>
         </div>
         <!-- List group links -->
@@ -165,156 +211,284 @@
 
     </div>
     <!--/.Card-->
-     
+      <div class="card ">
+       
+        <div class="card-body ">
+                      <a class="list-group-item list-group-item-action waves-effect">Operation de caisse</a>
+                       <!-- <a class="list-group-item list-group-item-action waves-effect">Montant retrait espece
+                          <span class="badge badge-primary badge-pill pull-right" width="150px">{{  retraitEspece | number}} cfa</span>
+                      </a> -->
+                      <a class="list-group-item list-group-item-action waves-effect">Montant depot espece
+                          <span class="badge badge-primary badge-pill pull-right" width="150px">{{  depotEspece | number : '1.1-10'}} cfa</span>
+                      </a>
+                      <a class="list-group-item list-group-item-action waves-effect">Montant retrait cheque
+                          <span class="badge badge-primary badge-pill pull-right" width="150px">{{  retraitCheque | number : '1.1-10'}} cfa</span>
+                      </a>
+                      <a class="list-group-item list-group-item-action waves-effect">Montant depot cheque
+                          <span class="badge badge-primary badge-pill pull-right" width="150px">{{  depotCheque | number : '1.1-10'}} cfa</span>
+                      </a>
+
+                      <a class="list-group-item list-group-item-action waves-effect">Montant retrait par virement
+                          <span class="badge badge-primary badge-pill pull-right" width="150px">{{   retraitVrement | number : '1.1-10'}} cfa</span>
+                      </a>
+                      <a class="list-group-item list-group-item-action waves-effect">Montant depot par virement
+                          <span class="badge badge-primary badge-pill pull-right" width="150px">{{  depotVirement | number : '1.1-10'}} cfa</span>
+                      </a>
+        </div>
+      </div>
     </div>
 
-  
-  <!--Grid column-->
 
 </div>
+<div class="row wow fadeIn">
+  <div class="col-md-12 mb-4">
 
+      <!--Card-->
+      <div class="card">
+          <div class="card-header">
+              Liste des operations effectuées sur le compte
+            </div>
+        <!--Card content-->
+        <div class="card-body">
+
+          <!-- Table  -->
+          <table class="table table-hover">
+            <!-- Table head -->
+              <thead class="blue-grey lighten-4">
+                <tr>
+                  <th>Type de l'operation</th>
+                  <th>Code titre</th>
+                  <th>Date operation</th>
+                  <th>Quantite</th>
+
+                  <th>Prix unitaire</th>
+                  <th>Montant (en fcfa)</th>
+
+                </tr>
+              </thead>
+              <tbody *ngFor="let operation of operations | slice:0:5">
+
+                    <tr class="waves-light" data-toggle="modal" data-target="#basicExample" (click)="getOrdreById(operation.idOrdre);centralOperation.show()">
+                        <!-- {{operation.typeOrde}} -->
+                        <td>
+                          <span *ngIf="operation.typeOrde.trim()=='AV'">Vente d'action</span>
+                          <span *ngIf="operation.typeOrde.trim()=='AA'">Achat d'action</span>
+                          <span *ngIf="operation.typeOrde.trim()=='OS'">OS</span>
+                          <span *ngIf="operation.typeOrde.trim()=='AS'">AS</span>
+                         </td>
+                        <td>{{operation.codeTitre}}</td>
+                        <td>{{operation.dateOrde | date}}</td>
+                        <td>{{operation.quantite | number : '1.1-10'}}</td>
+                        <td>{{operation.valUnitaire | number : '1.1-10'}}</td>
+                        <td>{{operation.montant | number : '1.1-10'}}</td>
+                      </tr>
+
+
+
+              </tbody>
+
+          </table>
+
+          <div class="row">
+            <button type="button" class="btn btn-secondary btn-sm waves-light" data-dismiss="modal" (click)="voirPlusOperation.show()" mdbWavesEffect [disabled]="!(operations.length > 5)">voir plus</button>
+
+          </div>
+        </div>
+
+      </div>
+      <!--/.Card-->
+
+    </div>
+    
+    <!-- <div class="col-md-12 mb-2">
+
+     
+      <div class="card">
+          <div class="card-header">
+              Evolution du portefeuille client
+          </div>
+        <div class="card-body">
+
+          <div style="display: block">
+            <canvas mdbChart [chartType]="chart3Type" [datasets]="chartDatasets1" [labels]="chartLabels" [colors]="chartColors" [options]="chartOptions"
+              [legend]="true">
+            </canvas>
+          </div>
+        </div>
+
+      </div>
+     
+
+    </div> -->
+</div>
 <div class="row wow fadeIn">
 
-    <!--Grid column-->
-    
-    <!--Grid column-->
-    <div class="col-md-6 mb-4">
-       
-      
+    <div class="col-md-6 mb-2" >
+
+
         <div class="card">
-    
+
           <div class="card-header">
-           
+
             <div class="row">
                 <div class="col-md-10">
                     Note rattacher a ce client
                 </div>
-               
                 <div class="col-md-1">
-                    <span class="btn btn-primary" (click)="ajouterNote(client.numCompt)">
+                    <span class="btn btn-primary" (click)="ajouterNote(client.clientId)">
                         <i class="fa fa-plus"></i>
                     </span>
                 </div>
               </div>
           </div>
-          <div class="card-body">
-    
-           
+          <div class="card-body" style="height: 250px;">
+
+
             <table class="table table-hover">
-          
+
               <thead class="blue lighten-4">
                 <tr>
-                 
+
                   <th>sujet</th>
                   <th>description</th>
-                 
+                  <th>Date</th>
                 </tr>
               </thead>
-              <!-- Table head -->
-    
-              <!-- Table body -->
+            
               <tbody *ngFor="let note of notes">
-               
-                    <tr  class="waves-light" data-toggle="modal" data-target="#basicExample" (click)="modif(tache.id);centralLarge.show()">
-                      
-                        
+
+                    <tr  class="waves-light" data-toggle="modal" data-target="#basicExample" (click)="modif(note.idNote);centralNote.show()">
                         <td>{{note.sujet}}</td>
                         <td>{{note.description}}</td>
-                        
-                      </tr>
-              
-                
-                
+                        <td>{{note.dateCreat | date}}</td>
+                    </tr>
+
+
+
               </tbody>
-              <!-- Table body -->
             </table>
-            <!-- Table  -->
-    
+
           </div>
-    
+            <div class="row">
+              <!-- <button type="button" class="btn btn-secondary btn-sm waves-light" data-dismiss="modal" (click)="voirPlusTache.show()" mdbWavesEffect>voir plus</button> -->
+
+            </div>
         </div>
         <!--/.Card-->
-    
+
       </div>
     <!--Grid column-->
-    <div class="col-md-6 mb-4">
-  
-      
+    <div class="col-md-6 mb-2">
+
+
       <div class="card">
-  
+
         <div class="card-header">
-          
+
           <div class="row">
               <div class="col-md-5">
                   Tache rattacher a ce client
               </div>
               <div class="col-md-5">
-                <form class="d-flex justify-content-center">
-                  <!-- Default input -->
+                <!-- <form class="d-flex justify-content-center">
+                 
                   <input type="date" aria-label="Search" class="form-control" name="dateDebutTache" [(ngModel)]="dateDebutTache">
                   <button class="btn btn-primary btn-sm my-0 p" type="submit" (click)="chercherTache()">
                     <i class="fa fa-search"></i>
                   </button>
-            
-                </form>
+
+                </form> -->
               </div>
               <div class="col-md-1">
-                  <span class="btn btn-primary" (click)="ajouterTache()">
+                  <span class="btn btn-primary" (click)="ajouterTache(client.clientId)">
                       <i class="fa fa-plus"></i>
                   </span>
               </div>
             </div>
         </div>
-        <div class="card-body">
-  
-         
+        <div class="card-body" style="height: 250px;">
+
+
           <table class="table table-hover">
-        
+
             <thead class="blue lighten-4">
               <tr>
-                <th>id</th>
-                <th>sujet</th>
+
+                <th>Statut</th>
+                <th>Description</th>
                 <th>date debut</th>
                 <th>Date fin</th>
+
               </tr>
             </thead>
             <!-- Table head -->
-  
+
             <!-- Table body -->
-            <tbody *ngFor="let tache of taches">
-             
-                  <tr  class="waves-light" data-toggle="modal" data-target="#basicExample" (click)="modif(tache.id);centralLarge.show()">
-                    
-                      <td>{{tache.id}}</td>
-                      <td>{{tache.sujet}}</td>
-                      <td>{{tache.dateDebut}}</td>
-                      <td>{{tache.dateFin}}</td>
+            <tbody *ngFor="let tache of taches | slice:taches.length-5:taches.length">
+
+                  <tr  class="waves-light" data-toggle="modal" data-target="#basicExample" (click)="modifTache(tache.idTache);centralTache.show()">
+
+
+                      <td>{{tache.statut}}</td>
+                      <td>{{tache.descriptionTache | slice:0:25}}</td>
+                      <td>{{tache.dateDebut | date}}</td>
+                      <td>{{tache.dateFin | date}}</td>
                     </tr>
-            
-              
-              
+
+
+
             </tbody>
             <!-- Table body -->
           </table>
           <!-- Table  -->
-  
+          <div class="row">
+            <!-- <button type="button" class="btn btn-secondary btn-sm waves-light" data-dismiss="modal" (click)="voirPlusTache.show()" mdbWavesEffect>voir plus</button> -->
+
+          </div>
         </div>
-  
+
       </div>
       <!--/.Card-->
-  
+
     </div>
     <!--Grid column-->
-  
-  </div>
-  <div class="col-md-12 mb-4">
 
-    <!--Card-->
+  </div>
+  <!-- <div class="col-md-12 mb-4">
+
+   
     <div class="card">
-        <div class="card-header">
-            Rapport des operations sur le compte
+        <div class="card-header row">
+            <div class="col-md-8 mb-4">
+               Rapport des operations sur le compte
+            </div>
+            <div class="col-md-04 mb-4">
+                <label for=""> filtrer par annnee</label>
+                <select name="" id="" (change)="creeCompteParAn($event.target.value)">
+                  
+                  <option value="2018" selected>2018</option>
+                  <option value="2017">2017</option>
+                  <option value="2016">2016</option>
+                  <option value="2015">2015</option>
+                  <option value="2014">2014</option>
+                  <option value="2013">2013</option>
+                  <option value="2012">2012</option>
+                  <option value="2011">2011</option>
+                  <option value="2010">2010</option>
+                  <option value="2009">2009</option>
+                  <option value="2008">2008</option>
+                  <option value="2007">2007</option>
+                  <option value="2006">2006</option>
+                  <option value="2005">2005</option>
+                  <option value="2004">2004</option>
+                  <option value="2003">2003</option>
+                  <option value="2002">2002</option>
+                  <option value="2001">2001</option>
+                  <option value="2000">2000</option>
+                </select>
+             </div>
         </div>
-      <!--Card content-->
+     
       <div class="card-body">
 
         <div style="display: block">
@@ -325,128 +499,119 @@
       </div>
 
     </div>
-    <!--/.Card-->
+   
 
-  </div>
-  <div class="row wow fadeIn mt-5">
-      <div class="col-md-6 mb-4">
-  
-          <!--Card-->
-          <div class="card">
-              <div class="card-header">
-                  Liste operation effectue sur le compte
-                </div>
-            <!--Card content-->
-            <div class="card-body">
-      
-              <!-- Table  -->
-              <table class="table table-hover">
-                <!-- Table head -->
-                <thead class="blue-grey lighten-4">
-                  <tr>
-                    <th>type operation</th>
-                    <th>titre</th>
-                    <th>Date operation</th>
-                    <th>quantite</th>
-
-                    <th>prix</th>
-                    
-                  </tr>
-                </thead>
-                <!-- Table head -->
-      
-                <!-- Table body -->
-                <tbody *ngFor="let operation of operations | slice:operations.length-5:operations.length">
-                
-                      <tr class="waves-light" data-toggle="modal" data-target="#basicExample" (click)="getOrdreById(operation.idOrdre);centralOperation.show()">
-                   
-                          <td>{{operation.typeOrde}}</td>
-                          <td>{{operation.codeTitre}}</td>
-                          <td>{{operation.dateOrde}}</td>
-                          <td>{{operation.quantite}}</td>
-                          <td>{{operation.valUnitaire}}</td>
-                        </tr>
-               
-                
-                 
-                </tbody>
-                <!-- Table body -->
-              </table>
-              <!-- Table  -->
-              <div class="row">
-                <button type="button" class="btn btn-secondary btn-sm waves-light" data-dismiss="modal" (click)="voirPlusOperation.show()" mdbWavesEffect>voir plus</button>
-
-              </div>
-            </div>
-      
-          </div>
-          <!--/.Card-->
-      
-        </div>
-        <div class="col-md-6 mb-4">
-  
-          <!--Card-->
-          <div class="card">
-              <div class="card-header">
-                 Reclamations du client
-                </div>
-            <!--Card content-->
-            <div class="card-body">
-      
-              <!-- Table  -->
-              <table class="table table-hover">
-                <!-- Table head -->
-                <thead class="blue-grey lighten-4">
-                  <tr>
-                    <th>date</th>
-                    <th>sujet</th>
-                    <th>statut</th>
-                  </tr>
-                </thead>
-              
-                  <tbody *ngFor="let reclamention of reclamentions | slice:0:5">
-                    <tr class="waves-light" data-toggle="modal" data-target="#basicExample" (click)="voirReclamention(reclamention.idReclamention);centralReclamention.show()">
-                    
-                      <td>{{reclamention.dateReclamention | date}}</td>
-                      <td>{{reclamention.statut}}</td>
-                      <td>{{reclamention.description}}</td>
-                      
-                    </tr>
-                  
-                  </tbody>
-             
-              </table>  
-             
-      
-            </div>
-      
-          </div>
-          <!--/.Card-->
-      
-        </div>
-        <div class="col-md-12 mb-4">
-
-          <!--Card-->
-          <div class="card">
-              <div class="card-header">
-                  Evolution du portefeuille client
-              </div>
-            <!--Card content-->
-            <div class="card-body">
-        
-              <div style="display: block">
-                <canvas mdbChart [chartType]="chart3Type" [datasets]="chartDatasets1" [labels]="chartLabels" [colors]="chartColors" [options]="chartOptions"
-                  [legend]="true">
-                </canvas>
-              </div>
-            </div>
-        
-          </div>
-          <!--/.Card-->
-        
-        </div>
-  </div>
+  </div> -->
  
+<div class="row">
+              <div class="col-md-6 mb-2">
+
+                <!--Card-->
+                <div class="card">
+                    <div class="card-header row">
+                        <div class="col-md-8">
+                            Reclamations du client
+                        </div>
+                        <div class="col-md-2"></div>
+                          <div class="col-md-2">
+                              <span class="btn btn-primary" (click)="ajouterReclamention();AddReclamention.show()">
+                                  <i class="fa fa-plus"></i>
+                              </span>
+                          </div>
+                        </div>
+                   
+                  <!--Card content-->
+                  <div class="card-body" style="height: 250px;">
+
+                    <!-- Table  -->
+                    <table class="table table-hover">
+                      <!-- Table head -->
+                      <thead class="blue-grey lighten-4">
+                        <tr>
+                          <th>Date</th>
+                          <th>Sujet</th>
+                          <th>Description</th>
+                        </tr>
+                      </thead>
+
+                        <tbody *ngFor="let reclamention of reclamentions | slice:0:5">
+                          <tr class="waves-light" data-toggle="modal" data-target="#basicExample" (click)="voirReclamention(reclamention.idReclamention);AddReclamention.show()">
+
+                            <td>{{reclamention.dateReclamention | date}}</td>
+                            <td>{{reclamention.sujet}}</td>
+                            <td>{{reclamention.description | slice:0:25}}</td>
+
+                          </tr>
+
+                        </tbody>
+
+                    </table>
+
+
+                  </div>
+                  <div class="row">
+                    <!-- <button type="button" class="btn btn-secondary btn-sm waves-light" data-dismiss="modal" (click)="voirPlusTache.show()" mdbWavesEffect>voir plus</button> -->
+
+                  </div>
+                </div>
+                <!--/.Card-->
+
+              </div>
+
+              <div class="col-md-6 mb-2">
+
+                  <!--Card-->
+                  <div class="card">
+                      <div class="card-header row">
+                        <div class="col-md-8">
+                            Listes des appels 
+                        </div>
+                        <div class="col-md-2"></div>
+                          <div class="col-md-2">
+                              <span class="btn btn-primary" (click)="setIsModif();getAllUser();AddPhonning.show();">
+                                  <i class="fa fa-plus"></i>
+                              </span>
+                          </div>
+                        </div>
+                    <!--Card content-->
+                    <div class="card-body" style="height: 250px;">
+        
+                      <!-- Table  -->
+                      <table class="table table-hover">
+                        <!-- Table head -->
+                        <thead class="blue-grey lighten-4">
+                          <tr>
+                            <th>Date</th>
+                            <th>Description</th>
+                            <th>Durée de l'appelle</th>
+                            <th>User</th>
+                          </tr>
+                        </thead>
+        
+                          <tbody *ngFor="let phonning of phonnings | slice:0:5">
+                            <tr class="waves-light" data-toggle="modal" data-target="#basicExample" (click)="getdetailPhoning(phonning.idPhonning);AddPhonning.show()">
+                              <td>{{phonning.datePhoning | date}}</td>
+                              <td>{{phonning.descriptionPhonning  | slice:0:25}}</td>
+                              <td>{{phonning.dureePhoning}} min</td>
+                              <td>{{phonning.useCreateAt}}</td>
+        
+                            </tr>
+        
+                          </tbody>
+        
+                      </table>
+        
+        
+                    </div>
+                    <div class="row">
+                      <!-- <button type="button" class="btn btn-secondary btn-sm waves-light" data-dismiss="modal" (click)="voirPlusTache.show()" mdbWavesEffect>voir plus</button> -->
+        
+                    </div>
+                  </div>
+                  <!--/.Card-->
+        
+                </div>
+</div>
 <!--Grid row-->
 
 <div class="col-md-3">
@@ -456,7 +621,7 @@
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
-          Detail operation
+                Detail operation
           </div>
           <div class="modal-body">
               <table class="table table-hover">
@@ -473,37 +638,42 @@
                       <th>agence</th>
                       <th>date valide</th>
                       <th></th>
-                      
+
                     </tr>
                   </thead>
                   <!-- Table head -->
-        
+
                   <!-- Table body -->
                   <tbody >
-                  
+
                         <tr *ngIf="operation!=null">
-                     
-                            <td>{{operation.typeOrde}}</td>
+
+                            <td>
+                                <span *ngIf="operation.typeOrde.trim()=='AV'">Vente d'action</span>
+                                <span *ngIf="operation.typeOrde.trim()=='AA'">Achat d'action</span>
+                                <span *ngIf="operation.typeOrde.trim()=='OS'">OS</span>
+                                <span *ngIf="operation.typeOrde.trim()=='AS'">AS</span>
+                               </td>
                             <td>{{operation.codeTitre}}</td>
-                            <td>{{operation.dateOrde}}</td>
+                            <td>{{operation.dateOrde | date}}</td>
                             <td>{{operation.quantite}}</td>
-                            <td>{{operation.valUnitaire}}</td>
-                            <td>{{operation.montant}}</td>
-                            <td>{{operation.quantiteExecute}}</td>
+                            <td>{{operation.valUnitaire | number : '1.1-10'}}</td>
+                            <td>{{operation.montant | number : '1.1-10'}}</td>
+                            <td>{{operation.quantiteExecute | number : '1.1-10'}}</td>
                             <td>{{operation.agence}}</td>
-                            <td>{{operation.dateValid}}</td>
+                            <td>{{operation.dateValid | date }}</td>
                           </tr>
-                 
-                  
-                   
+
+
+
                   </tbody>
                   <!-- Table body -->
                 </table>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary btn-sm waves-light" data-dismiss="modal" (click)="centralLarge.hide()" mdbWavesEffect>Close</button>
-           
+            <button type="button" class="btn btn-secondary btn-sm waves-light" data-dismiss="modal" (click)="voirPlusOperation.hide()" mdbWavesEffect>Close</button>
+
           </div>
         </div>
       </div>
@@ -524,31 +694,36 @@
                     <thead class="blue-grey lighten-4">
                       <tr>
                         <th>Code Titre</th>
+                        <th>Nom Titre</th>
                         <th>Quantite</th>
                         <th>Prix du jour</th>
                         <th>Montant</th>
                         <th>cmp</th>
-                        
-                    
-                        
+
+
+
                       </tr>
                     </thead>
                     <!-- Table head -->
-          
+
                     <!-- Table body -->
                     <tbody *ngIf="titre!=null">
-                    
+
                           <tr *ngFor="let t of titre">
-                            <th>{{t.codeTitre}}</th>
-                            <th>{{t.quantite}}</th>
-                            <th>{{t.prixDuJour}}</th>
-                            <th>{{t.montant}}</th>
-                            <th>{{t.cmp}}</th>
-                              
+                            
+                                <th  *ngIf="t.codeTitre != 'LQ0000000000'">{{t.codeTitre}}</th>
+                                <th *ngIf="t.codeTitre != 'LQ0000000000'">{{t.nomTitre}}</th>
+                                <th *ngIf="t.codeTitre != 'LQ0000000000'">{{t.quantite | number : '1.1-10'}}</th>
+                                <th *ngIf="t.codeTitre != 'LQ0000000000'">{{t.prixDuJour | number : '1.1-10'}}</th>
+                                <th *ngIf="t.codeTitre != 'LQ0000000000'">{{t.montant | number : '1.1-10'}}</th>
+                                <th *ngIf="t.codeTitre != 'LQ0000000000'">{{t.cmp}}</th>
+                         
+                            
+
                           </tr>
-                  
-                    
-                    
+
+
+
                     </tbody>
                     <!-- Table body -->
                   </table>
@@ -557,12 +732,12 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary btn-sm waves-light" data-dismiss="modal" (click)="detailPorte.hide()" mdbWavesEffect>Close</button>
-           
+
           </div>
         </div>
       </div>
   </div>
-  
+
   <div mdbModal #sideTopRight="mdb-modal" class="modal fade right" id="centralModalSm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
   aria-hidden="true">
   <div class="modal-dialog modal-side modal-top-right" role="document">
@@ -574,23 +749,23 @@
         </button>
       </div>
       <div class="modal-body">
-        
+
           <div *ngIf="currentFileUpload" class="progress">
             <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" attr.aria-valuenow="{{progress.percentage}}"
               aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width:progress.percentage+'%'}">
               {{progress.percentage}}%</div>
-          </div>  
+          </div>
 
        <form enctype="multipart/form-data">
          <div class="form-group">
             <label for="">Choisir un fichier</label>
             <input type="file" class="form-control" (change)="selectFile($event)">
          </div>
-        
+
        </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary waves-light" data-dismiss="modal" (click)="sideTopRight.hide()" mdbWavesEffect>Close</button>
+        <button type="button" class="btn btn-primary waves-light" data-dismiss="modal" (click)="sideTopRight.hide()" mdbWavesEffect>Close</button>
         <button type="button" class="btn btn-primary waves-light" mdbWavesEffect (click)="upload()">Save changes</button>
       </div>
     </div>
@@ -598,7 +773,7 @@
 </div>
 
 
- 
+
 <div class="col-md-3">
 
   <div mdbModal #voirPlusOperation="mdb-modal" class="modal fade" id="basicExample" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
@@ -613,31 +788,45 @@
           <table class="table table-hover" >
             <!-- Table head -->
             <thead class="blue-grey lighten-4">
-              <tr>
-                <th>type operation</th>
-                <th>titre</th>
-                <th>Date operation</th>
-                <th>quantite</th>
-                <th>Val unitaire</th>
-                
-              </tr>
+                <tr>
+                    <th>type operation</th>
+                    <th>titre</th>
+                    <th>Date operation</th>
+                    <th>quantite</th>
+                    <th>prix Unitaire</th>
+                    <th>Montant</th>
+                    <th>quantite execute</th>
+                    <th>agence</th>
+                    <th>date valide</th>
+                    <th></th>
+
+                  </tr>
             </thead>
             <!-- Table head -->
-  
+
             <!-- Table body -->
             <tbody *ngFor="let operation of operations ">
-            
+
                   <tr class="waves-light" data-toggle="modal" data-target="#basicExample" (click)="voirPlusOperation.hide();getOrdreById(operation.idOrdre);centralOperation.show()">
-               
-                      <td>{{operation.typeOrde}}</td>
+
+                      <td>
+                          <span *ngIf="operation.typeOrde.trim()=='AV'">Vente d'action</span>
+                          <span *ngIf="operation.typeOrde.trim()=='AA'">Achat d'action</span>
+                          <span *ngIf="operation.typeOrde.trim()=='OS'">OS</span>
+                          <span *ngIf="operation.typeOrde.trim()=='AS'">AS</span>
+                      </td>
                       <td>{{operation.codeTitre}}</td>
-                      <td>{{operation.dateOrde}}</td>
-                      <td>{{operation.quantite}}</td>
-                      <td>{{operation.valUnitaire}}</td>
+                      <td>{{operation.dateOrde | date}}</td>
+                      <td>{{operation.quantite | number : '1.1-10'}}</td>
+                      <td>{{operation.valUnitaire | number : '1.1-10'}}</td>
+                      <td>{{operation.montant | number : '1.1-10'}}</td>
+                      <td>{{operation.quantiteExecute | number : '1.1-10'}}</td>
+                      <td>{{operation.agence}}</td>
+                      <td>{{operation.dateValid | date}}</td>
                     </tr>
-           
-            
-             
+
+
+
             </tbody>
             <!-- Table body -->
           </table>
@@ -646,11 +835,81 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary btn-sm waves-light" data-dismiss="modal" (click)="voirPlusOperation.hide()" mdbWavesEffect>Close</button>
-         
+
         </div>
       </div>
     </div>
 </div>
+
+<div class="col-md-3">
+
+    <div mdbModal #AddPhonning="mdb-modal" class="modal fade" id="basicExample" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+      aria-hidden="true" [config]="{backdrop: true, ignoreBackdropClick: false}">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header row">
+            
+                  Ajouter un appelle
+             
+              
+          </div>
+          <div class="modal-body" >
+
+             
+                  <div class="col-md-2">
+
+                    </div>
+                    <div class="col-md-10">
+                       <form >
+                         <div class="form-row">
+                            <div class="col-md-6">
+                                <label for="">Durée de l'appelle(en minute)</label>
+                                <input type="number" name="dureePhoning" class="form-control" [(ngModel)]="phonning.dureePhoning">
+                            </div>
+                         
+                         </div>
+
+                           <div class="form-row">
+                              <div class="form-group col-md-9">
+                                <label for="">Description</label>
+                                <textarea class="form-control" name="descriptionPhonning"  [(ngModel)]="phonning.descriptionPhonning" placeholder="Faites un resumé de l'appelle!!!!" rows="10"></textarea>
+                              </div>
+                          </div>
+                          <div class="form-row">
+                              <div class="form-group col-md-6">
+                                <label for="">Inviter un autre utilisateur</label>
+
+                                    <select class="form-control" [(ngModel)]="userInvited" name="userInvited">
+
+                                          <option *ngFor="let user of users" [ngValue]="user.username">{{user.prenom}} {{user.nom}}</option>
+
+
+                                    </select>
+
+
+                              </div>
+                          </div>
+
+
+                          <button type="submit" class="btn btn-primary" (click)="savePhonning();AddPhonning.hide()" [hidden]="!isModifPhonong"> <i class="fa fa-edit mr-3"></i>Mosifier</button>
+                          <button type="submit" class="btn btn-primary" (click)="savePhonning();AddPhonning.hide()" [hidden]="isModifPhonong"> <i class="fa fa-plus mr-3"></i>Ajouter</button>
+                          <button class="btn btn-primary"  (click)="AddPhonning.hide()" >Annuler</button>
+
+                       </form>
+                      </div>
+
+          
+          </div>
+
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary btn-sm waves-light" data-dismiss="modal" (click)="AddPhonning.hide()" mdbWavesEffect>Close</button>
+
+          </div>
+        </div>
+      </div>
+  </div>
 
 <div class="col-md-3">
 
@@ -662,71 +921,80 @@
          Ajouter une reclamention
           </div>
           <div class="modal-body" >
-            
+
               <div class="row" *ngIf="reclamention!=null">
                   <div class="col-md-2">
 
-                  </div>
-                      <div class="col-md-10">
-                         <form >
+                    </div>
+                    <div class="col-md-10">
+                       <form >
+                         <div class="form-row">
+                          <div class="col-md-6">
+                              <label for="">sujet</label>
+                              <input type="text" name="sujet" class="form-control" [(ngModel)]="reclamention.sujet">
+                          </div>
+                          <div class="col-md-3">
+                              <label for="">statut</label>
+                              <select class="form-control"  [(ngModel)]="reclamention.statut" name="statut">
+                                <option value="active">active</option>
+                                <option value="en cours">en cours</option>
+                                <option value="fin">fin</option>
+                              </select>
+                            </div>
+                         </div>
+
                            <div class="form-row">
-                            <div class="col-md-6">
-                                <label for="">sujet</label>
-                                <input type="text" name="statut" class="form-control" [(ngModel)]="reclamention.statut">
-                            </div>
-                          
-                           </div>
-                           
-                             <div class="form-row">
-                                <div class="form-group col-md-6">
-                                  <label for="">Description</label>
-                                   <textarea class="form-control" name="description"  [(ngModel)]="reclamention.description"></textarea>
-                                </div>
-                            </div>
-                           
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                  <label for="">Inviter un autre utilisateur</label>
-                                 
-                                      <select class="form-control" [(ngModel)]="userInvited" name="userInvited">
-                                        
-                                            <option *ngFor="let user of users" [ngValue]="user.username">{{user.prenom}} {{user.nom}}</option>
-                                        
-                                          
-                                      </select>
-                                 
-                                   
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-success" (click)="saveReclamention()"> <i class="fa fa-plus mr-3"></i>Ajouter</button>
-                            <button type="reset" class="btn btn-primary">Annuler</button>
-                          
-                           
-                  
-                         </form>
-                        </div>
+                              <div class="form-group col-md-9">
+                                <label for="">Description</label>
+                                <textarea class="form-control" name="description"  [(ngModel)]="reclamention.description" rows="10"></textarea>
+                              </div>
+                          </div>
+                          <div class="form-row">
+                              <div class="form-group col-md-6">
+                                <label for="">Inviter un autre utilisateur</label>
+
+                                    <select class="form-control" [(ngModel)]="reclamention.usernameInvited" name="usernameInvited">
+
+                                          <option *ngFor="let user of users" [ngValue]="user.username">{{user.prenom}} {{user.nom}}</option>
+
+
+                                    </select>
+
+
+                              </div>
+                          </div>
+                          <input type="checkbox" value="Cocher si vous voulez faire une modification !!!" />
+
+                          <button type="submit" class="btn btn-primary" (click)="saveReclamention();AddReclamention.hide()" [hidden]="isModifPhonong"> <i class="fa fa-plus mr-3"></i>Ajouter</button>
+                          <button type="submit" class="btn btn-primary" (click)="saveReclamention();AddReclamention.hide()"  [hidden]="!isModifPhonong"> <i class="fa fa-plus mr-3"></i>Modifier</button>
+                          <button  class="btn btn-primary" (click)="AddReclamention.hide()" >Annuler</button>
+
+                       </form>
+                      </div>
+
            </div>
           </div>
-           
+
+
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary btn-sm waves-light" data-dismiss="modal" (click)="voirPlusOperation.hide()" mdbWavesEffect>Close</button>
-           
+
           </div>
         </div>
       </div>
   </div>
-  <div class="col-md-3">
+   <div class="col-md-3">
 
       <div mdbModal #centralReclamention="mdb-modal" class="modal fade" id="basicExample" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
         aria-hidden="true" [config]="{backdrop: true, ignoreBackdropClick: false}">
         <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
             <div class="modal-header">
-            Detail Portefeuille
+               Detail Reclamation
             </div>
             <div class="modal-body">
-               
+
                   <table class="table table-hover">
                       <!-- Table head -->
                       <thead class="blue-grey lighten-4">
@@ -736,29 +1004,321 @@
                             <th>statut</th>
                           </tr>
                         </thead>
-                      
+
                           <tbody >
                             <tr class="waves-light">
-                            
+
                               <td>{{reclamention.dateReclamention | date}}</td>
                               <td>{{reclamention.statut}}</td>
                               <td>{{reclamention.description}}</td>
-                              
+
                             </tr>
-                          
+
                           </tbody>
                       <!-- Table body -->
                     </table>
-              
+
               </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary btn-sm waves-light" data-dismiss="modal" (click)="centralReclamention.hide()" mdbWavesEffect>Close</button>
-             
+
+            </div>
+          </div>
+        </div>
+    </div>
+  <div class="col-md-3">
+
+      <div mdbModal #centralReclamention="mdb-modal" class="modal fade" id="basicExample" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true" [config]="{backdrop: true, ignoreBackdropClick: false}">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+               Detail Reclamation
+            </div>
+            <div class="modal-body">
+
+                  <table class="table table-hover">
+                      <!-- Table head -->
+                      <thead class="blue-grey lighten-4">
+                          <tr>
+                            <th>date</th>
+                            <th>sujet</th>
+                            <th>statut</th>
+                          </tr>
+                        </thead>
+
+                          <tbody >
+                            <tr class="waves-light">
+
+                              <td>{{reclamention.dateReclamention | date}}</td>
+                              <td>{{reclamention.statut}}</td>
+                              <td>{{reclamention.description}}</td>
+
+                            </tr>
+
+                          </tbody>
+                      <!-- Table body -->
+                    </table>
+
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary btn-sm waves-light" data-dismiss="modal" (click)="centralReclamention.hide()" mdbWavesEffect>Close</button>
+
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+
+      <div mdbModal #centralTache="mdb-modal" class="modal fade" id="basicExample" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true" [config]="{backdrop: true, ignoreBackdropClick: false}">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+             Detail Tache
+            </div>
+            <div class="modal-body">
+
+
+                        <div class="row">
+                                <div class="col-md-2">
+
+                                </div>
+                                <div class="col-md-10">
+                                   <form >
+                                     <div class="form-row">
+                                      <div class="col-md-6">
+                                          <label for="">sujet</label>
+                                          <input type="text" name="sujet" class="form-control" [(ngModel)]="tache.sujet">
+                                      </div>
+                                      <div class="col-md-3">
+                                          <label for="">statut</label>
+                                          <select class="form-control" [(ngModel)]="tache.statut" name="statut">
+                                            <option value="active">active</option>
+                                            <option value="en cours">en cours</option>
+                                            <option value="fin">finie</option>
+                                          </select>
+                                        </div>
+                                     </div>
+                                     <div class="form-row">
+                                        <div class="col-md-3">
+                                            <label for="">date debut</label>
+                                            <input type="date" class="form-control" [(ngModel)]="tache.dateDebut" name="dateDebut">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="">date fin</label>
+                                            <input type="date" class="form-control" [(ngModel)]="tache.dateFin" name="dateFin">
+                                        </div>
+                                        <div class="col-md-3">
+                                          <label for="">Priorité</label>
+                                          <select class="form-control" [(ngModel)]="tache.priorite" name="priorite">
+                                            <option value="high">high</option>
+                                            <option value="medium">medium</option>
+                                            <option value="low">low</option>
+                                          </select>
+                                        </div>
+                                       </div>
+                                       <div class="form-row">
+                                          <div class="form-group col-md-9">
+                                            <label for="">Description</label>
+                                             <textarea class="form-control" [(ngModel)]="tache.descriptionTache" name="descriptionTache" rows="10"></textarea>
+                                          </div>
+                                      </div>
+                                      <div class="form-row">
+                                          <div class="col-md-3">
+                                                  <label for="">Assigner a quelqu'un</label>
+                                                  <select class="form-control" [(ngModel)]="tache.assignerA" name="assignerA">
+                                                    <option *ngFor="let user of users" [ngValue]="user.username">{{user.prenom}} {{user.nom}}</option>
+                                                  </select>
+                                          </div>
+                                      </div>
+
+                                      <button class="btn btn-primary" (click)="ajouterTache(id);centralTache.hide()" [hidden]="isModifPhonong"> <i class="fa fa-plus mr-3"></i>Ajouter</button>
+                                      <button class="btn btn-primary" (click)="ajouterTache(id)" [hidden]="!isModifPhonong"> <i class="fa fa-edit mr-3"></i>Modifier</button>
+                                      <button class="btn btn-primary" (click)="centralTache.hide()">Annuler</button>
+
+                                   </form>
+                                  </div>
+                              </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <!-- <button type="button" class="btn btn-secondary btn-sm waves-light" data-dismiss="modal" (click)="t.hide()" mdbWavesEffect>Close</button> -->
+
             </div>
           </div>
         </div>
     </div>
 
 
-<app-stats-card2></app-stats-card2>
+    <div class="col-md-3">
+
+      <div mdbModal #alert="mdb-modal" class="modal fade" id="basicExample" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true" [config]="{backdrop: true, ignoreBackdropClick: false}">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+               Alerte
+              </div>
+              <div class="modal-body">
+                  <form >
+                      <div class="form-row">
+
+                          <div class="col-md-3">
+                              <label for="">Titre</label>
+                              <!-- <select class="form-control" [(ngModel)]="alerte.codeTitre" name="codeTitre">
+                                <option value="TTLSN" selected>Total SN</option>
+                                <option value="SNTS">Sonatel</option>
+                                <option value="BOAB ">BANK OF AFRICA BN</option>
+                              </select> -->
+                              <select class="form-control" [(ngModel)]="alerte.codeTitre" name="codeTitre">
+
+                                <option *ngFor="let a of alertes" [ngValue]="a.codeTitre">{{a.nomTitre}}</option>
+
+
+                          </select>
+                          </div>
+                          <div class="col-md-3">
+                              <label for="">type operation</label>
+                              <select class="form-control" [(ngModel)]="alerte.typeOp" name="typeOp">
+                                  <option value="AA" selected>achat</option>
+                                  <option value="AV">vente</option>
+
+                                </select>
+
+                          </div>
+                          <div class="col-md-3">
+                              <label for="">Quantite</label>
+                              <input type="text" class="form-control" [(ngModel)]="alerte.quantite" name="quantite"/>
+
+                          </div>
+
+
+                      </div>
+                      <div class="form-row">
+                          <div class="col-md-3">
+                              <label for="">Champ</label>
+                              <input type="text" class="form-control"  value="prixDuJour" disabled placeholder="prix du jour"/>
+
+                          </div>
+                          <div class="col-md-3">
+                              <label for="">operation</label>
+                              <select class="form-control" [(ngModel)]="alerte.operationAlerte" name="operationAlerte">
+                                <option value="==" selected>=</option>
+                                <option value=">=">>=</option>
+                                <option value="<="><=</option>
+                                <option value=">">></option>
+                                <option value="<"><</option>
+                              </select>
+                          </div>
+                          <div class="col-md-3">
+                              <label for="">Valeur</label>
+                              <input type="number" class="form-control" [(ngModel)]="alerte.prixDujour" name="prixDujour"/>
+
+                          </div>
+
+                            <div class="col-md-3">
+                                <label for="">date validite</label>
+                                <input type="date" class="form-control" [(ngModel)]="alerte.dateValide" name="dateValide">
+                            </div>
+                      </div>
+                       <button class="btn btn-primary" (click)="ajouterAlert();alert.hide()"> <i class="fa fa-plus mr-3"></i>Ajouter</button>
+                       <button class="btn btn-primary" (click)="alert.hide()">Annuler</button>
+
+                    </form>
+
+              </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm waves-light" data-dismiss="modal" (click)="centralReclamention.hide()" mdbWavesEffect>Close</button>
+
+              </div>
+          </div>
+        </div>
+    </div>
+
+    <ngx-spinner bdColor="rgba(51,51,51,0.8)"
+        size="large"
+        color="#fff"
+        type="ball-scale-multiple">
+      <p style="font-size: 20px; color: white;">Loading...</p>
+  </ngx-spinner>
+
+<!-- <app-stats-card2></app-stats-card2> -->
+<!-- <button type="button" mdbBtn color="primary" class="relative waves-light" (click)="basicModal.show()" mdbWavesEffect>Launch demo modal</button> -->
+
+<div mdbModal #basicModal="mdbModal" class="modal fade right" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-full-height modal-right" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title w-100" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="basicModal.hide()" mdbWavesEffect>Close</button>
+        <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect>Save!</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div mdbModal #centralNote="mdb-modal" class="modal fade" id="basicExample" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true" [config]="{backdrop: true, ignoreBackdropClick: false}">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+             Detail Note
+            </div>
+            <div class="modal-body">
+
+
+                        <div class="row">
+                                <div class="col-md-2">
+
+                                </div>
+                                <div class="col-md-10">
+                                   <form >
+                                        <div class="form-row">
+                                          <div class="col-md-6">
+                                              <label for="">sujet</label>
+                                              <input type="text" name="sujet" class="form-control" [(ngModel)]="not.sujet" placeholder="Donnez un sujet a votre note">
+                                          </div>
+                                        
+                                        </div>
+                                         
+                                           <div class="form-row">
+                                              <div class="form-group col-md-6">
+                                                <label for="">Description</label>
+                                                 <textarea class="form-control" name="description"  [(ngModel)]="not.description" style="height:300px" placeholder="Redigez votre note" rows="10"></textarea>
+                                              </div>
+                                          </div>
+                                          <div class="form-row">
+                                              <div class="col-md-5" >
+                                                    <button class="waves-light" data-toggle="modal" data-target="#basicExample" >rattacher a</button>
+                                                  <input type="text" name="nomclient" class="form-control" [(ngModel)]="nomclient" disabled width="200px">
+                                              </div>
+                                          </div>
+                                          
+                                          <button type="submit" class="btn btn-primary" (click)="ajouterNote()"> <i class="fa fa-plus mr-3"></i>Ajouter</button>
+                                          <button type="reset" class="btn btn-primary" (click)="centralNote.hide()">Annuler</button>
+                                        
+                                         
+                                   </form>
+                                  </div>
+                              </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-secondary btn-sm waves-light" data-dismiss="modal"  mdbWavesEffect>Close</button> 
+
+            </div>
+          </div>
+        </div>

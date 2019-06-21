@@ -1,8 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { format } from 'url';
 import { formatDate } from '@angular/common';
+import { User } from 'models/user';
+import { Transaction } from 'models/transaction';
+import { Session } from 'protractor';
+import { BehaviorSubject } from 'rxjs';
+
 const HttpUploadOptions = {
   headers: new HttpHeaders({ 
     "Content-Type": "multipart/form-data  boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW" ,
@@ -13,16 +17,43 @@ const HttpUploadOptions = {
   providedIn: 'root'
 })
 export class LoginService {
-  url="http://localhost:8080/"
+  darkModeState: BehaviorSubject<boolean>;
+ 
+  url="http://localhost:8080/";
   private login:boolean=false;
   private username:string
   commissioncgf=0;
   commissionTotalcgf=0;
   pourcentage=0
   operations:any[]=null
+  opera:any[]=null;
+  dataAchat:any[]=null;
+  dataSubs:any[]=null;
+  dataVente:any[]=null;
   constructor(private http:HttpClient) {
-    
+    this.darkModeState = new BehaviorSubject<boolean>(false);
    }
+   getdataAchat(){
+     return this.dataAchat;
+   }
+   setdataAchat(n){
+    this.dataAchat = n;
+   }
+
+   getdataSubs(){
+    return this.dataSubs;
+  }
+  setdataSubs(n){
+   this.dataSubs = n;
+  }
+
+  getdataVente(){
+    return this.dataVente;
+  }
+  setdataVente(n){
+   this.dataVente = n;
+  }
+
   getcommissionTotalcgf(){
     return this.commissionTotalcgf
   }
@@ -43,7 +74,11 @@ export class LoginService {
   }
   getUserName()
   {
-    return this.username
+    return sessionStorage.getItem("username")
+  }
+
+  getSessionStaorage(){
+    
   }
 
   getuser(username:string,password:string){
@@ -67,8 +102,8 @@ export class LoginService {
     setoperation(operations){
       this.operations = operations
     }
-  getOrdreUser(){
-    let url1=this.url+"user/getOrdreBycomm?username="+this.username;
+  getOrdreUser(username,date){
+    let url1=this.url+"ordre/getOrdreByCommercial/"+date+"?username="+username;
     return  this.http.get(url1).pipe(
               map((data:any[])=>data)
              )
@@ -89,15 +124,15 @@ export class LoginService {
     let url =this.url+"getCommissionCgfByAchat";
     return this.http.get(url)
   }
-  getCommissionByCommercial(username:string){
+  getCommissionByCommercial(username:string,date:string){
     
-     let urlc = this.url+"user/getCommissionByCommercial?username="+username
+     let urlc = this.url+"user/getCommissionByCommercial/"+date+"?username="+username
      return this.http.get(urlc).pipe(
        map((data:number)=>data)
      )
   }
-  getCourtageCgf(){
-    let url1 = this.url+"user/getCourtage"
+  getCourtageCgf(date){
+    let url1 = this.url+"getCourtageByDateAction/"+date
     return this.http.get(url1).pipe(
       map((data:number)=>data)
     )
@@ -109,4 +144,74 @@ export class LoginService {
      let urldoc=this.url+"uploadFile?file="+d
      return this.http.post(urldoc,formatDate,HttpUploadOptions)
    }
+   getopera(){
+     return this.opera;
+   }
+   setopera(op:any[]){
+     this.opera = op
+   }
+   setUsername(user:string){
+     this.username = user
+   }
+
+   public getNomClientCreatAtComm(username,date){
+    
+      let url1 = this.url+"getClientCreateByComm/"+date+"?username="+username
+
+      return this.http.get(url1).pipe(
+        map((data:number)=>data)
+      )
+
+   }
+   
+   public getTop10Portefeuille(username:string){
+      let url1=this.url+"/portefeuille/getTop10portefeuilleByCommercial?username="+username;
+      return this.http.get(url1).pipe(
+        map((data:any[])=>data)
+      )
+   }
+   public getTop10LiquiditeByCommercial(username:string){
+    let url1=this.url+"/portefeuille/getTop10LiquiditeByCommercial?username="+username;
+    return this.http.get(url1).pipe(
+      map((data:any[])=>data)
+    )
+   }
+
+   public getStaticOperationDeCaisseByCommercial(date:string){
+     let urlc = this.url+"getStatiqueOperationDeCaisseByUsercommercial/"+date+"?username="+this.getUserName();
+     return this.http.get(urlc).pipe(
+       map((data:number[])=>data)
+     )
+   }
+  
+  addUser(){
+    let url1=this.url+"/user/addUser"
+    let user={
+      nom:"ndour",
+      prenom:"baila",
+      username:"ndourbaila",
+      password:"123",
+      cni:"11111",
+      role:"",
+      email:"ndourbaila92@gmail.com"
+}
+    return this.http.post<User>(url1,user)
+    .pipe(
+      
+    );;
+  }
+getMontantPortefeuille(username:string){
+  
+ // let url1=this.url+"montantPortefeuilleByCommercial?username="+username
+  let url1=this.url+"portefeuillejj/getPortefeuilleduJourByUIsername?username="+username
+  return  this.http.get(url1)
+}
+
+getLastTransactionByUsername(username){
+  let urlu = this.url+"/getLastTransactionByUsername?username="+username;
+
+  return this.http.get(urlu).pipe(
+    map((data:Transaction[])=>data)
+  )
+}
 }

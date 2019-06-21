@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NoteService } from 'service/note.service';
 import { ClientService } from 'service/client.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -9,15 +9,15 @@ import { LoginService } from 'service/login.service';
   templateUrl: './note.component.html',
   styleUrls: ['./note.component.scss']
 })
-export class NoteComponent implements OnInit {
+export class NoteComponent implements OnInit, OnDestroy {
   note={
-    "id":0,
+    "idNote":0,
     "sujet":"",
     "description":"",
     "idclient":0,
     "isChecked":false,
     "dateCreat":"",
-    "numCmt":0,
+    "numCompte":0,
     "userCreate":""
   }
   choix=false
@@ -25,12 +25,20 @@ export class NoteComponent implements OnInit {
   idClient=0
   nomclient:any
   cni:""
+  numClient=0
+  numCpt=0
+  notes:any[] = [];
   constructor(private noteService:NoteService,private clientservice:ClientService,private router:Router,private route:ActivatedRoute,private userService:LoginService) { 
     this.idClient = clientservice.getIdClient()
     clientservice.getClientById(this.idClient).subscribe(data=>{
       this.nomclient = data['nom']
-     
+      this.numClient = data['cptNoCli']
+      this.numCpt = data['numCompt']
+      console.log(this.numCpt)
     })
+      noteService.getsNotes(userService.getUserName()).subscribe(data=>{
+        this.notes = data
+      })
   }
 
   ngOnInit() {
@@ -38,21 +46,30 @@ export class NoteComponent implements OnInit {
   ajouterNote(){
    
     //this.noteService.ajouterNote(this.note);
-     this.note.numCmt=this.idClient
-     let today = new Date()
-      let jj = today.getDate() 
-      let mm = today.getMonth()
-      let yy = today.getFullYear()
-      this.note.dateCreat= yy+"-"+mm+"-"+jj
+     this.note.numCompte=this.numCpt
+    //  let today = new Date()
+    //   let jj = today.getDate() 
+    //   let mm = today.getMonth()
+    //   let yy = today.getFullYear()
+      //this.note.dateCreat= yy+"-"+mm+"-"+jj
       this.note.userCreate = this.userService.getUserName()
     //this.clientservice.ratacherTache(this.note.id,this.idClient)
     this.clientservice.addNote(this.note).subscribe(data=>{
-      
-      this.router.navigate(["detailClient/",this.idClient])
+      console.log(data)
+      if(data!=null)
+      this.router.navigate(["profileClient/",this.numClient])
+      this.noteService.getsNotes(this.userService.getUserName()).subscribe(data=>{
+        this.notes = data
+      })
     })
     
   }
+  ngOnDestroy() {
+    // ...
+  }
+  detailClient(id){
 
+  }
   getClient(){
     this.clients = this.clientservice.getAllClient()
   }
@@ -75,17 +92,23 @@ export class NoteComponent implements OnInit {
     if(even == "A")
     {
      this.idClient = id
-      
+      this.clientservice.getClientById(id).subscribe(data=>{
+          this.nomclient = data.nom
+          this.note.numCompte = data.numCompt
+      })
     }
     else{
       this.note.isChecked = false
       this.idClient=-1
     }
-    
+    console.log(this.idClient)
   }
   chercher(){
-    this.clients=[]
-    this.clients.push(this.clientservice.chercherClientByEmail(this.cni))
+    this.clients = [];
+    this.clients.push(this.clientservice.chercherClientByEmail(this.cni));
+     this.clientservice.chercherClientByName(this.cni).subscribe(data=>{
+         this.clients = data
+     })
   }
 
 }

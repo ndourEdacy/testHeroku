@@ -44,10 +44,20 @@ import { ModifClinetComponent } from './modif-clinet/modif-clinet.component';
 import { LoginComponent } from './login/login.component';
 import { ProfilClientComponent } from './profil-client/profil-client.component';
 import { ListeOperationComponent } from './liste-operation/liste-operation.component';
+import { NotificationComponent } from './notification/notification.component';
+import { ProfileClientComponent } from './profile-client/profile-client.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { ObjectifComponent } from './objectif/objectif.component';
+import { Top10portefeuilleComponent } from './top10portefeuille/top10portefeuille.component';
+import { Top10LiquiditeComponent } from './top10-liquidite/top10-liquidite.component';
+import { PageNotfoundComponent } from './page-notfound/page-notfound.component';
+import { ClientNotFoundComponent } from './client-not-found/client-not-found.component';
+import { TachecompenentComponent } from './tachecompenent/tachecompenent.component';
 
 
 @NgModule({
   imports: [
+    NgxSpinnerModule,
     CommonModule,
     RouterModule,
     FormsModule,
@@ -95,9 +105,19 @@ import { ListeOperationComponent } from './liste-operation/liste-operation.compo
     LoginComponent,
     ProfilClientComponent,
     ListeOperationComponent,
+    NotificationComponent,
+    ProfileClientComponent,
+    ObjectifComponent,
+    Top10portefeuilleComponent,
+    Top10LiquiditeComponent,
+    PageNotfoundComponent,
+    ClientNotFoundComponent,
+    TachecompenentComponent,
+  
 
   ],
   exports: [
+    
     FooterComponent,
     BasicTableComponent,
     ModalsComponent,

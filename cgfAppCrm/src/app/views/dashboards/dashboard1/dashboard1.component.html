@@ -7,25 +7,24 @@
   <div class="card-body d-sm-flex justify-content-between">
 
     <h4 class="mb-sm-0 pt-3">
-      <a href="https://mdbootstrap.com/material-design-for-bootstrap/" target="_blank">Home Page</a>
+      <a href="#">Home Page</a>
       <span>/</span>
       <span>Dashboard</span>
     </h4>
-    <!-- <form class="d-flex md-form justify-content-center">
-     
-      <input type="search" placeholder="entrer le nom " aria-label="Search" class="form-control" name="nom" [(ngModel)]="nom">
-      <input type="search" placeholder="entrer le prenom" aria-label="Search" class="form-control" name="prenom" [(ngModel)]="prenom">
-      <input type="date" placeholder="entrer la date de naissance" aria-label="Search" class="form-control" name="date" [(ngModel)]="date">
-      <button class="btn btn-primary btn-sm my-0 p" type="submit" (click)="chercheByName()">
-        <i class="fa fa-search"></i>
-      </button>
+     <form class="d-flex md-form justify-content-center">
 
-    </form> -->
+
+        <input type="search" placeholder="entrer le nom complet" aria-label="Search" class="form-control" name="nomComplet" [(ngModel)]="nomComplet">
+        <button class="btn btn-primary btn-sm my-0 p" type="submit" (click)="chercheByName();voirClientChercher.show()">
+          <i class="fa fa-search"></i>
+        </button>
+
+    </form>
 
     <form class="d-flex md-form justify-content-center">
       <!-- Default input -->
       <input type="search" placeholder="numero compte" aria-label="Search" class="form-control" name="cni" [(ngModel)]="cni">
-      <button class="btn btn-primary btn-sm my-0 p" type="submit" (click)="chercher()">
+      <button class="btn btn-primary btn-sm my-0 p" type="submit" (click)="chercher()" >
         <i class="fa fa-search"></i>
       </button>
 
@@ -44,71 +43,73 @@
 <div class="row wow fadeIn">
 
     <!--Grid column-->
-    <div class="col-md-6 mb-4">
-  
+    <div class="col-md-4 mb-4">
+
       <!--Card-->
-      <div class="card">
+      <div class="card" style="height: 350px;">
           <div class="card-header">
               <div class="row">
-                <div class="col-md-10">
+                <div class="col-md-10 col-sm-10">
                     Mes Notes
                 </div>
-                <div class="col-md-1">
+                <div class="col-md-1 col-sm-1">
                     <span class="btn btn-primary" (click)="ajouterMeeting()">
                         <i class="fa fa-plus"></i>
                     </span>
                 </div>
               </div>
-             
-              
+
+
             </div>
         <!--Card content-->
         <div class="card-body">
-  
+
           <!-- Table  -->
           <table class="table table-hover">
             <!-- Table head -->
             <thead class="blue-grey lighten-4">
               <tr>
-                <th>id</th>
+
                 <th>sujet</th>
-                <th>description</th>
-                
+                <!-- <th>Nom du client</th> -->
+                <th>decription</th>
+                <th>date create</th>
+
               </tr>
             </thead>
             <!-- Table head -->
-  
+
             <!-- Table body -->
-            <tbody *ngFor="let note of notes">
-              <tr  class="waves-light" data-toggle="modal" data-target="#basicExample" (click)="modifnote(tache.id);centralNote.show()">
-               
-                <td>{{note.id}}</td>
-                <td>{{note.sujet}}</td>
-                <td>{{note.description}}</td>
+            <tbody *ngFor="let n of notes | slice:0:3">
+              <tr  class="waves-light" data-toggle="modal" data-target="#basicExample" (click)="modifnote(n.idNote);centralNote.show()">
+                <td>{{n.sujet}}</td>
+                <!-- <td>{{n.userClient}}</td> -->
+                <td>{{n.description | slice:0:25}}</td>
+                <td>{{n.dateCreat | date}}</td>
               </tr>
-             
+
             </tbody>
             <!-- Table body -->
           </table>
           <!-- Table  -->
-  
+
         </div>
-  
+
       </div>
       <!--/.Card-->
-  
+
     </div>
     <!--Grid column-->
-  
+
     <!--Grid column-->
-    <div class="col-md-6 mb-4">
-  
-      
-      <div class="card">
-  
+    <div class="col-md-4 mb-4">
+
+
+      <div class="card" style="height: 350px;">
+
         <div class="card-header">
             <div class="row">
-                <div class="col-md-10">
+                <div class="col-md-10 col-sm-12">
                     Mes Taches
                 </div>
                 <div class="col-md-1">
@@ -119,60 +120,141 @@
               </div>
         </div>
         <div class="card-body">
-  
-         
+
+
           <table class="table table-hover">
-        
+
             <thead class="blue lighten-4">
               <tr>
-                <th>id</th>
+
+                <th>statut</th>
                 <th>sujet</th>
                 <th>date debut</th>
                 <th>Date fin</th>
               </tr>
             </thead>
             <!-- Table head -->
-  
+
             <!-- Table body -->
-            <tbody *ngFor="let tache of taches">
-             
-                  <tr  class="waves-light" data-toggle="modal" data-target="#basicExample" (click)="modif(tache.id);centralLarge.show()">
-                    
-                      <td>{{tache.id}}</td>
+            <tbody *ngFor="let tache of taches  | slice:taches.length-3:taches.length">
+
+                  <tr  class="waves-light" data-toggle="modal" data-target="#basicExample" (click)="modifTache(tache.idTache);centralLarge.show()">
+
+
+                      <td>{{tache.statut}}</td>
                       <td>{{tache.sujet}}</td>
-                      <td>{{tache.dateDebut}}</td>
-                      <td>{{tache.dateFin}}</td>
-                    </tr>
-            
-              
-              
+                      <td>{{tache.dateDebut | date}}</td>
+                      <td>{{tache.dateFin | date}}</td>
+                  </tr>
+
             </tbody>
             <!-- Table body -->
           </table>
           <!-- Table  -->
-  
+
         </div>
-  
+
       </div>
       <!--/.Card-->
-  
+
     </div>
     <!--Grid column-->
-  
+    <div class="col-md-4 mb-4 ">
+
+        <!--Card-->
+        <div class="card" style="height: 350px;">
+            <div class="card-header">
+                <div class="row">
+                  <div class="col-md-10 col-sm-10">
+                     Alertes
+                  </div>
+                  <div class="col-md-1 col-sm-1">
+                      <span class="btn btn-primary" (click)="getAllTitreAction();alert.show()">
+                          <i class="fa fa-plus"></i>
+                      </span>
+                  </div>
+                </div>
+
+
+              </div>
+          <!--Card content-->
+          <div class="card-body">
+
+            <!-- Table  -->
+            <table class="table table-hover">
+              <!-- Table head -->
+              <thead class="blue-grey lighten-4">
+                <tr>
+                  <th>Numero Compte</th>
+                  <th>Titre</th>
+                  <th>Type operation</th>
+                  <th>Prix du jour</th>
+
+                </tr>
+              </thead>
+              <!-- Table head -->
+
+              <!-- Table body -->
+              <tbody *ngFor="let alerte of alertes | slice:alertes.length-5:alertes.length">
+                 
+                <tr  class="waves-light" data-toggle="modal" data-target="#basicExample" (click)="getalert(alerte.idAlerte);alert.show()" >
+                  
+                  <td>{{alerte.numCompte}}</td>
+                  <td>{{alerte.codeTitre}}</td>
+                  <td>{{alerte.typeOp}}</td>
+                  <td>{{alerte.prixDujour}}</td>
+                </tr>
+
+              </tbody>
+              <!-- Table body -->
+            </table>
+            <!-- Table  -->
+
+          </div>
+
+        </div>
+        <!--/.Card-->
+
+      </div>
   </div>
 <!--Grid row-->
-<div class="row wow fadeIn mt-5">
+<div class="row wow fadeIn">
 
   <!--Grid column-->
-  <div class="col-md-9 mb-4">
+  <div class="col-md-9 mb-2">
 
     <!--Card-->
-    <div class="card">
-        <div class="card-header">
-            Rapport
+    <div class="card" >
+        <div class="card-header row">
+           <div class="col-md"> Rapport</div>
+            <div class="col-md-04 col-sm-06 mb-4">
+              <label for=""> filtrer par annnee</label>
+              <select name="" id="" (change)="operationByDate($event.target.value)">
+                <option value="2019" selected>2019</option>
+                <option value="2018" >2018</option>
+                <option value="2017">2017</option>
+                <option value="2016">2016</option>
+                <option value="2015">2015</option>
+                <option value="2014">2014</option>
+                <option value="2013">2013</option>
+                <option value="2012">2012</option>
+                <option value="2011">2011</option>
+                <option value="2010">2010</option>
+                <option value="2009">2009</option>
+                <option value="2008">2008</option>
+                <option value="2007">2007</option>
+                <option value="2006">2006</option>
+                <option value="2005">2005</option>
+                <option value="2004">2004</option>
+                <option value="2003">2003</option>
+                <option value="2002">2002</option>
+                <option value="2001">2001</option>
+                <option value="2000">2000</option>
+              </select>
+           </div>
         </div>
       <!--Card content-->
-      <div class="card-body">
+      <div class="card-body" style="height: 600px;">
 
         <div style="display: block">
           <canvas mdbChart [chartType]="chart1Type" [datasets]="chartDatasets" [labels]="chartLabels" [colors]="chartColors" [options]="chartOptions"
@@ -188,7 +270,7 @@
   <!--Grid column-->
 
   <!--Grid column-->
-  <div class="col-md-3 mb-4">
+  <div class="col-md-3 col-sm-12 mb-2 hidden-sm-*">
 
     <!--Card-->
     <div class="card mb-4">
@@ -198,7 +280,7 @@
         Portefeuille
       </div>
 
-     
+
       <!-- <div class="card-body">
 
         <div style="display: block">
@@ -207,9 +289,9 @@
           </canvas>
         </div>
       </div> -->
-      <div class="list-group list-group-flush">
+      <div class="list-group list-group-flush" style="height: 625px;">
         <a class="list-group-item list-group-item-action waves-effect">evolution portefeuille
-          <span class="badge badge-success badge-pill pull-right">22%
+          <span class="badge badge-success badge-pill pull-right">
             <i class="fa fa-arrow-up ml-1"></i>
           </span>
         </a>
@@ -218,58 +300,64 @@
             <i class="fa fa-arrow-down ml-1"></i>
           </span>
         </a> -->
+        <a class="list-group-item list-group-item-action waves-effect">Nombre de client crée
+
+          <span class="badge badge-primary badge-pill pull-right">{{nombreClientCree | number : '1.1-10'}} </span>
+        </a>
         <a class="list-group-item list-group-item-action waves-effect">montant titre achete
-          <span class="badge badge-primary badge-pill pull-right">14 || {{montantAchat}} fcfa</span>
+          <span class="badge badge-primary badge-pill pull-right">{{montantAchat | number : '1.1-10'}} fcfa</span>
         </a>
         <a class="list-group-item list-group-item-action waves-effect">montant titre vendu
-          <span class="badge badge-primary badge-pill pull-right">123 || {{montantVente}} fcfa</span>
+          <span class="badge badge-primary badge-pill pull-right">{{montantVente | number : '1.1-10'}} fcfa</span>
         </a>
-        <a class="list-group-item list-group-item-action waves-effect">montant de subscription
-          <span class="badge badge-primary badge-pill pull-right">8 ||{{montantSubscription}} fcfa</span>
+        <a class="list-group-item list-group-item-action waves-effect">montant de souscription
+          <span class="badge badge-primary badge-pill pull-right">{{montantSubscription | number : '1.1-10'}} fcfa</span>
         </a>
         <a class="list-group-item list-group-item-action waves-effect">montant portefeuille
-          <span class="badge badge-primary badge-pill pull-right">{{montantPortefeuille}} fcfa</span>
+          <span class="badge badge-primary badge-pill pull-right">{{montantPortefeuille | number : '1.1-10'}} fcfa</span>
         </a>
         <a class="list-group-item list-group-item-action waves-effect">montant liquidite
-          <span class="badge badge-primary badge-pill pull-right">{{montantLiquidite}} fcfa</span>
+          <span class="badge badge-primary badge-pill pull-right">{{montantLiquidite | number : '1.1-10'}} fcfa</span>
         </a>
-        <a class="list-group-item list-group-item-action waves-effect">Commission Cgf Obtenu
-          <span class="badge badge-primary badge-pill pull-right">{{commissioncgf}} fcfa</span>
+        <!-- <a class="list-group-item list-group-item-action waves-effect">Commission Cgf Obtenu
+          <span class="badge badge-primary badge-pill pull-right">{{commissioncgf | number : '1.1-10'}} fcfa</span>
+        </a> -->
+        <a class="list-group-item list-group-item-action waves-effect">Commission Total Cgf
+
+          <span class="badge badge-primary badge-pill pull-right">{{commissionTotalcgf | number : '1.1-10'}} fcfa</span>
         </a>
-        <a class="list-group-item list-group-item-action waves-effect">Commission Total Cgf 
-       
-          <span class="badge badge-primary badge-pill pull-right">{{commissionTotalcgf}} fcfa</span>
-        </a>
-        <a class="list-group-item list-group-item-action waves-effect">Pourcentage commission obtenu
-       
+        <!-- <a class="list-group-item list-group-item-action waves-effect">Pourcentage commission obtenu
+
           <span class="badge badge-success badge-pill pull-right">{{pourcentage | number:'2.1-2'}} %</span>
-        </a>
+        </a> -->
+
       </div>
-    </div>
-  
+    </div> 
+
     <!--/.Card-->
-     
+
     </div>
-    
-  
+
+
   <!--Grid column-->
 
 </div>
-<div class="col-md-12 mb-4">
-  
+<div class="row">
+  <div class="col-md-8 col-sm-12">
+
     <!--Card-->
     <div class="card">
-        <div class="card-header">
-           Liste des odres executes
+          <div class="card-header">
+            Liste des operations d'ordre
           </div>
       <!--Card content-->
-      <div class="card-body">
+      <div class="card-body" style="height: 420px;">
 
         <!-- Table  -->
         <table class="table table-hover">
-            <!-- Table head -->
-            <thead class="blue-grey lighten-4">
-              <tr>
+          <!-- Table head -->
+          <thead class="blue-grey lighten-4">
+              <tr class="waves-light" data-toggle="modal" data-target="#basicExample">
                 <th>Numero compte</th>
                 <th>type operation</th>
                 <th>titre</th>
@@ -280,34 +368,34 @@
                 <th>quantite execute</th>
                 <th>agence</th>
                 <th>date valide</th>
-                <th></th>
-                
+
+
               </tr>
             </thead>
-            <!-- Table head -->
-  
-            <!-- Table body -->
+          
             <tbody *ngIf="operations!=null">
-            
-                  <tr *ngFor="let operation of operations |  slice:operations.length-5:operations.length">
-                      <td>{{operation.numCompte}}</td>
-                      <td>{{operation.typeOrde}}</td>
-                      <td>{{operation.codeTitre}}</td>
-                      <td>{{operation.dateOrde}}</td>
-                      <td>{{operation.quantite}}</td>
-                      <td>{{operation.valUnitaire}}</td>
-                      <td>{{operation.montant}}</td>
-                      <td>{{operation.quantiteExecute}}</td>
-                      <td>{{operation.agence}}</td>
-                      <td>{{operation.dateValid}}</td>
+
+                  <tr *ngFor="let operation of operations |  slice:operations.length-4:operations.length"  >
+
+                          <td>{{operation.numCompte}}</td>
+                          <td>{{operation.typeOrde}}</td>
+                          <td>{{operation.codeTitre}}</td>
+                          <td>{{operation.dateOrde}}</td>
+                          <td>{{operation.quantite}}</td>
+                          <td>{{operation.valUnitaire}}</td>
+                          <td>{{operation.montant | number : '1.1-10'}}</td>
+                          <td>{{operation.quantiteExecute}}</td>
+                          <td>{{operation.agence}}</td>
+                          <td>{{operation.dateValid}}</td>
+
                   </tr>
-           
-            
-             
+
+
+
             </tbody>
             <!-- Table body -->
           </table>
-       
+
 
       </div>
         <div class="row">
@@ -316,16 +404,114 @@
           </div>
     </div>
     <!--/.Card-->
- 
+
   </div>
+  <div class="col-md-4">
+    <div class="card ">
+        <div class="card-header">
+            Operation de caisse
+          </div>
+      <div class="card-body "  style="height: 450px;">
+                    <!-- <a class="list-group-item list-group-item-action waves-effect">Operation de caisse</a> -->
+                     <a class="list-group-item list-group-item-action waves-effect">Montant depot espece
+                        <span class="badge badge-primary badge-pill pull-right" width="150px">{{  depotEspece | number : '1.1-10'}} cfa</span>
+                    </a>
+                    <a class="list-group-item list-group-item-action waves-effect">Montant retrait cheque
+                        <span class="badge badge-primary badge-pill pull-right" width="150px">{{  retraitCheque | number : '1.1-10'}} cfa</span>
+                    </a>
+                    <a class="list-group-item list-group-item-action waves-effect">Montant depot cheque
+                        <span class="badge badge-primary badge-pill pull-right" width="150px">{{  depotCheque | number : '1.1-10'}} cfa</span>
+                    </a>
+                    <a class="list-group-item list-group-item-action waves-effect">Montant retrait par virement
+                        <span class="badge badge-primary badge-pill pull-right" width="150px">{{   retraitVrement | number : '1.1-10'}} cfa</span>
+                    </a>
+                    <a class="list-group-item list-group-item-action waves-effect">Montant depot par virement
+                        <span class="badge badge-primary badge-pill pull-right" width="150px">{{  depotVirement | number : '1.1-10'}} cfa</span>
+                    </a>
+                    <a class="list-group-item list-group-item-action waves-effect">Montant Total Décollecte 
+                      <span class="badge badge-primary badge-pill pull-right" width="150px">{{   retraitVrement + retraitCheque | number : '1.1-10'}} cfa</span>
+                  </a>
+                  <a class="list-group-item list-group-item-action waves-effect">Montant Total collecté
+                      <span class="badge badge-primary badge-pill pull-right" width="150px">{{  depotVirement + depotEspece + depotCheque | number : '1.1-10'}} cfa</span>
+                  </a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <div class="row mb-4">
+    <div class="col-md-12 mb-4">
+      
+      
+      <div class="card" style="height: 400px;">
+          <div class="card-header">
+              Liste de tes 5 dernieres transactions
+            </div>
+      
+        <div class="card-body" >
+
+        
+          <table class="table table-hover">
+           
+            <thead class="blue-grey lighten-4">
+              <tr>
+                <th>type operation</th>
+                <th>titre</th>
+                <th>Date operation</th>
+                <th>montant</th>
+
+               
+                
+              </tr>
+            </thead>
+            
+          
+            <tbody *ngFor="let operation of transactions">
+              
+                  <tr class="waves-light" data-toggle="modal" data-target="#basicExample" >
+                   
+                    <td>
+                        <span *ngIf="operation.typeTrn.trim()=='AV'">Vente d'action</span>
+                        <span *ngIf="operation.typeTrn.trim()=='AA'">Achat d'action</span>
+                        <span *ngIf="operation.typeTrn.trim()=='OS'">OS</span>
+                        <span *ngIf="operation.typeTrn.trim()=='AS'">AS</span>
+                        <span *ngIf="operation.typeTrn.trim()=='GEST'">GEST</span>
+                        <span *ngIf="operation.typeTrn.trim()=='LD' || operation.typeTrn.trim()=='DL' ">Depot espece</span>
+                        <span *ngIf="operation.typeTrn.trim()=='RC' || operation.typeTrn.trim()=='CR' ">Retrait cheque</span>
+                        <span *ngIf="operation.typeTrn.trim()=='DC' || operation.typeTrn.trim()=='CD' ">Depot cheque</span>
+                        <span *ngIf="operation.typeTrn.trim()=='DV' || operation.typeTrn.trim()=='VD' ">Depot par virement</span>
+                        <span *ngIf="operation.typeTrn.trim()=='RV' || operation.typeTrn.trim()=='VR' ">Retrait par virement</span>
+                        <span *ngIf="operation.typeTrn.trim()=='LTD'">Depot par transfert</span>
+                        
+                      </td>
+                      
+                      <td>{{operation.codeTitre}}</td>
+                      <td>{{operation.dateTrn | date}}</td>
+                      <td>{{ operation.montantB | number}}</td>
+                     
+                    
+                  </tr>
+          
+            
+            
+            </tbody>
+           
+          </table>
+         
+        </div>
+
+      </div>
+     
+
+    </div>
+</div> -->
 <div class="col-md-12 mb-4">
 
-  <!--Card-->
-  <div class="card">
+
+  <!-- <div class="card">
       <div class="card-header">
           Evolution de ton portefeuille
       </div>
-    <!--Card content-->
+  
     <div class="card-body">
 
       <div style="display: block">
@@ -335,19 +521,20 @@
       </div>
     </div>
 
-  </div>
-  <!--/.Card-->
+  </div> -->
+
 
 </div>
 
 <div class="col-md-3">
 
-  <div mdbModal #centralLarge="mdb-modal" class="modal fade" id="basicExample" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-    aria-hidden="true" [config]="{backdrop: true, ignoreBackdropClick: false}">
+  <div  mdbModal #centralLarge="mdb-modal" class="modal fade" id="basicExample"
+        tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true" [config]="{backdrop: true, ignoreBackdropClick: false}">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title w-100" id="myModalLabel">Modal title</h4>
+          <h4 class="modal-title w-100" id="myModalLabel">Details note</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="centralLarge.hide()">
             <span aria-hidden="true">×</span>
           </button>
@@ -355,19 +542,19 @@
         <div class="modal-body">
           <div class="row">
             <div class="col-md-2">
-          
+
             </div>
             <div class="col-md-10">
-               <form #f="ngForm" (ngSubmit)="modifier(f.value)">
-                  <input type="text" name="id" class="form-control" [ngModel]="tache.id" hidden>
+               <form >
+                  <input type="number" name="idTache" class="form-control" [(ngModel)]="tache.idTache" hidden>
                  <div class="form-row">
                   <div class="col-md-6">
                       <label for="">sujet</label>
-                      <input type="text" name="sujet" class="form-control" [ngModel]="tache.sujet">
+                      <input   class="form-control" [(ngModel)]="tache.sujet" name="sujet">
                   </div>
                   <div class="col-md-3">
                       <label for="">statut</label>
-                      <select class="form-control" [ngModel]="tache.statut" name="statut">
+                      <select class="form-control" [(ngModel)]="tache.statut" name="statut">
                         <option value="active">active</option>
                         <option value="en cours">en cours</option>
                         <option value="fin">fin</option>
@@ -377,15 +564,15 @@
                  <div class="form-row">
                     <div class="col-md-3">
                         <label for="">date debut</label>
-                        <input type="date" class="form-control" [ngModel]="tache.dateDebut" name="dateDebut">
+                        <input type="date" class="form-control" [(ngModel)]="tache.dateDebut" name="dateDebut">
                     </div>
                     <div class="col-md-3">
                         <label for="">date fin</label>
-                        <input type="date" class="form-control" [ngModel]="tache.dateFin" name="dateFin">
+                        <input type="date" class="form-control" [(ngModel)]="tache.dateFin" name="dateFin">
                     </div>
                     <div class="col-md-3">
                       <label for="">Priorité</label>
-                      <select class="form-control" [ngModel]="tache.priorite" name="priorite">
+                      <select class="form-control" [(ngModel)]="tache.priorite" name="priorite">
                         <option value="high">high</option>
                         <option value="medium">medium</option>
                         <option value="low">low</option>
@@ -395,34 +582,34 @@
                    <div class="form-row">
                       <div class="form-group col-md-9">
                         <label for="">Description</label>
-                         <textarea class="form-control" [ngModel]="tache.description" name="description"></textarea>
+                         <textarea class="form-control" [(ngModel)]="tache.descriptionTache" name="descriptionTache"></textarea>
                       </div>
                   </div>
                   <div class="form-row">
                       <div class="col-md-3">
                               <label for="">Assigner a quelqu'un</label>
                               <input type="text" name="nom" class="form-control">
-                              
+
                           </div>
                   </div>
-                  
-                 
-                  <button class="btn btn-success" type="submit"> <i class="fa fa-edit mr-3" ></i>Modofier</button>
-                  <button type="reset" class="btn btn-primary">Annuler</button>
-                  
+
+
+                  <button class="btn btn-primary" type="submit" (click)="modifier(tache);centralLarge.hide()"> <i class="fa fa-edit mr-3" ></i>Modofier</button>
+                  <button type="reset" class="btn btn-primary"  (click)="centralLarge.hide()">Annuler</button>
+
                </form>
               </div>
-           
+
           </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary btn-sm waves-light" data-dismiss="modal" (click)="centralLarge.hide()" mdbWavesEffect>Close</button>
+        <!-- <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm waves-light" data-dismiss="modal"" mdbWavesEffect>Close</button>
           <button type="button" class="btn btn-primary btn-sm waves-light" mdbWavesEffect>Save changes</button>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
- 
+
 
 
 </div>
@@ -434,85 +621,219 @@
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title w-100" id="myModalLabel">Modal title</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="centralLarge.hide()">
+            <h4 class="modal-title w-100" id="myModalLabel">Detail Note</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="centralNote.hide()">
               <span aria-hidden="true">×</span>
             </button>
           </div>
           <div class="modal-body">
             <div class="row">
-              <div class="col-md-2">
-            
-              </div>
+             
               <div class="col-md-10">
-                 <form #f="ngForm" (ngSubmit)="modifier(f.value)">
-                    <input type="text" name="id" class="form-control" [ngModel]="tache.id" hidden>
-                   <div class="form-row">
-                    <div class="col-md-6">
+                 <form >
+                  <div class="form-row">
+                    <div class="col-md-4">
                         <label for="">sujet</label>
-                        <input type="text" name="sujet" class="form-control" [ngModel]="tache.sujet">
+                        <input name="sujet" class="form-control" [(ngModel)]="note.sujet"> 
                     </div>
-                    <div class="col-md-3">
-                        <label for="">statut</label>
-                        <select class="form-control" [ngModel]="tache.statut" name="statut">
-                          <option value="active">active</option>
-                          <option value="en cours">en cours</option>
-                          <option value="fin">fin</option>
-                        </select>
-                      </div>
-                   </div>
-                   <div class="form-row">
-                      <div class="col-md-3">
-                          <label for="">date debut</label>
-                          <input type="date" class="form-control" [ngModel]="tache.dateDebut" name="dateDebut">
-                      </div>
-                      <div class="col-md-3">
-                          <label for="">date fin</label>
-                          <input type="date" class="form-control" [ngModel]="tache.dateFin" name="dateFin">
-                      </div>
-                      <div class="col-md-3">
-                        <label for="">Priorité</label>
-                        <select class="form-control" [ngModel]="tache.priorite" name="priorite">
-                          <option value="high">high</option>
-                          <option value="medium">medium</option>
-                          <option value="low">low</option>
-                        </select>
-                      </div>
-                     </div>
+                    <div class="col-md-4">
+                      <label for="">Nom du client</label>
+                      <input class="form-control" disabled name="nomclient" [(ngModel)]="note.nomClient"> 
+                    </div>
+                  </div>
+                   
                      <div class="form-row">
-                        <div class="form-group col-md-9">
+                        <div class="form-group col-md-6">
                           <label for="">Description</label>
-                           <textarea class="form-control" [ngModel]="tache.description" name="description"></textarea>
+                           <textarea class="form-control" name="description"  [(ngModel)]="note.description" style="height:300px;width: 310px;"></textarea>
                         </div>
                     </div>
-                    <div class="form-row">
+                    <!-- <div class="form-row">
                         <div class="col-md-3">
-                                <label for="">Assigner a quelqu'un</label>
-                                <input type="text" name="nom" class="form-control">
-                                
-                            </div>
-                    </div>
-                    
-                   
-                    <button class="btn btn-success" type="submit"> <i class="fa fa-edit mr-3" ></i>Modofier</button>
-                    <button type="reset" class="btn btn-primary">Annuler</button>
-                    
+                              <button class="waves-light" data-toggle="modal" data-target="#basicExample" (click)="getClient();centralLarge.show()">rattacher a</button>
+                            <input type="text" name="nomclient" class="form-control" [(ngModel)]="nomclient" disabled>
+                        </div>
+                    </div> -->
+
+                    <button class="btn btn-primary" type="submit" (click)="modifierNote(note);centralNote.hide()" > <i class="fa fa-edit mr-3" ></i>Modofier</button>
+                    <button type="reset" class="btn btn-primary" (click)="centralNote.hide()">Annuler</button>
+
                  </form>
                 </div>
-             
+              
             </div>
           </div>
-          <div class="modal-footer">
+          <!-- <div class="modal-footer">
             <button type="button" class="btn btn-secondary btn-sm waves-light" data-dismiss="modal" (click)="centralLarge.hide()" mdbWavesEffect>Close</button>
-            <button type="button" class="btn btn-primary btn-sm waves-light" mdbWavesEffect>Save changes</button>
-          </div>
+            <button type="button" class="btn btn-primary btn-sm waves-light" mdbWavesEffect (click)="centralLarge.hide()" >Save changes</button>
+          </div> -->
         </div>
       </div>
     </div>
-   
-  
-  
+
+
+
   </div>
+
+
+  <div class="col-md-3">
+
+      <div mdbModal #voirClientChercher="mdb-modal" class="modal fade" id="basicExample" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true" [config]="{backdrop: true, ignoreBackdropClick: false}">
+        <div class="modal-dialog modal-lg" role="document">
+
+            <div class="modal-content">
+
+              <div class="modal-header">
+
+              </div>
+
+              <div class="modal-body" >
+                  <div class="col-md-10">
+                      <form >
+                          <div class="form-row">
+                              <div class="col-md-4">
+                                  <label for="">Nom</label>
+                              </div>
+                              <div class="col-md-6">
+                                  <select class="form-control" [(ngModel)]="numcli" name="numcli">
+                                    <option *ngFor="let c of clientCh" [ngValue]="c.cptNoCli" selected>{{c.nom}}</option>
+                                  </select>
+                              </div>
+                           </div>
+
+                            <div class="form-row">
+
+                                <div class="col-md-4">
+                                  <label for="">Cni</label>
+                                </div>
+
+                                <div class="col-md-6">
+                                  <select class="form-control" [(ngModel)]="cni" name="cni">
+                                      <option *ngFor="let c of clientCh" [ngValue]="c.nom" >{{c.cni}}</option>
+                                  </select>
+                                </div>
+
+                            </div>
+
+                         <div class="form-row">
+                             <div class="col-md-4">
+                                     <label for="">Matricule</label>
+                             </div>
+                             <div class="col-md-6">
+                                     <select class="form-control" [(ngModel)]="matricule" name="matricule">
+                                        <option *ngFor="let c of clientCh" [ngValue]="c.nom" >{{c.matricule}}</option>
+                                     </select>
+                             </div>
+                         </div>
+
+                         <button class="btn btn-success" (click)="profileClient()">Voir profil client</button>
+                         <button type="reset" class="btn btn-primary" (click)="voirClientChercher.hide()">Annuler</button>
+
+                      </form>
+                     </div>
+                </div>
+
+
+              </div>
+
+            </div>
+
+          </div>
+</div>
+<div class="col-md-3">
+
+  <div mdbModal #alert="mdb-modal" class="modal fade" id="basicExample" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true" [config]="{backdrop: true, ignoreBackdropClick: false}">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+           Alerte
+          </div>
+          <div class="modal-body">
+              <form >
+                  <div class="form-row">
+
+                      <div class="col-md-3">
+                          <label for="">Titre</label>
+                          <!-- <select class="form-control" [(ngModel)]="alerte.codeTitre" name="codeTitre">
+                            <option value="TTLSN" selected>Total SN</option>
+                            <option value="SNTS">Sonatel</option>
+                            <option value="BOAB ">BANK OF AFRICA BN</option>
+                          </select> -->
+                          <select class="form-control" [(ngModel)]="alerte.codeTitre" name="codeTitre">
+
+                            <option *ngFor="let a of allTitre" [ngValue]="a.codeTitre">{{a.nomTitre}}</option>
+
+
+                      </select>
+                      </div>
+                      <div class="col-md-3">
+                          <label for="">type operation</label>
+                          <select class="form-control" [(ngModel)]="alerte.typeOp" name="typeOp">
+                              <option value="AA" selected>achat</option>
+                              <option value="AV">vente</option>
+
+                            </select>
+
+                      </div>
+                      <div class="col-md-3">
+                          <label for="">Quantite</label>
+                          <input type="text" class="form-control" [(ngModel)]="alerte.quantite" name="quantite"/>
+
+                      </div>
+
+
+                  </div>
+                  <div class="form-row">
+                      <div class="col-md-3">
+                          <label for="">Champ</label>
+                          <input type="text" class="form-control"  value="prixDuJour" disabled placeholder="prix du jour"/>
+
+                      </div>
+                      <div class="col-md-3">
+                          <label for="">operation</label>
+                          <select class="form-control" [(ngModel)]="alerte.operationAlerte" name="operationAlerte">
+                            <option value="==" selected>=</option>
+                            <option value=">=">>=</option>
+                            <option value="<="><=</option>
+                            <option value=">">></option>
+                            <option value="<"><</option>
+                          </select>
+                      </div>
+                      <div class="col-md-3">
+                          <label for="">Valeur</label>
+                          <input type="number" class="form-control" [(ngModel)]="alerte.prixDujour" name="prixDujour"/>
+
+                      </div>
+
+                        <div class="col-md-3">
+                            <label for="">date validite</label>
+                            <input type="date" class="form-control" [(ngModel)]="alerte.datavalid" name="datavalid">
+                        </div>
+                  </div>
+                   <button class="btn btn-primary" (click)="ajouterAlert();alert.hide();"> <i class="fa fa-plus mr-3"></i>Ajouter</button>
+                   <button type="reset" class="btn btn-primary">Annuler</button>
+
+                </form>
+
+          </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary btn-sm waves-light" data-dismiss="modal" (click)="alert.hide()" mdbWavesEffect>Close</button>
+
+          </div>
+      </div>
+    </div>
+</div>
+
+
+<ngx-spinner bdColor="rgba(51,51,51,0.8)"
+  size="large"
+  color="#fff"
+  type="ball-scale-multiple">
+<p style="font-size: 20px; color: white;overflow-y: hidden;">Loading...</p>
+</ngx-spinner>
 <!--Grid row-->
 
 <!--Grid row-->
@@ -522,16 +843,16 @@
 <!--Grid row-->
 <!-- <div class="row wow fadeIn">
 
- 
+
   <div class="col-lg-4 col-md-12 mb-4">
 
-   
+
     <div class="card">
 
-      
+
       <div class="card-header">Line chart</div>
 
-     
+
       <div class="card-body">
 
         <div style="display: block">
@@ -542,21 +863,21 @@
       </div>
 
     </div>
-    
+
 
   </div>
-  
 
- 
+
+
   <div class="col-lg-4 col-md-6 mb-4">
 
-   
+
     <div class="card">
 
-     
+
       <div class="card-header">Radar Chart</div>
 
-     
+
       <div class="card-body">
 
         <div style="display: block">
@@ -567,19 +888,19 @@
       </div>
 
     </div>
-  
+
 
   </div>
- 
+
   <div class="col-lg-4 col-md-6 mb-4">
 
-  
+
     <div class="card">
 
-     
+
       <div class="card-header">Doughnut Chart</div>
 
-    
+
       <div class="card-body">
 
         <div style="display: block">
@@ -590,9 +911,9 @@
       </div>
 
     </div>
-   
+
   </div>
-  
+
 
 </div> -->
 <!--Grid row-->
@@ -606,13 +927,13 @@
     <!--Card-->
     <!-- <div class="card">
 
-     
+
       <div class="card-header">Google map</div>
 
-    
+
       <div class="card-body">
 
-       
+
         <div class="card-body text-center">
           <agm-map [latitude]="map.lat" [longitude]="map.lng" [mapTypeId]="'roadmap'" style="height: 300px">
             <agm-marker [latitude]="map.lat" [longitude]="map.lng"></agm-marker>
@@ -635,9 +956,9 @@
 
 
       <div class="card-header">Modals</div>
-      
+
       <div class="card-body">
-      
+
         <section class="px-4">
           <h4 class="mb-5 mt-4 dark-grey-text text-center font-bold">
             <strong>Position & Sizes</strong>
@@ -647,10 +968,10 @@
             <p class="lead">Click buttons below to launch modals demo</p>
           </div>
 
-         
+
           <div class="row">
 
-           
+
             <div class="col-md-3">
               <h5 class="text-center mb-3">Frame Modal</h5>
 
@@ -701,7 +1022,7 @@
                 </div>
               </div>
             </div>
-           
+
             <div class="col-md-3">
               <h5 class="text-center mb-3">Side Modal</h5>
 
@@ -815,8 +1136,8 @@
                 </div>
               </div>
             </div>
- 
-            
+
+
             <div class="col-md-3">
               <h5 class="text-center mb-3">Fluid Modal</h5>
 
@@ -1008,15 +1329,15 @@
                 </div>
               </div>
             </div>
-         
+
           </div>
-          
+
 
         </section>
-       
+
 
       </div>
-      
+
     </div> -->
     <!--/.Card-->
 
@@ -1029,4 +1350,6 @@
 <!--Grid row-->
 
 
-<app-stats-card2></app-stats-card2>
+
+
+<!-- <app-stats-card2></app-stats-card2> -->

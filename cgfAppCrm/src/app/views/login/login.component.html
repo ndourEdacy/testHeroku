@@ -1,9 +1,13 @@
+<div class="login">
 
-	
-		<div class="card" style="margin-left:200px;margin-right:300px">
-			<div class="card-header">
-				<h3>Sign In</h3>
-			
+
+	<div style="height: 600px;" >
+
+
+		<div class="card" style="position:absolute; margin-left:30%;margin-right:30%;margin-bottom: 20%;margin-top: 15%; width:50%;">
+			<div class="card-header text-center">
+				<h3>GCF-BOURSE login</h3>
+
 			</div>
 			<div class="card-body">
 				<form>
@@ -12,7 +16,7 @@
 							<span class="input-group-text"><i class="fa fa-user"></i></span>
 						</div>
 						<input type="text" class="form-control" placeholder="username" name="username" [(ngModel)]="username">
-						
+
 					</div>
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
@@ -20,22 +24,27 @@
 						</div>
 						<input type="password" class="form-control" placeholder="password" name="password" [(ngModel)]="password">
 					</div>
-				
-					<div class="form-group">
-						<input type="submit" value="Login" class="btn float-right login_btn" (click)="logIn()">
+
+					<div class="form-group row">
+						<div class="col-md-4"></div>
+						
+						<div class="col-md-4">
+								<button  class="btn btn-primary login_btn" (click)="logIn()">Se connecter</button>
+						</div>
+						
+						<div class="col-md-4"></div>
 					</div>
 				</form>
 			</div>
-			<div class="card-footer">
-				<div class="d-flex justify-content-center links">
-					Don't have an account?<a href="#">Sign Up</a>
-        </div>
-        
-				<div class="d-flex justify-content-center">
-					<a href="#">Forgot your password?</a>
-				</div>
-			</div>
+		
 		</div>
 
+	</div> 
 
+</div>
 
+<ngx-spinner bdColor="rgba(51,51,51,0.8)"
+size="medium"
+color="#fff"
+type="ball-scale-multiple">
+<p style="font-size: 20px; color: white">Loading...</p>></ngx-spinner>

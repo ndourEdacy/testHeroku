@@ -10,17 +10,22 @@ import { ClientService } from 'service/client.service';
 export class ProfilClientComponent implements OnInit {
 idClient:number
 client:any
+lastOrdre:any[] = []
   constructor(private router:ActivatedRoute,private clientservice:ClientService) {
        
     router.params.forEach(param=>{
            this.idClient = param.id
         });
 
-        this.client = this.clientservice.getClientById(this.idClient)
+        this.client = this.clientservice.getClientById(this.idClient);
+       
        
    }
 
   ngOnInit() {
   }
-
+  modifTache(id){
+    
+  }
+ 
 }

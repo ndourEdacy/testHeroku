@@ -1,7 +1,7 @@
 import { AgmCoreModule } from '@agm/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule, NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
@@ -16,6 +16,12 @@ import { NavigationModule } from './main-layout/navigation/navigation.module';
 
 import { HttpClientModule } from '@angular/common/http';
 
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+import { ToastrModule } from 'ng6-toastr-notifications';
+//import { AppRoutingModule } from './app-routing.module';
+registerLocaleData(localeFr);
+
 
 @NgModule({
   declarations: [
@@ -24,6 +30,7 @@ import { HttpClientModule } from '@angular/common/http';
    
   ],
   imports: [
+   
     AgmCoreModule.forRoot({
       apiKey: ''
     }),
@@ -38,10 +45,11 @@ import { HttpClientModule } from '@angular/common/http';
     ErrorModule,
     FormsModule, 
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ToastrModule.forRoot()
     
   ],
-  providers: [],
+  providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
   bootstrap: [AppComponent],
   schemas: [ NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA ]
 })

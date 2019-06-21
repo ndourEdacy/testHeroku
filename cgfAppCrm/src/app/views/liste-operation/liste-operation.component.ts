@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'service/login.service';
 import { Router } from '@angular/router';
+import { ClientService } from 'service/client.service';
 
 @Component({
   selector: 'app-liste-operation',
@@ -9,31 +10,23 @@ import { Router } from '@angular/router';
 })
 export class ListeOperationComponent implements OnInit {
    operations:any[]=null
+   operation:any
    op:any[]=[]
-   nombreOrde = 0;
+   nombreOrde = 0
    nombreOrdeWeb=0
-  constructor(private loginService:LoginService,private router:Router) {
-        this.operations = loginService.getoperation()
-        this.nombreOrde = this.operations.length
+   client:any
+  constructor(private loginService:LoginService,private router:Router,private clientService:ClientService) {
+        
         this.nombreOrdeWeb = this.getNombreOrdeWeb()
    }
 
   ngOnInit() {
+    this.operations = this.loginService.getoperation()
+    this.loginService.setopera(this.operations)
+  
+        this.nombreOrde = this.operations.length
   }
-  filterParOdreExecute(){
-   
-    let ops = this.loginService.getoperation()
-    console.log(ops)
-    this.operations.forEach(o=>{
-        if(o.quantite == o.quantiteExecute && o.typeOrde.match('BLA')===null)
-           this.op.push(o)
-    })
-    
-    
-    this.operations = this.op
-    this.nombreOrdeWeb = this.getNombreOrdeWeb()
-    this.nombreOrde = this.operations.length
-  }
+
   getNombreOrdeWeb(){
     let i=0
     this.operations = this.loginService.getoperation()
@@ -44,27 +37,61 @@ export class ListeOperationComponent implements OnInit {
 
       return i;
   }
-    filterParOdreExecutePartiellement(){
-      let opExP:any[]=[]
-     this.operations = this.loginService.getoperation()
-      this.operations.forEach(o=>{
-        if(o.quantite != o.quantiteExecute && o.typeOrde.match('BLA')===null &&  o.quantiteExecute!=0)
-           opExP.push(o)
+
+  filterParOdreExecute()
+  {
+    this.op=[]
+      this.operations = this.loginService.getopera()
+      console.log(this.operations)
+        this.operations.forEach(o=>{
+            if(o.quantite == o.quantiteExecute && o.typeOrde.match('BLA')==null)
+              this.op.push(o)
         })
-        this.operations = opExP
+
+      // console.log("----------------",this.op)
+        this.loginService.setoperation(this.op)
+        this.operations = this.loginService.getoperation();
         this.nombreOrdeWeb = this.getNombreOrdeWeb()
         this.nombreOrde = this.operations.length
+     //   console.log("----------------",this.operations)
+  }
+
+    
+    filterParOdreExecutePartiellement(){
+
+        let opExP:any[]=[]
+        this.operations = this.loginService.getopera()
+          this.operations.forEach(o=>{
+              if(o.quantite != o.quantiteExecute && o.typeOrde.match('BLA')===null &&  o.quantiteExecute!=0)
+                     opExP.push(o)
+            })
+            this.loginService.setoperation(opExP)
+            this.operations = this.loginService.getoperation();
+            this.nombreOrdeWeb = this.getNombreOrdeWeb()
+            this.nombreOrde = this.operations.length
     }
 
     filterParOdreNonExecute(){
-      let opExP:any[]=[]
-      this.operations = this.loginService.getoperation()
+      
+      let opExP:any[]=[];
+      this.operations = this.loginService.getopera()
       this.operations.forEach(o=>{
-        if(o.quantite == o.quantiteExecute && o.typeOrde.match('BLA')===null && o.quantiteExecute!=0)
+        if(o.quantite != o.quantiteExecute && o.typeOrde.match('BLA')===null && o.quantiteExecute==0)
            opExP.push(o)
         })
-        this.operations = opExP
+        this.loginService.setoperation(opExP)
+        this.operations = this.loginService.getoperation();
         this.nombreOrdeWeb = this.getNombreOrdeWeb()
         this.nombreOrde = this.operations.length
+    }
+    getOrdreById(id:number){
+          this.operation = this.operations.find(p=>p.idOrdre ==id);
+          this.getclient(this.operation.numCompte)
+    }
+    getclient(numcpt:number)
+    {
+        this.clientService.getClientByNumCpt(numcpt).subscribe(data=>{
+            this.client = data;
+        })
     }
 }

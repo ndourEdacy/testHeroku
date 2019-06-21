@@ -1,0 +1,245 @@
+<div class="row">
+
+<div class="col-md-6 mb-2">
+
+
+  <div class="card" >
+
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-10">
+                Mes Taches
+            </div>
+            <!-- <div class="col-md-1">
+                <span class="btn btn-primary" (click)="ajouterTache()">
+                    <i class="fa fa-plus"></i>
+                </span>
+            </div> -->
+          </div>
+    </div>
+    <div class="card-body" style="height: 200px;">
+
+
+      <table class="table table-hover">
+
+        <thead class="blue lighten-4">
+          <tr>
+
+            <th>Description</th>
+            <th>date debut</th>
+            <th>Date fin</th>
+            <th>Priorite</th>
+            <th>Statut</th>
+          </tr>
+        </thead>
+
+        <tbody *ngFor="let tache of taches">
+
+              <tr  class="waves-light" data-toggle="modal" data-target="#basicExample" (click)="getIdTache(tache.idTache);DetailTache.show();">
+
+
+                  <td>{{tache.descriptionTache | slice:0:50}}</td>
+                  <td>{{tache.dateDebut | date}}</td>
+                  <td>{{tache.dateFin  | date}}</td>
+                  <td>{{tache.priorite}}</td>
+                  <td>{{tache.statut}}</td>
+                </tr>
+
+
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+
+</div>
+
+
+  <div class="col-md-6">
+
+
+    <div class="card" >
+        <div class="card-header">
+            <div class="row">
+              <div class="col-md-10">
+                 Alertes
+              </div>
+              <!-- <div class="col-md-1">
+                  <span class="btn btn-primary" (click)="ajouterMeeting()">
+                      <i class="fa fa-plus"></i>
+                  </span>
+              </div> -->
+            </div>
+
+
+          </div>
+
+      <div class="card-body" style="height: 200px;">
+
+
+        <table class="table table-hover">
+
+          <thead class="blue-grey lighten-4">
+            <tr>
+              <th>Numero Compte</th>
+              <th>Titre</th>
+              <th>Type operation</th>
+              <th>Prix du jour</th>
+
+            </tr>
+          </thead>
+
+          <tbody *ngFor="let alerte of alertes | slice:alertes.length-5:alertes.length">
+            <tr  class="waves-light" data-toggle="modal" data-target="#basicExample" >
+
+              <td>{{alerte.numCompte}}</td>
+              <td>{{alerte.codeTitre}}</td>
+              <td>{{alerte.typeOp}}</td>
+              <td>{{alerte.prixDujour}}</td>
+            </tr>
+
+          </tbody>
+
+        </table>
+
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
+<div class="card-body" style="background-color:white;z-index: inherit 10000000000000000; height: 550px;overflow-y: scroll;">
+    <div class="card-header">
+     Client a contacter
+    </div>
+
+
+  <table class="table table-hover">
+
+      <thead class="blue lighten-4">
+        <tr>
+          <th>Numero Compte</th>
+          <th>nom</th>
+          <th>Telephone</th>
+          <th>Email</th>
+          <th>Type Compte</th>
+          <th>Portefeuille</th>
+          <th>Liquidite</th>
+          
+        </tr>
+      </thead>
+      <!-- Table head -->
+  
+      <!-- Table body -->
+      <tbody *ngFor="let c of clients | slice:0:25">
+       
+            <tr  class="waves-light" data-toggle="modal" data-target="#basicExample" (click)="detailClient(c.cptNoCli)">           
+                <td>{{c.numCompt}}</td>
+                <td>{{c.nom}}</td>
+                <td>{{c.phone}}</td>
+                <td>{{c.email}}</td>
+                <td>{{c.typeCompte}}</td>
+                <td>{{c.portefeuille | number}}</td>
+                <td>
+                  <span class="badge badge-success badge-pill" *ngIf="c.liquidite > 100000 ">{{c.liquidite | number}}</span>
+                  <span class="badge badge-danger badge-pill" *ngIf="c.liquidite < 0 ">{{c.liquidite | number}}</span>
+                </td>
+             </tr>
+      
+        
+        
+      </tbody>
+      <!-- Table body -->
+    </table>
+
+
+</div>
+<ngx-spinner bdColor="rgba(51,51,51,0.8)"
+  size="large"
+  color="#fff"
+  type="ball-scale-multiple">
+<p style="font-size: 20px; color: white;overflow-y: hidden;">Loading...</p>
+</ngx-spinner>
+<div class="col-md-3">
+
+  <div mdbModal #DetailTache="mdb-modal" class="modal fade" id="basicExample" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true" [config]="{backdrop: true, ignoreBackdropClick: false}">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+           Detail Tache
+        </div>
+        <div class="modal-body">
+             
+           <!-- <app-tachecompenent [idTache]="idtache"></app-tachecompenent> -->
+           <div class="row">
+                    
+            <div class="col-md-12">
+               <form >
+                 <div class="form-row">
+                  <div class="col-md-6">
+                      <label for="">sujet</label>
+                      <input type="text" name="sujet" class="form-control" [(ngModel)]="tache.sujet">
+                  </div>
+                  <div class="col-md-3">
+                      <label for="">statut</label>
+                      <select class="form-control" [(ngModel)]="tache.statut" name="statut">
+                        <option value="active">active</option>
+                        <option value="en cours">en cours</option>
+                        <option value="fin">finie</option>
+                      </select>
+                    </div>
+                 </div>
+                 <div class="form-row">
+                    <div class="col-md-3">
+                        <label for="">date debut</label>
+                        <input type="date" class="form-control" [(ngModel)]="tache.dateDebut" name="dateDebut">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="">date fin</label>
+                        <input type="date" class="form-control" [(ngModel)]="tache.dateFin" name="dateFin">
+                    </div>
+                    <div class="col-md-3">
+                      <label for="">Priorité</label>
+                      <select class="form-control" [(ngModel)]="tache.priorite" name="priorite">
+                        <option value="high">high</option>
+                        <option value="medium">medium</option>
+                        <option value="low">low</option>
+                      </select>
+                    </div>
+                   </div>
+                   <div class="form-row">
+                      <div class="form-group col-md-9">
+                        <label for="">Description</label>
+                         <textarea class="form-control" [(ngModel)]="tache.descriptionTache" name="descriptionTache" style="height:300px"></textarea>
+                      </div>
+                  </div>
+                  <div class="form-row">
+                      <div class="col-md-3">
+                              <label for="">Assigner a quelqu'un</label>
+                              <select class="form-control" [(ngModel)]="tache.assignerA" name="assignerA">
+                                <option *ngFor="let user of users" [ngValue]="user.username">{{user.prenom}} {{user.nom}}</option>
+                              </select>
+                      </div>
+                  </div>
+          
+                  <button class="btn btn-primary" (click)="modifTache();DetailTache.hide()"> <i class="fa fa-edit mr-3"></i>Modifier</button>
+                  <button type="reset" class="btn btn-primary" (click)="DetailTache.hide()">Annuler</button>
+                  
+               </form>
+              </div>
+             
+          </div>
+        </div>
+        <div class="modal-footer">
+          <!-- <button type="button" class="btn btn-secondary btn-sm waves-light" data-dismiss="modal" (click)="centralOperation.hide()" mdbWavesEffect>Close</button> -->
+         
+        </div>
+      </div>
+    </div>
+</div>

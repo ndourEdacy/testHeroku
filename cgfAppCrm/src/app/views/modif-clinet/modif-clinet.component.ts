@@ -15,7 +15,9 @@ export class ModifClinetComponent implements OnInit {
        this.id=param.id
     })
     
-   this.client = clientservice.getClientById(this.id)
+   clientservice.getClientById(this.id).subscribe(data=>{
+      this.client = data
+   })
    console.log(this.client)
   }
 

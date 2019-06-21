@@ -1,0 +1,26 @@
+export interface Transaction{
+     idTransaction;
+     agence;
+     username;
+     numOpr;
+    numTrn;
+    cptNo;
+    typeTrn;
+     typeOpr;
+    dateTrn;
+    montantB;
+     unites;
+     valUnit;
+    codeTitre;
+  cptTrf;
+    observation;
+     numOrdre;
+     numCtr;
+     refSicav;
+  numAvis;
+   fraisSgi;
+     fraisBrvm;
+    factSgi;
+     factBrvm;
+     tvaSgi;
+}

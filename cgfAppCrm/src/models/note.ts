@@ -1,6 +1,10 @@
 export class Note{
-    public id:0;
-    public sujet:string;
-    public description:string;
-    public idclient:0
+     idNote:0;
+     sujet:String;
+     description:String;
+     numCompte:0;
+     dateCreat: Date;
+     userCreate:String;
+     userClient: String;
+
 }

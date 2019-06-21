@@ -1,56 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Tache } from 'models/tache';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
+import { LoginService } from './login.service';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class TacheService {
- taches:any=[{
-  id:1,
-  dateDebut:"2018-10-26",
-  dateFin:"2018-10-27",
-  description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tristique nunc ut leo placerat, eu ultricies risus fringilla. Phasellus suscipit eget odio ut semper. Integer tempus finibus lacinia. Cras id scelerisque nibh. Curabitur risus erat, dignissim ut imperdiet in, efficitur vitae metus. Mauris vestibulum velit vel rutrum dignissim. In id vulputate velit, ut auctor est. Pellentesque tempus urna a consectetur dictum. Aenean vitae placerat felis.",
-  sujet:"achat titre",
-  statut:"active",
-  priorite:"medium",
-  dateCreate:"2018-10-23"
-},{
-  id:2,
-  dateDebut:"2018-10-26",
-  dateFin:"2018-10-26",
-  description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tristique nunc ut leo placerat, eu ultricies risus fringilla. Phasellus suscipit eget odio ut semper. Integer tempus finibus lacinia. Cras id scelerisque nibh. Curabitur risus erat, dignissim ut imperdiet in, efficitur vitae metus. Mauris vestibulum velit vel rutrum dignissim. In id vulputate velit, ut auctor est. Pellentesque tempus urna a consectetur dictum. Aenean vitae placerat felis.",
-  sujet:"vente titre",
-  statut:"active",
-  priorite:"medium",
-  dateCreate:"2018-10-25"
-},{
-  id:3,
-  dateDebut:"2018-10-26",
-  dateFin:"2018-10-26",
-  description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tristique nunc ut leo placerat, eu ultricies risus fringilla. Phasellus suscipit eget odio ut semper. Integer tempus finibus lacinia. Cras id scelerisque nibh. Curabitur risus erat, dignissim ut imperdiet in, efficitur vitae metus. Mauris vestibulum velit vel rutrum dignissim. In id vulputate velit, ut auctor est. Pellentesque tempus urna a consectetur dictum. Aenean vitae placerat felis.",
-  sujet:"phoning",
-  statut:"active",
-  priorite:"medium",
-  dateCreate:"2018-10-11"
-},{
-  id:4,
-  dateDebut:"2018-10-26",
-  dateFin:"2018-10-26",
-  description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tristique nunc ut leo placerat, eu ultricies risus fringilla. Phasellus suscipit eget odio ut semper. Integer tempus finibus lacinia. Cras id scelerisque nibh. Curabitur risus erat, dignissim ut imperdiet in, efficitur vitae metus. Mauris vestibulum velit vel rutrum dignissim. In id vulputate velit, ut auctor est. Pellentesque tempus urna a consectetur dictum. Aenean vitae placerat felis.",
-  sujet:"mailling",
-  statut:"active",
-  priorite:"medium",
-  dateCreate:"2018-11-02"
-},{
-  id:5,
-  dateDebut:"2018-10-26",
-  dateFin:"2018-10-26",
-  description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tristique nunc ut leo placerat, eu ultricies risus fringilla. Phasellus suscipit eget odio ut semper. Integer tempus finibus lacinia. Cras id scelerisque nibh. Curabitur risus erat, dignissim ut imperdiet in, efficitur vitae metus. Mauris vestibulum velit vel rutrum dignissim. In id vulputate velit, ut auctor est. Pellentesque tempus urna a consectetur dictum. Aenean vitae placerat felis.",
-  sujet:"f yhry",
-  statut:"active",
-  priorite:"medium",
-  dateCreate:"2018-10-21"
-}];
+ taches:any=[];
  tache={
   id:0,
   dateDebut:Date,
@@ -59,47 +17,52 @@ export class TacheService {
   sujet:"",
   statut:"active",
   priorite:"medium",
-  dateCreate:"2018-10-23"
+  dateCreate:"2018-10-23",
+  numclientRatacher:0,
+  assignerA:"",
+  userCreat:""
 }
  id=0;
-  constructor() { }
-  ajouterTache(t){
-    t.id=this.id+1;
-    this.id++;
-    
-     this.taches.push(t);
+ url="http://localhost:8080/"
+  constructor(private http:HttpClient, private loginservice :LoginService) { 
+    this.url = loginservice.url; 
   }
-  getAllTache(){
-    return this.taches
+  ajouterTache(t){
+     let urlt = this.url+"tache/add"
+     return this.http.post(urlt,t).pipe(
+       map((data:any)=>data)
+     )
+     
+  }
+  getAllTache(username){
+    let url1=this.url+"user/getTacheByCommercial?username="+username
+    return this.http.get(url1).pipe(
+      map((data:any[])=>data)
+    )
   }
 
   getTacheById(id:number){
    
-      // this.taches.forEach(function(element) {
-      //   console.log(element.id)
-      //    if(element.id === id){
-      //      this.tache=element
-      //    }
-        
-      // });
-      for(let i = 0 ; i < this.taches.length ; i++){
-          if(this.taches[i].id === id){
-           return this.taches[i];
-          }
-      }
+    let urlt = this.url+"tache/findById/"+id
      
-        return this.tache;
+    return this.http.get(urlt).pipe(
+      map((data:any)=>data)
+    );
     
   }
   modifierTache(t){
-    
-    for(let i = 0 ; i < this.taches.length ; i++){
-      if(this.taches[i].id === t.id){
-         this.tache[i]=t;
+    let urlt = this.url+"tache/updateTache";
+
+
+    // for(let i = 0 ; i < this.taches.length ; i++){
+    //   if(this.taches[i].id === t.id){
+    //      this.tache[i]=t;
         
-         return  this.tache[i]
-      }
-    }
+    //        this.tache[i]
+    //   }
+    // }
+
+    return this.http.put(urlt,t);
   }
 
   getTache(date){
@@ -114,5 +77,11 @@ export class TacheService {
     }
     return t;
 
+  }
+  getTacheByNumCpt(numcpt:number){
+    let urlt=this.url+"tache/getTacheByNumCompte?numcpt="+numcpt;
+    return this.http.get(urlt).pipe(
+      map((data:any[])=>data)
+    )
   }
 }

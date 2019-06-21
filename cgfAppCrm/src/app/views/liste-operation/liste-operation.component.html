@@ -29,14 +29,13 @@
                                    
           </div>
       <!--Card content-->
-      <div class="card-body">
+      <div class="card-body" style="height: 700px;overflow-y: scroll;">
 
-        <!-- Table  -->
         <table class="table table-hover">
             <!-- Table head -->
             <thead class="blue-grey lighten-4">
               <tr>
-                <th>Numero Compte</th>
+                <!-- <th>Numero Compte</th> -->
                 <th>Numero Ordre</th>
                 <th>type operation</th>
                 <th>titre</th>
@@ -54,18 +53,30 @@
             <!-- Table head -->
   
             <!-- Table body -->
-            <tbody *ngIf="operations!=null">
+            <tbody *ngIf="operations!=null" >
             
-                  <tr *ngFor="let operation of operations |  slice:operations.length-25:operations.length">
-                      <td>{{operation.numCompte}}</td>
+                  <tr *ngFor="let operation of operations |  slice:operations.length-25:operations.length"
+                           class="waves-light" data-toggle="modal" 
+                           data-target="#basicExample" (click)="getOrdreById(operation.idOrdre);centralOperation.show()"> 
+                      <!-- <td>{{operation.numCompte}}</td> -->
                       <td>{{operation.numOrde}}</td>
-                      <td>{{operation.typeOrde}}</td>
+                      
+                     
+                      <td>
+                        <span *ngIf="operation.typeOrde.trim()=='AV' || operation.typeOrde.trim()=='VA'">Vente d'action</span>
+                        <span *ngIf="operation.typeOrde.trim()=='AA'">Achat d'action</span>
+                        <span *ngIf="operation.typeOrde.trim()=='OS'">OS {{operation.typeOrde}}</span>
+                        <span *ngIf="operation.typeOrde.trim()=='AS'">AS</span>
+                        <span *ngIf="operation.typeOrde.trim()=='OV'">OV</span>
+                        <span *ngIf="operation.typeOrde.trim()=='OA'">OA</span>
+                      </td>
+
                       <td>{{operation.codeTitre}}</td>
                       <td>{{operation.dateOrde}}</td>
-                      <td>{{operation.quantite}}</td>
-                      <td>{{operation.valUnitaire}}</td>
-                      <td>{{operation.montant}}</td>
-                      <td>{{operation.quantiteExecute}}</td>
+                      <td>{{operation.quantite | number : '1.1-10'}}</td>
+                      <td>{{operation.valUnitaire | number : '1.1-10'}}</td>
+                      <td>{{operation.montant | number : '1.1-10'}}</td>
+                      <td>{{operation.quantiteExecute | number : '1.1-10'}}</td>
                       <td>{{operation.agence}}</td>
                       <td>{{operation.dateValid}}</td>
                     </tr>
@@ -78,11 +89,79 @@
        
 
       </div>
-        <div class="row">
-            <button type="button" class="btn btn-secondary btn-sm waves-light" data-dismiss="modal" (click)="voirPlusOperation.show()" mdbWavesEffect>voir plus</button>
-
-          </div>
+      
     </div>
     <!--/.Card-->
  
+  </div>
+  <div class="col-md-3">
+
+    <div mdbModal #centralOperation="mdb-modal" class="modal fade" id="basicExample" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+      aria-hidden="true" [config]="{backdrop: true, ignoreBackdropClick: false}">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+          Detail operation
+          </div>
+          <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-4">
+                      Nom client: {{client.nom}}
+                    </div>
+                    <div class="col-md-4">
+                         Enail: {{client.email}}
+                    </div>
+                    <div class="col-md-4">
+                         Phone: {{client.phone}}
+                    </div>
+                </div>
+              <table class="table table-hover">
+                  <!-- Table head -->
+                
+                  <thead class="blue-grey lighten-4">
+                    <tr>
+                      <th>type operation</th>
+                      <th>titre</th>
+                      <th>Date operation</th>
+                      <th>quantite</th>
+                      <th>prix Unitaire</th>
+                      <th>Montant</th>
+                      <th>quantite execute</th>
+                      
+                      <th>date valide</th>
+                      <th></th>
+                      
+                    </tr>
+                  </thead>
+                  <!-- Table head -->
+        
+                  <!-- Table body -->
+                  <tbody >
+                  
+                        <tr *ngIf="operation!=null">
+                     
+                            <td>{{operation.typeOrde}}</td>
+                            <td>{{operation.codeTitre}}</td>
+                            <td>{{operation.dateOrde}}</td>
+                            <td>{{operation.quantite | number : '1.1-10'}}</td>
+                            <td>{{operation.valUnitaire | number : '1.1-10'}}</td>
+                            <td>{{operation.montant | number : '1.1-10'}}</td>
+                            <td>{{operation.quantiteExecute | number : '1.1-10'}}</td>
+                         
+                            <td>{{operation.dateValid}}</td>
+                          </tr>
+                 
+                  
+                   
+                  </tbody>
+                  <!-- Table body -->
+                </table>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-secondary btn-sm waves-light" data-dismiss="modal" (click)="centralOperation.hide()" mdbWavesEffect>Close</button> -->
+           
+          </div>
+        </div>
+      </div>
   </div>

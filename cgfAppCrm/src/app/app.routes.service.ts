@@ -21,6 +21,14 @@ import { ProfilClientComponent } from './views/profil-client/profil-client.compo
 import { LoginComponent } from './views/login/login.component';
 import { DetailProspectComponent } from './views/detail-prospect/detail-prospect.component';
 import { ListeOperationComponent } from './views/liste-operation/liste-operation.component';
+import { NotificationComponent } from './views/notification/notification.component';
+import { ProfileClientComponent } from './views/profile-client/profile-client.component';
+import { ObjectifComponent } from './views/objectif/objectif.component';
+import { Top10portefeuilleComponent } from './views/top10portefeuille/top10portefeuille.component';
+import { Top10LiquiditeComponent } from './views/top10-liquidite/top10-liquidite.component';
+import { PageNotfoundComponent } from './views/page-notfound/page-notfound.component';
+import { ClientNotFoundComponent } from './views/client-not-found/client-not-found.component';
+
 
 
 
@@ -52,7 +60,7 @@ const routes: Route[] = [
   },
   { path: 'operation', component: OperationComponent},
   { path: 'note', component: NoteComponent},
-  { path: 'tache', component: TacheComponent},
+  { path: 'tache/:id', component: TacheComponent},
   { path: 'prospect', component: ProspectComponent},
   { path: 'modals', component: ModalsComponent},
   { path: 'simulateur', component: SimulateurComponent},
@@ -66,9 +74,15 @@ const routes: Route[] = [
   { path: 'profil/:id', component: ProfilClientComponent},
   { path: 'modifClient/:id', component: ModifClinetComponent},
   { path: 'listeOperation', component: ListeOperationComponent},
-  { path: '**', component: NotFoundComponent },
+  { path: 'notification', component: NotificationComponent},
+  { path: 'profileClient/:id', component: ProfileClientComponent},
+  { path: 'ojectif', component: ObjectifComponent},
+  { path: 'top10portefeuille', component: Top10portefeuilleComponent},
+  { path: 'top10liquidite', component: Top10LiquiditeComponent},
+  { path: 'clientNotFoundComponent', component: ClientNotFoundComponent},
+  { path: '**', component: PageNotfoundComponent },
   
-
+  
 ];
 
 export const AppRoutes: ModuleWithProviders = RouterModule.forRoot(routes);

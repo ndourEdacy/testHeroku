@@ -28,9 +28,12 @@ export class AppComponent implements OnInit {
   ];
 
   private currentUrl = '';
-  login=false;
+  login=true;
   username:string;
   password:string;
+  i=0;
+  darkModeActive: boolean;
+
   constructor(
     private router: Router,
     private location: Location,
@@ -38,22 +41,29 @@ export class AppComponent implements OnInit {
     private htpp:HttpClient,
     private loginService:LoginService
   ) {
-
-      this.router.events.subscribe((route:any) => {
-      this.currentUrl = route.url;
-      this.login=loginService.getLogin();
-      this.specialPage = this.specialPages.indexOf(this.currentUrl) !== -1;
-     
-      if(this.currentUrl=="/login" || this.currentUrl=="/")
-      {
-        this.login=false;
-      }
       
+      this.router.events.subscribe((route:any) => {
+          this.currentUrl = route.url;
+          this.login=loginService.getLogin();
+          this.specialPage = this.specialPages.indexOf(this.currentUrl) !== -1;
+        
+          if(this.currentUrl=="/login" || this.currentUrl=="/")
+          {
+             this.login = false;
+             this.i = 1
+          }
+          else if( this.currentUrl == undefined && this.i == 0 )
+          {
+             this.login = true
+          }
+       
     });
    
 
   }
-
+  modeToggleSwitch() {
+    this.loginService.darkModeState.next(!this.darkModeActive);
+  }
   ngOnInit(): void {
   }
 

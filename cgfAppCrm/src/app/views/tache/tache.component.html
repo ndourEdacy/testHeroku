@@ -1,13 +1,11 @@
-<div class="card">
+<div class="card" style="height: 800px;">
     <div class="card-header">
         Ajouter une tache
     </div>
     <div class="card-body">
             <div class="row">
-                    <div class="col-md-2">
-                  
-                    </div>
-                    <div class="col-md-10">
+                    
+                    <div class="col-md-8">
                        <form >
                          <div class="form-row">
                           <div class="col-md-6">
@@ -19,7 +17,7 @@
                               <select class="form-control" [(ngModel)]="tache.statut" name="statut">
                                 <option value="active">active</option>
                                 <option value="en cours">en cours</option>
-                                <option value="fin">fin</option>
+                                <option value="fin">finie</option>
                               </select>
                             </div>
                          </div>
@@ -44,24 +42,75 @@
                            <div class="form-row">
                               <div class="form-group col-md-9">
                                 <label for="">Description</label>
-                                 <textarea class="form-control" [(ngModel)]="tache.description" name="description"></textarea>
+                                 <textarea class="form-control" [(ngModel)]="tache.descriptionTache" name="descriptionTache" style="height:300px"></textarea>
                               </div>
                           </div>
                           <div class="form-row">
                               <div class="col-md-3">
                                       <label for="">Assigner a quelqu'un</label>
-                                      <input type="text" name="nom" class="form-control">
-                                      
-                                  </div>
+                                      <select class="form-control" [(ngModel)]="tache.assignerA" name="assignerA">
+                                        <option *ngFor="let user of users" [ngValue]="user.username">{{user.prenom}} {{user.nom}}</option>
+                                      </select>
+                              </div>
                           </div>
-                          
-                         
-                          <button class="btn btn-success" (click)="ajouterTache()"> <i class="fa fa-plus mr-3"></i>Ajouter</button>
+
+                          <button class="btn btn-primary" (click)="ajouterTache()"> <i class="fa fa-plus mr-3"></i>Ajouter</button>
                           <button type="reset" class="btn btn-primary">Annuler</button>
                           
                        </form>
                       </div>
-                   
+                      <div class="col-md-4">
+                          <div class="card">
+                            <div class="card-header">
+                              Liste des taches
+                            </div>
+                        <!--Card content-->
+                        <div class="card-body" style="height: 600px;">
+                  
+                          <!-- Table  -->
+                          <table class="table table-hover">
+                            <!-- Table head -->
+                            <thead class="blue-grey lighten-4">
+                                <tr class="waves-light" data-toggle="modal" data-target="#basicExample">
+                                
+                                  <th>Sujet</th>
+                                  <th>statut</th>
+                                  <th>date de debut</th>
+                                  <th>date fin</th>
+                  
+                                </tr>
+                            </thead>
+                              <!-- Table head -->
+                  
+                              <!-- Table body -->
+                              <tbody *ngIf="taches!=null">
+                  
+                                    <tr *ngFor="let t of taches |  slice:taches.length-10:taches.length"  >
+                  
+                                            <td>{{t.sujet}}</td>
+                                            <td>{{t.statut}}</td>
+                                            <td>{{t.dateDebut}}</td>
+                                            <td>{{t.dateFin}}</td>
+                                            
+                  
+                                    </tr>
+                  
+                  
+                  
+                              </tbody>
+                              <!-- Table body -->
+                            </table>
+                  
+                  
+                        </div>
+                          <div class="row">
+                              <button type="button" class="btn btn-secondary btn-sm waves-light" data-dismiss="modal" mdbWavesEffect>voir plus</button>
+                  
+                          </div>
+                      </div>
+                
+                
+                      </div>
                   </div>
     </div>
 </div>

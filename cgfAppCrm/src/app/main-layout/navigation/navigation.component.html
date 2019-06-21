@@ -2,7 +2,7 @@
 <header>
 
     <!-- Sidebar -->
-    <div class="sidebar-fixed position-fixed">
+    <div class="sidebar-fixed position-fixed primary-color" >
 
         <a class="logo-wrapper waves-effect">
             <img src="../../../../assets/img/cgflogo.jpg" class="img-fluid" alt="">
@@ -13,15 +13,15 @@
             <a [routerLink]="['cgf-crm/admin1',username]" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
                 <i class="fa fa-pie-chart mr-3"></i>Dashboard
             </a>
-            <a routerLink="profiles/profile1" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
+            <!-- <a routerLink="profiles/profile1" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
                 <i class="fa fa-user mr-3"></i>Profile</a>
             <a routerLink="client" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
                 <i class="fa fa-handshake-o mr-3"></i>Ajout Client</a>
             <a routerLink="prospect" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
                 <i class="fa fa-map mr-3"></i>Ajout Prospect</a>
             <a routerLink="operation" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
-            <i class="fa fa-map mr-3"></i>Faire une operation</a>
-            <a routerLink="tache" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
+            <i class="fa fa-map mr-3"></i>Faire une operation</a> -->
+            <a routerLink="tache/0" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
                     <i class="fa fa-map mr-3"></i>Creer une tache</a>
             <a routerLink="note" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
                   <i class="fa fa-map mr-3"></i>Creer une note</a>
@@ -29,20 +29,20 @@
                         <i class="fa fa-map mr-3"></i>simulateur</a>
             <a routerLink="listeClient" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
                     <i class="fa fa-eye mr-3"></i>liste client</a>
-            <a routerLink="listeProspect" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
-                    <i class="fa fa-eye mr-3"></i>liste prospects</a>
-           <a routerLink="listeProspect" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
-                    <i class="fa fa-eye mr-3"></i>Mon portefeuille</a>
+            <!-- <a routerLink="listeProspect" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
+                    <i class="fa fa-eye mr-3"></i>liste prospects</a> -->
             <a routerLink="notification" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
-                <i class="fa fa-bell mr-3"></i>Notifications</a>
-             <a routerLink="notification" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
-                    <i class="fa fa-bell mr-3"></i>Creer alerte</a>
-            <a routerLink="notification" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
-                <i class="fa fa-bell mr-3"></i>Definir objectif</a>
+                <i class="fa fa-bell mr-3"><span [hidden]="isnotif">{{notif}}</span></i>Notifications</a>
+             <a routerLink="top10portefeuille" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
+                    <i class="fa fa-bell mr-3"></i>Top 10 portefeuille</a>
+            <a routerLink="top10liquidite" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
+                    <i class="fa fa-bell mr-3"></i>Top 10 liquidite</a>
+            <!-- <a routerLink="ojectif" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
+                <i class="fa fa-bell mr-3"></i>Definir objectif</a> -->
 
 
         </div>
-
+       
     </div>
     <!-- Sidebar -->
 

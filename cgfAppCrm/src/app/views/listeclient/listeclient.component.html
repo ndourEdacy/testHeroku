@@ -7,20 +7,20 @@
 
 </form> -->
 <div class="row">
-  <div class="col-sm-6">
+  <div class="col-sm-08 col-md-06">
       <form class="form-inline">
-        <div class="form-group mb-2">
+        <div class="form-group">
           <label for="staticEmail2" >De:</label>
           <input type="number" class="form-control" id="staticEmail2" [(ngModel)]="liquiditeInf" name="liquiditeInf">
         </div>
-        <div class="form-group mx-sm-3 mb-2">
+        <div class="form-group">
           <label for="inputPassword2" >A:</label>
           <input type="number" class="form-control" id="inputPassword2"  [(ngModel)]="liquiditeSup" name="liquiditeSup">
         </div>
         <button class="btn btn-primary btn-sm my-0 p" type="submit" (click)="getclientMou()">Filtrer Par liquidite</button>
       </form>
   </div>
-  <div class="col-sm-6">
+  <!-- <div class="col-sm-6">
       <form class="form-inline">
         <div class="form-group">
           <label for="staticEmail2" >Type :</label>
@@ -31,17 +31,17 @@
             <option value="OS">OS</option>
           </select>
         </div>
-        <div class="form-group mx-sm-3 mb-2">
+        <div class="form-group">
           <label for="inputPassword2" >De:</label>
-          <input type="number" class="form-control" id="inputPassword2"  [(ngModel)]="liquiditeSup" name="liquiditeSup">
+          <input type="number" class="form-control" id="inputPassword2"  [(ngModel)]="montantInf" name="montantInf">
         </div>
-        <div class="form-group mx-sm-3 mb-2">
+        <div class="form-group">
             <label for="inputPassword2" >A:</label>
-            <input type="number" class="form-control" id="inputPassword2"  [(ngModel)]="liquiditeSup" name="liquiditeSup">
+            <input type="number" class="form-control" id="inputPassword2"  [(ngModel)]="montantSup" name="montantSup">
         </div>
-        <button class="btn btn-primary btn-sm my-0 p" type="submit" (click)="getclientMou()">Filtrer operation</button>
+        <button class="btn btn-primary btn-sm my-0 p" type="submit" (click)="getOperationByMontant()">Filtrer operation</button>
       </form>
-  </div>
+  </div> -->
 </div>
 
 
@@ -54,23 +54,33 @@
       <tr>
         <th>Numero Compte</th>
         <th>nom</th>
+        <th>Telephone</th>
+        <th>Email</th>
         <th>Type Compte</th>
-        <th>Objectif Placement</th>
+        <th>Portefeuille</th>
+        <th>Liquidite</th>
         
       </tr>
     </thead>
     <!-- Table head -->
 
     <!-- Table body -->
-    <tbody *ngFor="let c of clients | slice:0:25">
+    <tbody *ngFor="let c of clients">
      
-          <tr  class="waves-light" data-toggle="modal" data-target="#basicExample" (click)="detailClient(c.numCompt)">           
+          <tr  class="waves-light" data-toggle="modal" data-target="#basicExample" (click)="detailClient(c.cptNoCli)">           
               <td>{{c.numCompt}}</td>
               <td>{{c.nom}}</td>
+              <td>{{c.phone}}</td>
+              <td>{{c.email}}</td>
               <td>{{c.typeCompte}}</td>
-              <td>{{c.objPlacement}}</td>
-              
-            </tr>
+              <td>{{c.portefeuille | number : '1.1-10'}}</td>
+              <td>
+                <span class="badge badge-success badge-pill" *ngIf="c.liquidite >= 100000">{{c.liquidite | number : '1.1-10'}}</span>
+                <span class="badge badge-danger badge-pill" *ngIf="c.liquidite <= 0 ">{{c.liquidite | number : '1.1-10'}}</span>
+                <span class="badge badge-primary badge-pill" *ngIf="c.liquidite >0 && c.liquidite <100000 ">{{c.liquidite | number : '1.1-10'}}</span>
+               
+              </td>
+           </tr>
     
       
       
@@ -167,6 +177,11 @@
  
 
 </div>
-
+<ngx-spinner bdColor="rgba(51,51,51,0.8)"
+  size="large"
+  color="#fff"
+  type="ball-scale-multiple">
+<p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
 
 

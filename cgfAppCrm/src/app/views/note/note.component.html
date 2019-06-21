@@ -1,19 +1,17 @@
-<div class="card">
+<div class="card" style="height: 800px;">
   
         <div class="card-header">
            Ajouter une note
        </div>
        <div class="card-body">
             <div class="row">
-                    <div class="col-md-2">
-  
-                    </div>
-                        <div class="col-md-10">
+                    
+                        <div class="col-md-6">
                            <form >
                              <div class="form-row">
                               <div class="col-md-6">
                                   <label for="">sujet</label>
-                                  <input type="text" name="sujet" class="form-control" [(ngModel)]="note.sujet">
+                                  <input type="text" name="sujet" class="form-control" [(ngModel)]="note.sujet" placeholder="Donnez un sujet a votre note">
                               </div>
                             
                              </div>
@@ -21,22 +19,73 @@
                                <div class="form-row">
                                   <div class="form-group col-md-6">
                                     <label for="">Description</label>
-                                     <textarea class="form-control" name="description"  [(ngModel)]="note.description"></textarea>
+                                     <textarea class="form-control" name="description"  [(ngModel)]="note.description" style="height:300px" placeholder="Redigez votre note"></textarea>
                                   </div>
                               </div>
                               <div class="form-row">
-                                  <div class="col-md-3">
+                                  <div class="col-md-5" >
                                         <button class="waves-light" data-toggle="modal" data-target="#basicExample" (click)="getClient();centralLarge.show()">rattacher a</button>
-                                      <input type="text" name="nomclient" class="form-control" [(ngModel)]="nomclient" disabled>
+                                      <input type="text" name="nomclient" class="form-control" [(ngModel)]="nomclient" disabled width="200px">
                                   </div>
                               </div>
                               
-                              <button type="submit" class="btn btn-success" (click)="ajouterNote()"> <i class="fa fa-plus mr-3"></i>Ajouter</button>
+                              <button type="submit" class="btn btn-primary" (click)="ajouterNote()"> <i class="fa fa-plus mr-3"></i>Ajouter</button>
                               <button type="reset" class="btn btn-primary">Annuler</button>
                             
                              
                     
                            </form>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="card">
+                              <div class="card-header">
+                                Liste des notes
+                              </div>
+                          <!--Card content-->
+                          <div class="card-body" style="height: 600px;">
+                    
+                            <!-- Table  -->
+                            <table class="table table-hover">
+                              <!-- Table head -->
+                              <thead class="blue-grey lighten-4">
+                                  <tr class="waves-light" data-toggle="modal" data-target="#basicExample">
+                                    <th>Numero compte</th>
+                                    <th>Sujet</th>
+                                    <th>Description</th>
+                                    <th>Date de creation</th>
+                    
+                                  </tr>
+                                </thead>
+                                <!-- Table head -->
+                    
+                                <!-- Table body -->
+                                <tbody *ngIf="notes!=null">
+                    
+                                      <tr *ngFor="let n of notes |  slice:notes.length-10:notes.length"  >
+                    
+                                              <td>{{n.numCompte}}</td>
+                                              <td>{{n.sujet}}</td>
+                                              <td>{{n.description}}</td>
+                                              <td>{{n.dateCreat | date}}</td>
+                                              
+                    
+                                      </tr>
+                    
+                    
+                    
+                                </tbody>
+                                <!-- Table body -->
+                              </table>
+                    
+                    
+                          </div>
+                            <div class="row">
+                                <button type="button" class="btn btn-secondary btn-sm waves-light" data-dismiss="modal" mdbWavesEffect>voir plus</button>
+                    
+                              </div>
+                        </div>
+                    
+                    
                           </div>
              </div>
        </div>
@@ -74,9 +123,9 @@
              
             </div>
             <div class="row">
-                <div class="col-md-12">
-                    <div class="col-md-10">
-                        <table class="table table-hover">
+                <div class="col-md-12 col-sm-12">
+                    <div class="col-md-10 col-sm-8" style="overflow-y: scroll">
+                        <table class="table table-hover" >
         
                             <thead class="blue lighten-4">
                               <tr>
@@ -90,11 +139,11 @@
                             <!-- Table head -->
                         
                             <!-- Table body -->
-                            <tbody *ngFor="let c of clients">
+                            <tbody *ngFor="let c of clients" >
                              
                                   <tr  class="waves-light" data-toggle="modal" data-target="#basicExample" >
                                     
-                                      <td><input type="checkbox" [(ngModel)]="c.isChecked" (change)="checkValue(c.isChecked?'A':'B',c.id)"></td>
+                                      <td><input type="checkbox" [(ngModel)]="c.isChecked" (change)="checkValue(c.isChecked?'A':'B',c.clientId)"></td>
                                       <td>{{c.prenom}}</td>
                                       <td>{{c.nom}}</td>
                                       <td>{{c.dateNaiss}}</td>
@@ -113,7 +162,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-primary btn-sm waves-light" mdbWavesEffect (click)="saveChoix();centralLarge.hide()">Save changes</button>
-            <button type="button" class="btn btn-secondary btn-sm waves-light" data-dismiss="modal" (click)="centralLarge.hide()" mdbWavesEffect>Close</button>
+            <button type="button" class="btn btn-primary btn-sm waves-light" data-dismiss="modal" (click)="centralLarge.hide()" mdbWavesEffect>Close</button>
            
           </div>
         </div>
@@ -123,3 +172,4 @@
   
   
   </div>
+ 
