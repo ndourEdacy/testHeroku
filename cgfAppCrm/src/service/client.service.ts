@@ -87,7 +87,20 @@ export class ClientService {
       map((data:any)=>data)
     )
   }
+  getportefeuilleClients(clients:any[]){
+    if(clients != null)
+    {
+        for(let i = 0 ; i < clients.length ; i++) {
 
+            this.getPortefeuilleClientByNumcompte(clients[i].numCompt).subscribe(data=>{
+                clients[i].portefeuille = data[1];
+                clients[i].liquidite = data[0];
+               
+            }); 
+            
+        }
+    }
+  }
   getClientByNumCpt(id:number){
  
     let urlc = this.url+"/client/getByCmpt?numcpt="+id;

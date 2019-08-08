@@ -10,10 +10,10 @@ import { ToastrManager } from 'ng6-toastr-notifications';
   providedIn: 'root'
 })
 export class AlerteService {
-// url="http://192.168.0.114:8090/cgfapp/"
+
  url="http://localhost:8080/";
   constructor(private http:HttpClient ,private loginservice:LoginService,private toastr: ToastrManager) { 
-    //this.url = loginservice.url;
+    this.url = loginservice.url;
   }
   saveAlerte(alerte){
     let urla=this.url+"alerte/save"

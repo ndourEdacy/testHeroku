@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { LoginService } from 'service/login.service';
 import { NotificationService } from 'service/notification.service';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 
 
 @Component({
@@ -15,7 +16,7 @@ export class NavigationComponent implements OnInit , OnDestroy{
   username:string;
   notif = 0;
   isnotif: boolean;
-  constructor(private userService:LoginService,private notificationservice:NotificationService) {
+  constructor(private userService:LoginService,private notificationservice:NotificationService,private route:Router) {
     this.clicked = this.clicked === undefined ? false : true;
     this.username = userService.getUserName()
     this.isnotif =notificationservice.getisVisiteNotification()
@@ -35,5 +36,8 @@ export class NavigationComponent implements OnInit , OnDestroy{
   setClicked(val: boolean): void {
     this.clicked = val;
   }
-
+  deconxion(){
+    sessionStorage.removeItem("username");
+     this.route.navigate(["login"]);
+  }
 }

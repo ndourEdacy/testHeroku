@@ -80,7 +80,7 @@ const routes: Route[] = [
   { path: 'top10portefeuille', component: Top10portefeuilleComponent},
   { path: 'top10liquidite', component: Top10LiquiditeComponent},
   { path: 'clientNotFoundComponent', component: ClientNotFoundComponent},
-  { path: '**', component: PageNotfoundComponent },
+  { path: '**', component: PageNotfoundComponent }
   
   
 ];

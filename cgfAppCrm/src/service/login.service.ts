@@ -19,7 +19,8 @@ const HttpUploadOptions = {
 export class LoginService {
   darkModeState: BehaviorSubject<boolean>;
  
-  url="http://localhost:8080/";
+  url="http://192.168.0.114:8090/cgfapp/";
+  //url="http://localhost:8080/";
   private login:boolean=false;
   private username:string
   commissioncgf=0;
@@ -32,15 +33,20 @@ export class LoginService {
   dataVente:any[]=null;
   constructor(private http:HttpClient) {
     this.darkModeState = new BehaviorSubject<boolean>(false);
-   }
-   getdataAchat(){
+  }
+
+   getdataAchat()
+   {
      return this.dataAchat;
    }
-   setdataAchat(n){
+
+   setdataAchat(n)
+   {
     this.dataAchat = n;
    }
 
-   getdataSubs(){
+  getdataSubs()
+  {
     return this.dataSubs;
   }
   setdataSubs(n){
@@ -102,7 +108,8 @@ export class LoginService {
     setoperation(operations){
       this.operations = operations
     }
-  getOrdreUser(username,date){
+  getOrdreUser(username,date)
+  {
     let url1=this.url+"ordre/getOrdreByCommercial/"+date+"?username="+username;
     return  this.http.get(url1).pipe(
               map((data:any[])=>data)
@@ -198,20 +205,22 @@ export class LoginService {
     return this.http.post<User>(url1,user)
     .pipe(
       
-    );;
+    );
   }
-getMontantPortefeuille(username:string){
   
- // let url1=this.url+"montantPortefeuilleByCommercial?username="+username
-  let url1=this.url+"portefeuillejj/getPortefeuilleduJourByUIsername?username="+username
-  return  this.http.get(url1)
-}
+  getMontantPortefeuille(username:string){
+    
+  // let url1=this.url+"montantPortefeuilleByCommercial?username="+username
+    let url1=this.url+"portefeuillejj/getPortefeuilleduJourByUIsername?username="+username
+    return  this.http.get(url1)
+  }
 
-getLastTransactionByUsername(username){
-  let urlu = this.url+"/getLastTransactionByUsername?username="+username;
+  getLastTransactionByUsername(username){
+    let urlu = this.url+"/getLastTransactionByUsername?username="+username;
 
-  return this.http.get(urlu).pipe(
-    map((data:Transaction[])=>data)
-  )
-}
+    return this.http.get(urlu).pipe(
+      map((data:Transaction[])=>data)
+    )
+  }
+
 }

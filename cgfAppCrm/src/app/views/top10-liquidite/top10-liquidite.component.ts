@@ -38,7 +38,8 @@ export class Top10LiquiditeComponent implements OnInit {
       
         this.loginService.getTop10LiquiditeByCommercial(this.loginService.getUserName()).subscribe(data=>{
           this.getClients(data)
-       
+        
+         this.clientService.getportefeuilleClients(this.clients)
        });
   
      
@@ -55,12 +56,13 @@ export class Top10LiquiditeComponent implements OnInit {
             this.clientService.getClientByNumCpt(data[i].numCompt).subscribe(res=>{
               
                 cts[i] = res;
-                cts[i].portefeuille = data[i].portefeuille;
-                cts[i].liquidite = data[i].liquidite;
+                //cts[i].portefeuille = data[i].portefeuille;
+               // cts[i].liquidite = data[i].liquidite;
             });
           
         }
         this.clients = cts;
+        
 
   }
 
