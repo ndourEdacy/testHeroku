@@ -38,7 +38,7 @@
     "ng6-toastr-notifications": "^1.0.4",
     "ngx-spinner": "^6.1.2",
     "ngx-toastr": "^10.0.2",
-    "node-sass": "^4.9.2",
+    "node-sass": "^4.13.1",
     "rxjs": "^6.0.0",
     "screenfull": "3.3.x",
     "smoothscroll-polyfill": "0.3.x",
